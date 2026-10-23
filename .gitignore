@@ -30,3 +30,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Root reference mockup images
+/*.png

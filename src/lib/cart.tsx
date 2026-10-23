@@ -14,6 +14,10 @@ interface CartContextValue {
   items: CartItem[];
   count: number;
   subtotal: number;
+  isOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  toggleCart: () => void;
   add: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   updateQuantity: (productId: string, size: string, quantity: number) => void;
   remove: (productId: string, size: string) => void;
@@ -25,6 +29,7 @@ const STORAGE_KEY = "mile-infinity-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -51,7 +56,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       items,
       count,
       subtotal,
-      add: (item, quantity = 1) =>
+      isOpen,
+      openCart: () => setIsOpen(true),
+      closeCart: () => setIsOpen(false),
+      toggleCart: () => setIsOpen((prev) => !prev),
+      add: (item, quantity = 1) => {
         setItems((prev) => {
           const existing = prev.find((i) => i.productId === item.productId && i.size === item.size);
           if (existing) {
@@ -62,7 +71,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
             );
           }
           return [...prev, { ...item, quantity }];
-        }),
+        });
+        setIsOpen(true);
+      },
       updateQuantity: (productId, size, quantity) =>
         setItems((prev) =>
           quantity <= 0
@@ -75,7 +86,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setItems((prev) => prev.filter((i) => !(i.productId === productId && i.size === size))),
       clear: () => setItems([]),
     };
-  }, [items]);
+  }, [items, isOpen]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

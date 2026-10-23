@@ -25,8 +25,8 @@ export function ProductCard({ product }: { product: ProductDto }) {
   return (
     <div className="group flex flex-col">
       <Link
-        to="/product/$slug"
-        params={{ slug: product.slug }}
+        to="/product"
+        search={{ slug: product.slug }}
         className="relative block overflow-hidden bg-sand"
       >
         {product.isNew && (
@@ -52,8 +52,8 @@ export function ProductCard({ product }: { product: ProductDto }) {
       <div className="mt-4 flex flex-1 flex-col">
         <span className="eyebrow text-muted-foreground">{product.category}s</span>
         <Link
-          to="/product/$slug"
-          params={{ slug: product.slug }}
+          to="/product"
+          search={{ slug: product.slug }}
           className="mt-1 font-display text-lg leading-snug text-foreground hover:text-primary"
         >
           {product.name}

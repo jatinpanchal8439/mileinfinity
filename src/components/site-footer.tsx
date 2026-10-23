@@ -1,63 +1,108 @@
 import { Link } from "@tanstack/react-router";
-import { Gem, Leaf, Heart, Sparkles } from "lucide-react";
+import { ArrowRight, Instagram, Facebook } from "lucide-react";
+import logoImg from "@/assets/mile-infinity-logo.png";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-primary-deep text-primary-foreground">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <Gem className="h-5 w-5" strokeWidth={1.5} />
-              <span className="font-display text-xl uppercase tracking-[0.18em]">Mile Infinity</span>
-            </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/70">
-              Formulated botanical-inspired skincare, designed to bring intention to everyday care.
+    <footer className="bg-[#081810] text-[#f7f5f0] border-t border-[#122e20]">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-20">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          {/* Column 1: Brand */}
+          <div className="sm:col-span-2 md:col-span-1 lg:col-span-1">
+            <Link to="/" className="inline-block group">
+              <img
+                src={logoImg}
+                alt="Mile Infinity"
+                className="h-12 w-auto object-contain brightness-0 invert opacity-95 transition-opacity group-hover:opacity-100"
+              />
+            </Link>
+            <p className="mt-5 text-xs leading-relaxed text-[#f7f5f0]/70 font-sans max-w-xs">
+              Premium botanical-inspired skincare, designed to bring intention to everyday care.
             </p>
           </div>
+
+          {/* Column 2: SHOP */}
           <div>
-            <p className="eyebrow text-primary-foreground/60">Shop</p>
-            <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
-              <li><Link to="/shop" className="hover:text-primary-foreground">Face Wash</Link></li>
-              <li><Link to="/shop?category=serum" className="hover:text-primary-foreground">Serums</Link></li>
-              <li><Link to="/shop?category=moisturizer" className="hover:text-primary-foreground">Moisturizers</Link></li>
-              <li><Link to="/shop?category=sunscreen" className="hover:text-primary-foreground">Sun Care</Link></li>
-              <li><Link to="/cart" className="hover:text-primary-foreground">Your Bag</Link></li>
-            </ul>
-          </div>
-          <div>
-            <p className="eyebrow text-primary-foreground/60">Help</p>
-            <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
-              <li><a href="/#faq" className="hover:text-primary-foreground">FAQ</a></li>
-              <li><a href="/#faq" className="hover:text-primary-foreground">Shipping</a></li>
-              <li><a href="/#faq" className="hover:text-primary-foreground">Returns</a></li>
-              <li><a href="/#faq" className="hover:text-primary-foreground">Terms &amp; Conditions</a></li>
-            </ul>
-          </div>
-          <div>
-            <p className="eyebrow text-primary-foreground/60">Notes on skincare</p>
-            <p className="mt-4 text-sm text-primary-foreground/80">
-              Rituals, botanicals and intentional care.
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#f7f5f0]/50">
+              Shop
             </p>
-            <form className="mt-4 flex items-center gap-2 border-b border-primary-foreground/30 pb-2" onSubmit={(e) => e.preventDefault()}>
+            <ul className="mt-5 space-y-3 text-xs text-[#f7f5f0]/80 font-sans">
+              <li><Link to="/product" className="hover:text-white transition-colors">Face Wash</Link></li>
+              <li><Link to="/shop" className="hover:text-white transition-colors">Face Serum</Link></li>
+              <li><Link to="/shop" className="hover:text-white transition-colors">Moisturiser</Link></li>
+              <li><Link to="/shop" className="hover:text-white transition-colors">Sunscreen</Link></li>
+              <li><Link to="/shop" className="hover:text-white transition-colors">All Products</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3: EXPLORE */}
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#f7f5f0]/50">
+              Explore
+            </p>
+            <ul className="mt-5 space-y-3 text-xs text-[#f7f5f0]/80 font-sans">
+              <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+              <li><a href="/#ritual" className="hover:text-white transition-colors">Skincare Journal</a></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">FAQs</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4: HELP */}
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#f7f5f0]/50">
+              Help
+            </p>
+            <ul className="mt-5 space-y-3 text-xs text-[#f7f5f0]/80 font-sans">
+              <li><Link to="/contact" className="hover:text-white transition-colors">Shipping</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Returns</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Terms &amp; Conditions</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 5: STAY IN THE RITUAL */}
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#f7f5f0]/50">
+              Stay in the ritual
+            </p>
+            <p className="mt-5 font-display text-base font-normal leading-snug text-[#f7f5f0]">
+              Notes on skincare, botanicals and intentional care.
+            </p>
+            <form
+              className="mt-5 flex items-center border-b border-[#f7f5f0]/30 pb-2"
+              onSubmit={(e) => e.preventDefault()}
+            >
               <input
                 type="email"
                 placeholder="Your email address"
-                className="w-full bg-transparent text-sm text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none"
+                className="w-full bg-transparent text-xs text-white placeholder:text-white/40 focus:outline-none font-sans"
               />
-              <button type="submit" className="text-primary-foreground/80 hover:text-primary-foreground" aria-label="Subscribe">
-                &#8594;
+              <button
+                type="submit"
+                className="text-white/70 hover:text-white transition-colors pl-2"
+                aria-label="Subscribe to newsletter"
+              >
+                <ArrowRight className="h-4 w-4" />
               </button>
             </form>
           </div>
         </div>
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/15 pt-6 text-xs text-primary-foreground/50 sm:flex-row">
-          <span>&copy; {new Date().getFullYear()} Mile Infinity. All rights reserved.</span>
-          <span className="flex items-center gap-6">
-            <Leaf className="h-4 w-4" strokeWidth={1.5} />
-            <Heart className="h-4 w-4" strokeWidth={1.5} />
-            <Sparkles className="h-4 w-4" strokeWidth={1.5} />
+
+        {/* Bottom Bar from Slide 5 */}
+        <div className="mt-16 pt-8 border-t border-[#f7f5f0]/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#f7f5f0]/50 font-sans">
+          <span>&copy; {new Date().getFullYear()} MILE INFINITY. ALL RIGHTS RESERVED.</span>
+          <span className="tracking-[0.14em] uppercase text-[#f7f5f0]/40">
+            PLANT-BASED SKINCARE &bull; INDIA
           </span>
+          <div className="flex items-center gap-4 text-[#f7f5f0]/70">
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook" className="hover:text-white transition-colors">
+              <Facebook className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
