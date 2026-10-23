@@ -53,11 +53,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
       subtotal,
       add: (item, quantity = 1) =>
         setItems((prev) => {
-          const idx = prev.findIndex((i) => i.productId === item.productId && i.size === item.size);
-          if (idx >= 0) {
-            const next = [...prev];
-            next[idx] = { ...next[idx], quantity: next[idx].quantity + quantity };
-            return next;
+          const existing = prev.find((i) => i.productId === item.productId && i.size === item.size);
+          if (existing) {
+            return prev.map((i) =>
+              i.productId === item.productId && i.size === item.size
+                ? { ...existing, quantity: existing.quantity + quantity }
+                : i,
+            );
           }
           return [...prev, { ...item, quantity }];
         }),
