@@ -3,9 +3,13 @@ import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
+const DEFAULT_SUPABASE_URL = "https://howaceawpfbuthzdajdk.supabase.co";
+const DEFAULT_SUPABASE_KEY = "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT";
+
 function makePublicClient() {
-  const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
-  return createClient<Database>(process.env["SUPABASE_URL"]!, key, {
+  const url = (typeof process !== "undefined" && (process.env["SUPABASE_URL"] || process.env["VITE_SUPABASE_URL"])) || DEFAULT_SUPABASE_URL;
+  const key = (typeof process !== "undefined" && (process.env["SUPABASE_PUBLISHABLE_KEY"] || process.env["VITE_SUPABASE_PUBLISHABLE_KEY"])) || DEFAULT_SUPABASE_KEY;
+  return createClient<Database>(url, key, {
     auth: { persistSession: false },
     global: {
       fetch: (input, init) => {
