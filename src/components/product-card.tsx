@@ -23,14 +23,14 @@ export function ProductCard({ product }: { product: ProductDto }) {
   }
 
   return (
-    <div className="group flex flex-col">
+    <div className="group flex flex-col hover-lift-sm p-2 -m-2 rounded-lg transition-all duration-300 hover:bg-white/60">
       <Link
         to="/product"
         search={{ slug: product.slug }}
-        className="relative block overflow-hidden bg-sand"
+        className="relative block overflow-hidden bg-sand rounded-sm"
       >
         {product.isNew && (
-          <span className="eyebrow absolute left-3 top-3 z-10 rounded-full bg-background/90 px-3 py-1 text-primary">
+          <span className="eyebrow absolute left-3 top-3 z-10 rounded-full bg-background/95 backdrop-blur-sm px-3 py-1 text-primary shadow-sm animate-float-gentle">
             New Product
           </span>
         )}
@@ -41,7 +41,7 @@ export function ProductCard({ product }: { product: ProductDto }) {
             width={600}
             height={600}
             loading="lazy"
-            className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="aspect-square w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
           <div className="flex aspect-square w-full items-center justify-center bg-sand font-display text-6xl text-primary/40">
@@ -54,7 +54,7 @@ export function ProductCard({ product }: { product: ProductDto }) {
         <Link
           to="/product"
           search={{ slug: product.slug }}
-          className="mt-1 font-display text-lg leading-snug text-foreground hover:text-primary"
+          className="mt-1 font-display text-lg leading-snug text-foreground hover:text-primary transition-colors"
         >
           {product.name}
         </Link>
@@ -73,16 +73,18 @@ export function ProductCard({ product }: { product: ProductDto }) {
         <button
           onClick={handleAdd}
           disabled={product.stock <= 0}
-          className="btn-primary mt-4 w-full disabled:cursor-not-allowed disabled:opacity-50"
+          className={`btn-primary btn-shimmer mt-4 w-full active:scale-95 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${
+            added ? "bg-[#1f4e37] text-white" : ""
+          }`}
         >
           {added ? (
-            <>
+            <span className="inline-flex items-center gap-1.5 animate-scale-in">
               <Check className="h-4 w-4" /> Added to Bag
-            </>
+            </span>
           ) : (
-            <>
-              <Plus className="h-4 w-4" /> Add to Bag
-            </>
+            <span className="inline-flex items-center gap-1.5">
+              <Plus className="h-4 w-4 transition-transform group-hover:rotate-90 duration-300" /> Add to Bag
+            </span>
           )}
         </button>
       </div>

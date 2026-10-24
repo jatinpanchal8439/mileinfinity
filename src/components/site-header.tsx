@@ -18,6 +18,16 @@ export function SiteHeader() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [badgeBump, setBadgeBump] = useState(false);
+
+  useEffect(() => {
+    if (count > 0) {
+      setBadgeBump(true);
+      const timer = setTimeout(() => setBadgeBump(false), 450);
+      return () => clearTimeout(timer);
+    }
+  }, [count]);
+
   const routerState = useRouterState({
     select: (s) => ({
       pathname: s.location.pathname,
@@ -166,12 +176,16 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={openCart}
-            className="relative text-[#162e21] transition-transform hover:scale-110"
+            className="relative text-[#162e21] transition-transform hover:scale-110 active:scale-95"
             aria-label="Shopping bag"
           >
             <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={1.5} />
             {count > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#162e21] px-1 text-[10px] font-semibold text-white">
+              <span
+                className={`absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#162e21] px-1 text-[10px] font-semibold text-white shadow-sm ${
+                  badgeBump ? "animate-badge-pop" : ""
+                }`}
+              >
                 {count}
               </span>
             )}
@@ -180,7 +194,7 @@ export function SiteHeader() {
           {/* Rectangular solid dark green button matching screenshot */}
           <Link
             to="/shop"
-            className="hidden sm:inline-flex items-center justify-center rounded-none bg-[#163729] hover:bg-[#0f261c] px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all duration-200 hover:shadow-md"
+            className="btn-shimmer hover-lift-sm hidden sm:inline-flex items-center justify-center rounded-none bg-[#163729] hover:bg-[#0f261c] px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all duration-200 hover:shadow-md active:scale-95"
           >
             Shop Skincare
           </Link>

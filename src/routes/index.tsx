@@ -22,6 +22,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
+import { Reveal } from "@/components/reveal";
 import { RunningTicker } from "@/components/running-ticker";
 import { productsQueryOptions } from "@/lib/queries";
 import { useCart } from "@/lib/cart";
@@ -147,7 +148,7 @@ function Hero() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full py-16 sm:py-20 lg:py-28">
           <div className="max-w-xl lg:max-w-2xl">
-            <div className="inline-flex items-center gap-3 mb-5 sm:mb-6">
+            <div className="inline-flex items-center gap-3 mb-5 sm:mb-6 animate-fade-in-up">
               <span className="h-[1px] w-8 bg-[#162e21]/40" />
               <span className="text-[11px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/90">
                 Plant-Based Skincare
@@ -155,39 +156,39 @@ function Hero() {
               <span className="h-[1px] w-8 bg-[#162e21]/40" />
             </div>
 
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.08] sm:leading-[1.05] drop-shadow-sm">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.08] sm:leading-[1.05] drop-shadow-sm animate-fade-in-up [animation-delay:150ms]">
               Skincare,<br />
               Rooted in Nature.<br />
               Designed for<br />
               Modern Rituals.
             </h1>
 
-            <p className="mt-5 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans">
+            <p className="mt-5 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans animate-fade-in-up [animation-delay:300ms]">
               Thoughtfully formulated skincare inspired by botanical ingredients and created to
               bring conscious care into your everyday routine.
             </p>
 
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 animate-fade-in-up [animation-delay:450ms]">
               <a
                 href="#essentials"
-                className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#162e21] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-white shadow-md transition-all duration-300 hover:bg-[#0f2117] hover:shadow-lg hover:gap-4 text-center"
+                className="group btn-shimmer hover-lift inline-flex items-center justify-center gap-3 rounded-full bg-[#162e21] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-white shadow-md transition-all duration-300 hover:bg-[#0f2117] hover:shadow-lg hover:gap-4 text-center active:scale-95"
               >
                 <span>Shop Skincare</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#approach"
-                className="group inline-flex items-center justify-center gap-3 rounded-full border border-[#162e21]/30 bg-[#f7f5f0]/85 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-[#162e21] shadow-sm transition-all duration-300 hover:bg-[#f7f5f0] hover:border-[#162e21]/60 hover:gap-4 text-center"
+                className="group hover-lift inline-flex items-center justify-center gap-3 rounded-full border border-[#162e21]/30 bg-[#f7f5f0]/85 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-[#162e21] shadow-sm transition-all duration-300 hover:bg-[#f7f5f0] hover:border-[#162e21]/60 hover:gap-4 text-center active:scale-95"
               >
                 <span>Explore The Collection</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
 
-            {/* 4 Benefit Icon Badges (Clean botanical icons, NO sparkles) */}
-            <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 pt-6 sm:pt-7 border-t border-[#162e21]/20 max-w-xl">
-              <div className="flex flex-col items-start gap-1.5 sm:gap-2">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21]">
+            {/* 4 Benefit Icon Badges with hover micro-animations */}
+            <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 pt-6 sm:pt-7 border-t border-[#162e21]/20 max-w-xl animate-fade-in-up [animation-delay:600ms]">
+              <div className="flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Leaf className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
                 <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
@@ -195,8 +196,8 @@ function Hero() {
                 </span>
               </div>
 
-              <div className="flex flex-col items-start gap-1.5 sm:gap-2">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21]">
+              <div className="flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Droplets className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
                 <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
@@ -204,8 +205,8 @@ function Hero() {
                 </span>
               </div>
 
-              <div className="flex flex-col items-start gap-1.5 sm:gap-2">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21]">
+              <div className="flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Sprout className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
                 <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
@@ -213,8 +214,8 @@ function Hero() {
                 </span>
               </div>
 
-              <div className="flex flex-col items-start gap-1.5 sm:gap-2">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21]">
+              <div className="flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
                 <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
@@ -313,7 +314,7 @@ function TwoBrandsEcosystem() {
     <section className="relative w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16">
         {/* Header matching screenshot */}
-        <div className="text-center max-w-3xl mx-auto">
+        <Reveal direction="up" className="text-center max-w-3xl mx-auto">
           <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/75 font-sans">
             TWO BRANDS. ONE PURPOSE.
           </p>
@@ -329,13 +330,13 @@ function TwoBrandsEcosystem() {
             and created for modern life. Mile Infinity is its skincare expression — bringing the wisdom
             of wellness into modern, effective skincare.
           </p>
-        </div>
+        </Reveal>
 
         {/* 3-Column Bridge Ecosystem matching screenshot */}
         <div className="mt-10 sm:mt-16 grid gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-12 items-center">
           {/* Left Column: Navtaksh Wellness */}
-          <div className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="inline-flex items-center lg:items-start">
+          <Reveal direction="right" delay={150} className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
+            <div className="inline-flex items-center lg:items-start transition-transform duration-300 hover:scale-105">
               <img
                 src={navtakshLogo}
                 alt="NavTaksh Wellness — नव आयामेषु सम्पूर्ण कल्याणम्"
@@ -356,12 +357,12 @@ function TwoBrandsEcosystem() {
                 goes beyond skincare to nurture the whole person.
               </p>
             </div>
-          </div>
+          </Reveal>
 
           {/* Center Column: The Golden Infinity Nature & Radiance Visual */}
-          <div className="lg:col-span-6 flex justify-center items-center py-2 sm:py-4 lg:py-0">
+          <Reveal direction="up" delay={250} className="lg:col-span-6 flex justify-center items-center py-2 sm:py-4 lg:py-0">
             <div className="relative w-full max-w-xs sm:max-w-lg lg:max-w-xl xl:max-w-2xl group mx-auto">
-              <div className="relative overflow-hidden transition-transform duration-700 group-hover:scale-[1.01]">
+              <div className="relative overflow-hidden transition-transform duration-700 group-hover:scale-[1.02] animate-float-gentle">
                 <img
                   src={goldenInfinityImg}
                   alt="Golden Infinity Spa — Nature on the left, Radiance on the right"
@@ -369,11 +370,11 @@ function TwoBrandsEcosystem() {
                 />
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right Column: Mile Infinity */}
-          <div className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="inline-flex items-center lg:items-start">
+          <Reveal direction="left" delay={350} className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
+            <div className="inline-flex items-center lg:items-start transition-transform duration-300 hover:scale-105">
               <img
                 src={mileInfinityLogo}
                 alt="Mile Infinity"
@@ -391,7 +392,7 @@ function TwoBrandsEcosystem() {
                 and effective skincare for your everyday rituals.
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -552,7 +553,7 @@ function BundleBuilder() {
             </div>
 
             {/* Floating "+" Button exactly as in Group 23 */}
-            <div className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f7f5f0] text-[#162e21] shadow-xl border border-white/60 my-[-8px] sm:my-0">
+            <div className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f7f5f0] text-[#162e21] shadow-xl border border-white/60 my-[-8px] sm:my-0 animate-float">
               <span className="text-xl font-light leading-none">+</span>
             </div>
 
@@ -562,7 +563,7 @@ function BundleBuilder() {
                 <img
                   src={card2.cardImage}
                   alt={card2.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
               <div className="flex items-center justify-between px-4 py-3 bg-[#e8e3d8] text-[#162e21]">
@@ -601,7 +602,7 @@ function BundleBuilder() {
                     key={item.id}
                     type="button"
                     onClick={() => toggle(item.id)}
-                    className={`flex w-full items-center gap-2.5 sm:gap-3.5 p-2 sm:p-3 text-left transition-all ${
+                    className={`flex w-full items-center gap-2.5 sm:gap-3.5 p-2 sm:p-3 text-left transition-all duration-300 active:scale-98 hover-lift-sm ${
                       isSelected
                         ? "bg-[#dfe5da] ring-1 ring-[#162e21]/20 shadow-sm"
                         : "bg-transparent hover:bg-white/40"
@@ -611,7 +612,7 @@ function BundleBuilder() {
                       <img
                         src={item.cardImage}
                         alt={item.name}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                       />
                     </div>
 
@@ -629,9 +630,9 @@ function BundleBuilder() {
                         {formatInr(item.priceInr)}
                       </span>
                       <div
-                        className={`flex h-4.5 w-4.5 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border transition-all ${
+                        className={`flex h-4.5 w-4.5 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
                           isSelected
-                            ? "border-[#1a382b] bg-[#1a382b] text-white"
+                            ? "border-[#1a382b] bg-[#1a382b] text-white scale-105"
                             : "border-[#162e21]/40 bg-transparent"
                         }`}
                       >
@@ -665,16 +666,16 @@ function BundleBuilder() {
                 type="button"
                 onClick={handleAddRitual}
                 disabled={selectedIds.length !== 2}
-                className="mt-4 sm:mt-5 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3.5 sm:py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-lg transition-all flex items-center justify-between px-5 sm:px-6 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="btn-shimmer hover-lift active:scale-95 mt-4 sm:mt-5 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3.5 sm:py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-lg transition-all flex items-center justify-between px-5 sm:px-6 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {added ? (
-                  <span className="inline-flex items-center gap-2 text-emerald-300">
+                  <span className="inline-flex items-center gap-2 text-emerald-300 animate-scale-in">
                     <CheckCircle2 className="h-4 w-4" /> Ritual Added to Bag!
                   </span>
                 ) : (
                   <>
                     <span>Add Your Ritual to Bag</span>
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </>
                 )}
               </button>
@@ -725,7 +726,7 @@ function SpotlightMatchaSection() {
             <div className="hidden lg:block lg:col-span-7 xl:col-span-7 2xl:col-span-7 pointer-events-none" />
 
             {/* Right columns: Editorial copy shifted firmly to the right side */}
-            <div className="lg:col-span-5 xl:col-span-5 2xl:col-span-5 max-w-md sm:max-w-lg lg:max-w-xl ml-auto lg:pl-12 xl:pl-16 2xl:pl-24 lg:translate-x-6 xl:translate-x-12 bg-[#f9ecdf]/92 sm:bg-[#f9ecdf]/60 lg:bg-transparent backdrop-blur-xs lg:backdrop-blur-none p-5 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none shadow-sm lg:shadow-none">
+            <Reveal direction="up" delay={150} className="lg:col-span-5 xl:col-span-5 2xl:col-span-5 max-w-md sm:max-w-lg lg:max-w-xl ml-auto lg:pl-12 xl:pl-16 2xl:pl-24 lg:translate-x-6 xl:translate-x-12 bg-[#f9ecdf]/92 sm:bg-[#f9ecdf]/60 lg:bg-transparent backdrop-blur-xs lg:backdrop-blur-none p-5 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none shadow-sm lg:shadow-none">
               <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/75 font-sans">
                 The Ritual Starts Here
               </p>
@@ -778,13 +779,13 @@ function SpotlightMatchaSection() {
                       imageUrl: cardGreenImg,
                     })
                   }
-                  className="inline-flex items-center justify-center gap-3 bg-[#1a382b] hover:bg-[#12291f] text-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-md w-full sm:w-auto"
+                  className="btn-shimmer hover-lift active:scale-95 inline-flex items-center justify-center gap-3 bg-[#1a382b] hover:bg-[#12291f] text-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-md w-full sm:w-auto"
                 >
                   <span>Add to Cart</span>
                   <ShoppingBag className="h-4 w-4 stroke-[1.5]" />
                 </button>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>
@@ -998,7 +999,7 @@ function FourStepEditSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left Column from Slide 1 / Screenshot 4 */}
-          <div className="lg:col-span-4 lg:border-r lg:border-white/15 lg:pr-10 xl:pr-12">
+          <Reveal direction="right" className="lg:col-span-4 lg:border-r lg:border-white/15 lg:pr-10 xl:pr-12">
             <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#c29653]">
               The Four-Step Edit
             </p>
@@ -1015,20 +1016,22 @@ function FourStepEditSection() {
             <div className="mt-8">
               <a
                 href="#shop-catalog"
-                className="inline-flex items-center gap-3 bg-[#f4f1ea] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21] shadow-lg transition-transform hover:bg-white rounded-none"
+                className="btn-shimmer hover-lift active:scale-95 inline-flex items-center gap-3 bg-[#f4f1ea] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21] shadow-lg transition-transform hover:bg-white rounded-none"
               >
                 <span>Shop The Routine</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right Column: 4 Step Rows from Slide 1 / Screenshot 4 */}
           <div className="lg:col-span-8 divide-y divide-white/15 border-y border-white/15">
-            {steps.map((s) => (
-              <div
+            {steps.map((s, idx) => (
+              <Reveal
                 key={s.stepNum}
-                className="py-4 sm:py-6 flex items-center justify-between gap-3 sm:gap-6 group transition-colors hover:bg-white/[0.02]"
+                direction="up"
+                delay={idx * 90}
+                className="py-4 sm:py-6 flex items-center justify-between gap-3 sm:gap-6 group transition-all duration-300 hover:bg-white/[0.05] px-3 -mx-3 rounded-lg"
               >
                 {/* Step Num + Vertical bar */}
                 <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
@@ -1045,7 +1048,7 @@ function FourStepEditSection() {
 
                 {/* Title + Subtext positioned directly over the background collage */}
                 <div className="flex-1 min-w-0 pl-1 sm:pl-4">
-                  <h4 className="font-serif text-lg sm:text-2xl text-white font-normal truncate">
+                  <h4 className="font-serif text-lg sm:text-2xl text-white font-normal truncate group-hover:text-emerald-200 transition-colors">
                     {s.title}
                   </h4>
                   <p className="text-[10px] sm:text-xs text-white/80 font-sans truncate mt-0.5">
@@ -1067,13 +1070,13 @@ function FourStepEditSection() {
                         imageUrl: s.image,
                       })
                     }
-                    className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/30 text-white/80 transition-all group-hover:border-white group-hover:text-white group-hover:bg-white/10"
+                    className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/30 text-white/80 transition-all duration-200 group-hover:border-white group-hover:text-white group-hover:bg-white/15 group-hover:scale-110 active:scale-90"
                     title={`Add ${s.title} to bag`}
                   >
                     <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   </button>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -1416,10 +1419,10 @@ function RoutineFinderSection() {
                       setActiveStepIndex(idx);
                       setAdded(false);
                     }}
-                    className={`w-full flex items-center gap-4 px-6 py-4 text-left transition-all rounded-sm ${
+                    className={`w-full flex items-center gap-4 px-6 py-4 text-left transition-all duration-300 rounded-sm hover-lift-sm active:scale-98 ${
                       isActive
                         ? "bg-[#ede6dc] border-l-2 border-[#162e21] shadow-sm text-[#162e21]"
-                        : "bg-transparent hover:bg-black/[0.02] border-b border-[#162e21]/10 text-[#162e21]/70"
+                        : "bg-transparent hover:bg-black/[0.04] border-b border-[#162e21]/10 text-[#162e21]/70"
                     }`}
                   >
                     <span className="text-xs font-mono opacity-60">{step.step}</span>
@@ -1440,12 +1443,12 @@ function RoutineFinderSection() {
                 <img
                   src={routineFinderArtworkImg}
                   alt="Mile Infinity Routine Finder — Model with Skincare Ritual"
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.01]"
                 />
               </div>
 
               {/* Dynamic Interactive Floating Product Card positioned gracefully on mobile and desktop */}
-              <div className="mt-5 sm:mt-0 sm:absolute sm:-bottom-4 sm:right-4 z-20 w-full sm:w-72 max-w-sm mx-auto sm:mx-0 bg-white p-4 sm:p-6 shadow-xl rounded-2xl border border-[#ede7dc]">
+              <div className="mt-5 sm:mt-0 sm:absolute sm:-bottom-4 sm:right-4 z-20 w-full sm:w-72 max-w-sm mx-auto sm:mx-0 bg-white p-4 sm:p-6 shadow-xl rounded-2xl border border-[#ede7dc] hover-lift-sm animate-float-gentle transition-all">
                 <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#c29653]">
                   {current.category}
                 </p>
@@ -1458,16 +1461,16 @@ function RoutineFinderSection() {
                 <button
                   type="button"
                   onClick={handleAdd}
-                  className="mt-3.5 sm:mt-4 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all flex items-center justify-between px-4 rounded-none cursor-pointer"
+                  className="btn-shimmer hover-lift active:scale-95 mt-3.5 sm:mt-4 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all flex items-center justify-between px-4 rounded-none cursor-pointer"
                 >
                   {added ? (
-                    <span className="inline-flex items-center gap-1.5 text-emerald-300">
+                    <span className="inline-flex items-center gap-1.5 text-emerald-300 animate-scale-in">
                       <CheckCircle2 className="h-3.5 w-3.5" /> Added to Bag
                     </span>
                   ) : (
                     <>
                       <span>Find My Routine</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </>
                   )}
                 </button>
@@ -1535,7 +1538,7 @@ function FaqSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid gap-8 lg:gap-12 lg:grid-cols-12 items-start">
           {/* Left Column: Heading */}
-          <div className="lg:col-span-5 pt-2">
+          <Reveal direction="right" className="lg:col-span-5 pt-2">
             <p className="text-xs uppercase tracking-[0.24em] text-[#162e21]/75 font-semibold">
               Good to know
             </p>
@@ -1546,10 +1549,10 @@ function FaqSection() {
             <p className="mt-3.5 sm:mt-4 max-w-sm text-xs sm:text-base text-[#2c3d33]/85 leading-relaxed font-sans">
               Everything you need to begin a simpler Mile Infinity skincare ritual.
             </p>
-          </div>
+          </Reveal>
 
           {/* Right Column: Interactive Accordion */}
-          <div className="lg:col-span-7 divide-y divide-[#162e21]/20 border-y border-[#162e21]/20 sm:bg-transparent bg-[#fdfbf9]/90 sm:backdrop-blur-none backdrop-blur-xs rounded-2xl p-4 sm:p-0">
+          <Reveal direction="left" delay={150} className="lg:col-span-7 divide-y divide-[#162e21]/20 border-y border-[#162e21]/20 sm:bg-transparent bg-[#fdfbf9]/90 sm:backdrop-blur-none backdrop-blur-xs rounded-2xl p-4 sm:p-0">
             {FAQS.map((faq, idx) => {
               const isOpen = openIndex === idx;
               return (
@@ -1557,22 +1560,22 @@ function FaqSection() {
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between gap-4 text-left font-serif text-base sm:text-lg text-[#162e21] hover:text-[#0c2217] transition-colors"
+                    className="w-full flex items-center justify-between gap-4 text-left font-serif text-base sm:text-lg text-[#162e21] hover:text-[#0c2217] transition-colors group"
                   >
-                    <span>{faq.q}</span>
-                    <span className="text-xl font-light text-[#162e21] shrink-0 transition-transform duration-300">
+                    <span className="group-hover:translate-x-1 transition-transform duration-200">{faq.q}</span>
+                    <span className={`text-xl font-light text-[#162e21] shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}>
                       {isOpen ? "−" : "+"}
                     </span>
                   </button>
                   {isOpen && (
-                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/85 font-sans pl-1">
+                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/85 font-sans pl-1 animate-in fade-in slide-in-from-top-1 duration-200">
                       {faq.a}
                     </p>
                   )}
                 </div>
               );
             })}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -1596,7 +1599,7 @@ function ClosingLuxuryBanner() {
         />
 
         {/* Center editorial typography and interactive buttons matching Frame 30 */}
-        <div className="relative z-10 text-center px-4 max-w-2xl py-14 sm:py-20">
+        <Reveal direction="up" className="relative z-10 text-center px-4 max-w-2xl py-14 sm:py-20">
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-[46px] font-normal leading-[1.2] text-white">
             Your skin.<br />
             Your ritual.<br />
@@ -1609,20 +1612,20 @@ function ClosingLuxuryBanner() {
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
             <a
               href="#essentials"
-              className="bg-[#ede9e1] hover:bg-white text-[#162e21] px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all hover:scale-105 inline-flex items-center justify-center gap-2 shadow-lg text-center"
+              className="btn-shimmer hover-lift active:scale-95 bg-[#ede9e1] hover:bg-white text-[#162e21] px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center gap-2 shadow-lg text-center"
             >
               <span>Shop All Skincare</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
             <a
               href="#approach"
-              className="border border-white/70 hover:border-white bg-[#073125]/40 hover:bg-[#073125]/70 backdrop-blur-sm text-white px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all hover:scale-105 inline-flex items-center justify-center gap-2 text-center"
+              className="btn-shimmer hover-lift active:scale-95 border border-white/70 hover:border-white bg-[#073125]/40 hover:bg-[#073125]/70 backdrop-blur-sm text-white px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center gap-2 text-center"
             >
               <span>Explore The Brand</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

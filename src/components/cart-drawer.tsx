@@ -148,12 +148,12 @@ export function CartDrawer() {
     <div className="fixed inset-0 z-50 overflow-hidden font-sans">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 animate-in fade-in"
         onClick={closeCart}
       />
 
       <div className="fixed inset-y-0 right-0 flex max-w-full pl-0 sm:pl-10 z-50">
-        <div className="w-screen max-w-md bg-[#faf8f4] text-[#162e21] shadow-2xl flex flex-col">
+        <div className="w-screen max-w-md bg-[#faf8f4] text-[#162e21] shadow-2xl flex flex-col transform transition-transform duration-300 ease-out animate-in slide-in-from-right">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-[#e5dfd5] px-6 py-5 bg-[#f5f1ea]">
             <div className="flex items-center gap-3">
