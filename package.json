@@ -8,6 +8,8 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
+    "start": "node .output/server/index.mjs",
+    "build:node": "NITRO_PRESET=node-server vite build",
     "deploy": "vite build && wrangler deploy",
     "deploy:preview": "wrangler dev",
     "deploy:pages": "vite build && wrangler pages deploy .output/public",

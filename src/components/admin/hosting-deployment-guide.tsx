@@ -67,12 +67,11 @@ SHIPROCKET_TOKEN=your_shiprocket_bearer_token`;
   ];
 
   const VPS_STEPS = [
-    "Connect to your Ubuntu VPS via SSH: `ssh root@your-server-ip`.",
-    "Install Bun: `curl -fsSL https://bun.sh/install | bash`.",
-    "Clone your repo: `git clone https://github.com/your-username/commerce-store.git && cd commerce-store`.",
-    "Install and build: `bun install && bun run build`.",
-    "Start persistent server with PM2 or systemd: `pm2 start \"bun run start\" --name \"mile-infinity\"`.",
-    "Configure Nginx reverse proxy to point port 80/443 to `http://localhost:3000` with Certbot SSL.",
+    "Open https://railway.com and click '+ New Project' -> 'Deploy from GitHub repo'.",
+    "Select your repository: `commerce-admin-dashboard`.",
+    "Add Variables in Railway: `NITRO_PRESET=node-server`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `RAZORPAY_KEY_ID`.",
+    "Railway automatically reads `railway.json` and runs full-stack Node SSR via `.output/server/index.mjs`.",
+    "Under 'Settings' -> 'Networking', click 'Generate Domain' to get your instant live HTTPS URL.",
   ];
 
   return (
