@@ -348,13 +348,16 @@ function ShopTheEssentialsSection() {
               >
                 <div>
                   {/* Product Artwork image */}
-                  <div className="aspect-[4/5] overflow-hidden bg-[#faf8f4] flex items-center justify-center relative">
+                  <a
+                    href={`/product?id=${p.id}&slug=${p.slug}`}
+                    className="aspect-[4/5] overflow-hidden bg-[#faf8f4] flex items-center justify-center relative block cursor-pointer"
+                  >
                     <img
                       src={p.image}
                       alt={p.name}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                  </div>
+                  </a>
 
                   {/* Product details */}
                   <div className="mt-4">
@@ -362,7 +365,9 @@ function ShopTheEssentialsSection() {
                       {p.categoryTag}
                     </span>
                     <h3 className="mt-1.5 font-serif text-base sm:text-[17px] font-normal text-[#162e21] leading-snug min-h-[2.75rem] line-clamp-2">
-                      {p.name}
+                      <a href={`/product?id=${p.id}&slug=${p.slug}`} className="hover:underline">
+                        {p.name}
+                      </a>
                     </h3>
                     <p className="mt-2 text-xs text-[#2c3d33]/80 leading-relaxed font-sans min-h-[2.5rem] line-clamp-2">
                       {p.description}
@@ -376,24 +381,23 @@ function ShopTheEssentialsSection() {
                       {formatInr(p.priceInr)}
                     </span>
                     <a
-                      href={p.id === "prod-1" ? "/product" : `/product?id=${p.id}`}
+                      href={`/product?id=${p.id}&slug=${p.slug}`}
                       className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#162e21] hover:underline"
                     >
-                      <span>View Product</span>
+                      <span>View Details</span>
                       <ArrowRight className="h-3 w-3" />
                     </a>
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setQuickPayProduct(p)}
-                      className="w-full bg-white hover:bg-[#f7f5ef] text-[#162e21] py-2.5 px-3 text-xs font-bold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm border-2 border-[#162e21] active:scale-95 cursor-pointer"
+                    <a
+                      href={`/product?id=${p.id}&slug=${p.slug}`}
+                      className="w-full bg-white hover:bg-[#f7f5ef] text-[#162e21] py-2.5 px-3 text-xs font-bold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm border-2 border-[#162e21] active:scale-95 cursor-pointer text-center"
                     >
                       <CreditCard className="h-3.5 w-3.5 text-[#162e21]" />
                       <span>Buy Now</span>
                       <span className="text-[11px] font-normal text-[#162e21]/75">({formatInr(p.priceInr)})</span>
-                    </button>
+                    </a>
 
                     <button
                       type="button"

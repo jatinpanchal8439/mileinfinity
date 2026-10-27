@@ -75,8 +75,8 @@ export interface ProductDetail {
 
 export const PRODUCTS: ProductDetail[] = [
   {
-    id: "prod-1",
-    slug: "crimson-beauty-beetroot-facewash",
+    id: "3f147579-1e72-4338-855a-b9d816a40f7c",
+    slug: "crimson-beauty-beetroot-serum",
     stepNum: "01",
     stepTag: "01 / CLEANSE",
     categoryKicker: "Face Wash · The Cleansing Step",
@@ -126,8 +126,8 @@ export const PRODUCTS: ProductDetail[] = [
     ],
   },
   {
-    id: "prod-2",
-    slug: "ceremonial-green-fusion-serum",
+    id: "373af9fe-fca4-461e-8413-e4ee8692933b",
+    slug: "cucumber-green-potion-serum",
     stepNum: "02",
     stepTag: "02 / TREAT",
     categoryKicker: "Face Serum · The Treatment Step",
@@ -177,8 +177,8 @@ export const PRODUCTS: ProductDetail[] = [
     ],
   },
   {
-    id: "prod-3",
-    slug: "blueberry-lavender-bliss-moisturiser",
+    id: "0cb529ce-57e9-41aa-8b52-1ca1bb6256c6",
+    slug: "blueberry-lavender-rice-moisturizer",
     stepNum: "03",
     stepTag: "03 / HYDRATE",
     categoryKicker: "Moisturiser · The Hydration Step",
@@ -228,8 +228,8 @@ export const PRODUCTS: ProductDetail[] = [
     ],
   },
   {
-    id: "prod-4",
-    slug: "sunnykiss-radiance-spf-sunscreen",
+    id: "ca1d19fd-c2d6-4c47-8bdc-0c45d2d7ef6c",
+    slug: "sunaysia-radiance-spf-sunscreen",
     stepNum: "04",
     stepTag: "04 / PROTECT",
     categoryKicker: "Sunscreen · The Daily Protection Step",
@@ -309,18 +309,40 @@ export const Route = createFileRoute("/product")({
 
 export function ProductDetailsPage() {
   const search = Route.useSearch();
-  const [selectedId, setSelectedId] = useState<string>("prod-1");
+  const [selectedId, setSelectedId] = useState<string>("3f147579-1e72-4338-855a-b9d816a40f7c");
 
   useEffect(() => {
     if (search.id) {
-      setSelectedId(search.id);
+      const match = PRODUCTS.find(
+        (p) =>
+          p.id === search.id ||
+          (search.id === "prod-1" && p.id === "3f147579-1e72-4338-855a-b9d816a40f7c") ||
+          (search.id === "prod-2" && p.id === "373af9fe-fca4-461e-8413-e4ee8692933b") ||
+          (search.id === "prod-3" && p.id === "0cb529ce-57e9-41aa-8b52-1ca1bb6256c6") ||
+          (search.id === "prod-4" && p.id === "ca1d19fd-c2d6-4c47-8bdc-0c45d2d7ef6c")
+      );
+      if (match) setSelectedId(match.id);
+      else setSelectedId(search.id);
     } else if (search.slug) {
-      const match = PRODUCTS.find((p) => p.slug === search.slug);
+      const match = PRODUCTS.find(
+        (p) =>
+          p.slug === search.slug ||
+          p.slug.includes(search.slug) ||
+          search.slug.includes(p.slug) ||
+          search.slug.includes(p.stepTag.toLowerCase().split(" / ")[1] || "")
+      );
       if (match) setSelectedId(match.id);
     }
   }, [search.id, search.slug]);
 
-  const currentProduct = PRODUCTS.find((p) => p.id === selectedId) || PRODUCTS[0]!;
+  const currentProduct =
+    PRODUCTS.find((p) => p.id === selectedId) ||
+    PRODUCTS.find((p) => p.slug === search.slug) ||
+    (selectedId === "prod-1" ? PRODUCTS[0] : undefined) ||
+    (selectedId === "prod-2" ? PRODUCTS[1] : undefined) ||
+    (selectedId === "prod-3" ? PRODUCTS[2] : undefined) ||
+    (selectedId === "prod-4" ? PRODUCTS[3] : undefined) ||
+    PRODUCTS[0]!;
 
   const handleSelectProduct = (id: string) => {
     setSelectedId(id);
