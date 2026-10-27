@@ -58,10 +58,12 @@ SHIPROCKET_TOKEN=your_shiprocket_bearer_token`;
   ];
 
   const CLOUDFLARE_STEPS = [
-    "Run `bun run build` locally or inside GitHub Actions.",
-    "Your build output will be generated inside `.output/public` and `.output/server/`.",
-    "Run `npx wrangler pages deploy .output/public --project-name=mile-infinity`.",
-    "Add your custom domain (e.g. `store.yourdomain.com`) in Cloudflare Dashboard under Pages -> Custom Domains.",
+    "Run `bun run deploy` (or `npx wrangler deploy`) in terminal to publish live to Cloudflare Workers with edge assets.",
+    "Or via Cloudflare Dashboard: Go to Workers & Pages -> Create Application -> Pages -> Connect to Git.",
+    "Select your GitHub repository (`commerce-admin-dashboard`).",
+    "Build Settings: Framework: None, Build command: `bun run build`, Output directory: `.output/public`.",
+    "Add Environment Variables: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, and RAZORPAY_KEY_ID.",
+    "Add your custom domain with free automatic DDoS protection and SSL certificate.",
   ];
 
   const VPS_STEPS = [

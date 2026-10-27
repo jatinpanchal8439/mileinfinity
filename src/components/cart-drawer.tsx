@@ -114,9 +114,15 @@ export function CartDrawer() {
 
       // 1. Sync to Supabase PostgreSQL Database orders and order_items tables
       try {
-        const { data: dbOrder } = await supabase
+        const orderDbId =
+          typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+            ? crypto.randomUUID()
+            : "00000000-0000-4000-8000-" + Date.now().toString(16).padStart(12, "0");
+
+        const { error: orderInsertErr } = await supabase
           .from("orders")
           .insert({
+            id: orderDbId,
             order_number: orderId,
             customer_name: formData.name,
             customer_email: formData.email,
@@ -126,20 +132,24 @@ export function CartDrawer() {
             pincode: formData.pincode,
             subtotal_inr: grandTotal,
             status: "processing",
-          })
-          .select("id")
-          .maybeSingle();
+          });
 
-        if (dbOrder?.id) {
+        if (!orderInsertErr) {
           await supabase.from("order_items").insert(
             items.map((i) => ({
-              order_id: dbOrder.id,
+              id:
+                typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+                  ? crypto.randomUUID()
+                  : undefined,
+              order_id: orderDbId,
               product_name: i.name,
               quantity: i.quantity,
               unit_price_inr: i.priceInr,
               size: i.size || "Standard",
             }))
           );
+        } else {
+          console.warn("Supabase orders insert note:", orderInsertErr);
         }
       } catch (err) {
         console.warn("Database sync note:", err);

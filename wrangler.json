@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "commerce-admin-dashboard",
+  "compatibility_date": "2026-10-27",
+  "main": ".output/server/index.mjs",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".output/public"
+  },
+  "vars": {
+    "SUPABASE_URL": "https://howaceawpfbuthzdajdk.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT",
+    "VITE_SUPABASE_URL": "https://howaceawpfbuthzdajdk.supabase.co",
+    "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT",
+    "RAZORPAY_KEY_ID": "rzp_test_TsreDTx2vLmBw1",
+    "VITE_RAZORPAY_KEY_ID": "rzp_test_TsreDTx2vLmBw1"
+  }
+}

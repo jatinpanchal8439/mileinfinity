@@ -28,68 +28,7 @@ export interface CustomerProfile {
   lastOrderDate: string;
 }
 
-const DEFAULT_CUSTOMERS: CustomerProfile[] = [
-  {
-    id: "cust-1",
-    name: "Ananya Roy",
-    email: "ananya.roy@example.com",
-    phone: "+91 98101 23456",
-    city: "Mumbai",
-    totalOrders: 3,
-    totalSpentInr: 6890,
-    isVip: true,
-    firstOrderDate: "2026-08-14T10:00:00Z",
-    lastOrderDate: "2026-10-25T14:22:00Z",
-  },
-  {
-    id: "cust-2",
-    name: "Priya Sharma",
-    email: "priya.sharma@example.com",
-    phone: "+91 98450 12890",
-    city: "Bengaluru",
-    totalOrders: 2,
-    totalSpentInr: 3848,
-    isVip: false,
-    firstOrderDate: "2026-09-02T11:00:00Z",
-    lastOrderDate: "2026-10-24T09:12:00Z",
-  },
-  {
-    id: "cust-3",
-    name: "Rohan Varma",
-    email: "rohan.varma@example.com",
-    phone: "+91 97234 55667",
-    city: "New Delhi",
-    totalOrders: 1,
-    totalSpentInr: 2398,
-    isVip: false,
-    firstOrderDate: "2026-10-23T11:05:00Z",
-    lastOrderDate: "2026-10-23T11:05:00Z",
-  },
-  {
-    id: "cust-4",
-    name: "Vikram Malhotra",
-    email: "vikram.m@example.com",
-    phone: "+91 98111 44552",
-    city: "Hyderabad",
-    totalOrders: 4,
-    totalSpentInr: 9240,
-    isVip: true,
-    firstOrderDate: "2026-07-19T08:30:00Z",
-    lastOrderDate: "2026-10-21T18:45:00Z",
-  },
-  {
-    id: "cust-5",
-    name: "Sneha Gupta",
-    email: "sneha.g@example.com",
-    phone: "+91 99200 88771",
-    city: "Pune",
-    totalOrders: 2,
-    totalSpentInr: 4198,
-    isVip: false,
-    firstOrderDate: "2026-09-15T16:20:00Z",
-    lastOrderDate: "2026-10-20T12:10:00Z",
-  },
-];
+const DEFAULT_CUSTOMERS: CustomerProfile[] = [];
 
 interface CustomersManagerProps {
   orders: AdminOrder[];
@@ -203,7 +142,7 @@ export function CustomersManager({ orders, onSelectCustomerOrders }: CustomersMa
               Repeat Rate
             </span>
             <p className="text-2xl font-bold text-slate-900 mt-1">
-              {Math.round((customerList.filter((c) => c.totalOrders > 1).length / totalCustomers) * 100)}%
+              {totalCustomers > 0 ? Math.round((customerList.filter((c) => c.totalOrders > 1).length / totalCustomers) * 100) : 0}%
             </p>
             <p className="text-[11px] text-purple-600 font-medium mt-0.5">Botanical ritual loyalty</p>
           </div>
@@ -261,8 +200,20 @@ export function CustomersManager({ orders, onSelectCustomerOrders }: CustomersMa
             <tbody className="divide-y divide-slate-100">
               {filteredCustomers.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-12 text-center text-slate-400">
-                    No customers found matching &quot;{search}&quot;
+                  <td colSpan={7} className="py-16 text-center">
+                    <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#0f3d24] flex items-center justify-center mb-3">
+                        <Users className="w-6 h-6" />
+                      </div>
+                      <h4 className="font-bold text-slate-800 text-sm">
+                        {search ? "No matching customers found" : "No Registered Customers Yet"}
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        {search
+                          ? `No customer profiles match "${search}". Try searching by another name, email or city.`
+                          : "Customer profiles will automatically be created and tracked here in real-time as customers place orders on your store."}
+                      </p>
+                    </div>
                   </td>
                 </tr>
               ) : (

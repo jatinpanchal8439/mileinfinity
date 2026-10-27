@@ -115,89 +115,7 @@ export interface AdminOrder {
   };
 }
 
-const INITIAL_ORDERS: AdminOrder[] = [
-  {
-    id: "ord-101",
-    orderNumber: "MI-9482A1",
-    customerName: "Aarav Sharma",
-    customerEmail: "aarav.sharma@example.com",
-    customerPhone: "+91 98765 43210",
-    addressLine: "Flat 402, Lotus Towers, Indiranagar",
-    city: "Bengaluru",
-    pincode: "560038",
-    subtotalInr: 2598,
-    status: "shipped",
-    createdAt: "2026-10-23T09:30:00Z",
-    items: [
-      { name: "Mile Infinity Crimson Beauty Beetroot Facewash", quantity: 1, price: 999, size: "100ml" },
-      { name: "Mile Infinity Ceremonial Green Fusion Serum", quantity: 1, price: 1599, size: "30ml" },
-    ],
-    payment: {
-      gateway: "Razorpay",
-      status: "paid",
-      razorpayPaymentId: "pay_Qk92Lz8P1m0sKa",
-      razorpayOrderId: "order_Qk91Ks72Pn19",
-    },
-    shipment: {
-      shiprocketOrderId: "SR-849102",
-      shipmentId: "SHP-910283",
-      awbCode: "BLUEDART-849201948",
-      courierName: "Blue Dart Express",
-      status: "in_transit",
-      labelUrl: "#",
-    },
-  },
-  {
-    id: "ord-102",
-    orderNumber: "MI-8812B7",
-    customerName: "Priya Nair",
-    customerEmail: "priya.nair@example.com",
-    customerPhone: "+91 98112 33445",
-    addressLine: "12B, Marine Drive Villa",
-    city: "Mumbai",
-    pincode: "400020",
-    subtotalInr: 1599,
-    status: "processing",
-    createdAt: "2026-10-23T10:15:00Z",
-    items: [
-      { name: "Mile Infinity Ceremonial Green Fusion Serum", quantity: 1, price: 1599, size: "30ml" },
-    ],
-    payment: {
-      gateway: "Razorpay",
-      status: "paid",
-      razorpayPaymentId: "pay_Pl94Ms01Qv73Nm",
-      razorpayOrderId: "order_Pl93Kz81Mm20",
-    },
-    shipment: {
-      shiprocketOrderId: "SR-849103",
-      status: "pickup_scheduled",
-      courierName: "Delhivery Air",
-    },
-  },
-  {
-    id: "ord-103",
-    orderNumber: "MI-7721C3",
-    customerName: "Rohan Varma",
-    customerEmail: "rohan.varma@example.com",
-    customerPhone: "+91 97234 55667",
-    addressLine: "74, Defense Colony",
-    city: "New Delhi",
-    pincode: "110024",
-    subtotalInr: 2398,
-    status: "pending",
-    createdAt: "2026-10-23T11:05:00Z",
-    items: [
-      { name: "Mile Infinity Blue Berry & Lavender Bliss Moisturiser", quantity: 1, price: 1099, size: "50ml" },
-      { name: "Mile Infinity Sunnykiss Radiance SPF 50 Sunscreen", quantity: 1, price: 1299, size: "100ml" },
-    ],
-    payment: {
-      gateway: "Razorpay",
-      status: "paid",
-      razorpayPaymentId: "pay_Om72Nk93Px41Lv",
-      razorpayOrderId: "order_Om71Jm92Nx10",
-    },
-  },
-];
+const INITIAL_ORDERS: AdminOrder[] = [];
 
 function formatOrderDateTime(isoString: string): string {
   try {
@@ -329,7 +247,7 @@ function AdminDashboard() {
         const stored: AdminOrder[] = raw ? JSON.parse(raw) : [];
         const seen = new Set<string>();
         const merged: AdminOrder[] = [];
-        for (const ord of [...dbOrders, ...stored, ...INITIAL_ORDERS]) {
+        for (const ord of [...dbOrders, ...stored]) {
           if (!seen.has(ord.id) && !seen.has(ord.orderNumber)) {
             seen.add(ord.id);
             if (ord.orderNumber) seen.add(ord.orderNumber);
@@ -1331,9 +1249,24 @@ function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
-                      {orders
-                        .filter((o) => (orderStatusFilter === "all" ? true : o.status === orderStatusFilter))
-                        .map((order) => (
+                      {orders.filter((o) => (orderStatusFilter === "all" ? true : o.status === orderStatusFilter)).length === 0 ? (
+                        <tr>
+                          <td colSpan={8} className="py-16 text-center">
+                            <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
+                              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#0f3d24] flex items-center justify-center mb-3">
+                                <ShoppingBag className="w-6 h-6" />
+                              </div>
+                              <h4 className="font-bold text-slate-800 text-sm">No Customer Orders Yet</h4>
+                              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Real customer orders placed via storefront checkout or Razorpay payment will automatically appear here with full customer details, live payment status, and instant tax invoice generation.
+                              </p>
+                            </div>
+                          </td>
+                        </tr>
+                      ) : (
+                        orders
+                          .filter((o) => (orderStatusFilter === "all" ? true : o.status === orderStatusFilter))
+                          .map((order) => (
                           <tr key={order.id} className="hover:bg-slate-50/80 transition-colors">
                             <td className="py-3.5 px-4 font-mono font-bold text-slate-900">
                               <button
@@ -1416,17 +1349,31 @@ function AdminDashboard() {
                               </div>
                             </td>
                           </tr>
-                        ))}
-                    </tbody>
+                        ))
+                    )}
+                  </tbody>
                   </table>
                 </div>
               </div>
             ) : (
               /* ORDERS CARDS VIEW */
               <div className="space-y-4">
-                {orders
-                  .filter((o) => (orderStatusFilter === "all" ? true : o.status === orderStatusFilter))
-                  .map((order) => (
+                {orders.filter((o) => (orderStatusFilter === "all" ? true : o.status === orderStatusFilter)).length === 0 ? (
+                  <div className="p-16 text-center bg-white rounded-2xl border border-slate-200 shadow-sm">
+                    <div className="flex flex-col items-center justify-center max-w-sm mx-auto">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#0f3d24] flex items-center justify-center mb-3">
+                        <ShoppingBag className="w-6 h-6" />
+                      </div>
+                      <h4 className="font-bold text-slate-800 text-sm">No Customer Orders Yet</h4>
+                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        Real customer orders placed via storefront checkout or Razorpay payment will automatically appear here with full customer details, live payment status, and instant tax invoice generation.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  orders
+                    .filter((o) => (orderStatusFilter === "all" ? true : o.status === orderStatusFilter))
+                    .map((order) => (
                     <div
                       key={order.id}
                       className={`rounded-2xl border p-5 transition-all ${
@@ -1542,7 +1489,8 @@ function AdminDashboard() {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  ))
+                )}
               </div>
             )}
           </div>
