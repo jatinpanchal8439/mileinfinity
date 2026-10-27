@@ -8,6 +8,13 @@
       "when": 1792734029151,
       "tag": "0000_create_store_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793080810342,
+      "tag": "0001_orders_payments_and_admin_bootstrap",
+      "breakpoints": true
     }
   ]
 }
