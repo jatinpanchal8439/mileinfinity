@@ -3,13 +3,15 @@ services:
     name: commerce-admin-dashboard
     runtime: node
     plan: free
-    buildCommand: NITRO_PRESET=node-server npm run build
-    startCommand: node .output/server/index.mjs
+    buildCommand: "curl -fsSL https://bun.sh/install | bash && export PATH=\"$HOME/.bun/bin:$PATH\" && bun install && NITRO_PRESET=node-server bun run build"
+    startCommand: "node .output/server/index.mjs"
     envVars:
       - key: NODE_VERSION
         value: 20
       - key: NITRO_PRESET
         value: node-server
+      - key: NPM_CONFIG_PRODUCTION
+        value: false
       - key: SUPABASE_URL
         value: https://howaceawpfbuthzdajdk.supabase.co
       - key: VITE_SUPABASE_URL

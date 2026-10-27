@@ -35,7 +35,7 @@ If you prefer to configure manually:
    - **Root Directory**: Leave blank (defaults to root `/`)
    - **Build Command**:
      ```bash
-     NITRO_PRESET=node-server npm run build
+     curl -fsSL https://bun.sh/install | bash && export PATH="$HOME/.bun/bin:$PATH" && bun install && NITRO_PRESET=node-server bun run build
      ```
    - **Start Command**:
      ```bash
