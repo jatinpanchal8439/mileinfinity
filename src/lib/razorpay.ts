@@ -3,8 +3,8 @@ export interface RazorpaySettings {
   keyId: string;
   keySecret: string;
   mode: "test" | "live";
-  buttonStyle: "botanical" | "razorpay" | "gold" | "minimal";
-  buttonText: "Pay via Razorpay" | "Instant 1-Click Buy" | "Buy Now with Razorpay" | "Express Checkout";
+  buttonStyle: "botanical" | "razorpay" | "gold" | "minimal" | "white";
+  buttonText: "Buy Now" | "Pay via Razorpay" | "Instant 1-Click Buy" | "Buy Now with Razorpay" | "Express Checkout";
   showBadge: boolean;
   allowedMethods: {
     upi: boolean;
@@ -19,8 +19,8 @@ export const DEFAULT_RAZORPAY_SETTINGS: RazorpaySettings = {
   keyId: "rzp_test_TsreDTx2vLmBw1",
   keySecret: "rzp_sec_mileinfinity2026",
   mode: "test",
-  buttonStyle: "botanical",
-  buttonText: "Pay via Razorpay",
+  buttonStyle: "white",
+  buttonText: "Buy Now",
   showBadge: true,
   allowedMethods: {
     upi: true,

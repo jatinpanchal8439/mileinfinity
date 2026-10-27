@@ -29,57 +29,7 @@ export interface CouponItem {
   expiresAt: string;
 }
 
-const DEFAULT_COUPONS: CouponItem[] = [
-  {
-    id: "cpn-1",
-    code: "BOTANICAL20",
-    description: "20% off on all natural skincare essentials",
-    discountType: "percentage",
-    discountValue: 20,
-    minOrderValueInr: 1499,
-    maxDiscountInr: 500,
-    usageCount: 42,
-    usageLimit: 500,
-    isActive: true,
-    expiresAt: "2026-12-31",
-  },
-  {
-    id: "cpn-2",
-    code: "FIRSTBUY",
-    description: "Flat ₹200 off for first-time ritual shoppers",
-    discountType: "flat",
-    discountValue: 200,
-    minOrderValueInr: 999,
-    usageCount: 88,
-    usageLimit: 1000,
-    isActive: true,
-    expiresAt: "2026-12-31",
-  },
-  {
-    id: "cpn-3",
-    code: "GLOW500",
-    description: "Flat ₹500 off on luxury bundle orders above ₹2,999",
-    discountType: "flat",
-    discountValue: 500,
-    minOrderValueInr: 2999,
-    usageCount: 15,
-    usageLimit: 200,
-    isActive: true,
-    expiresAt: "2026-11-30",
-  },
-  {
-    id: "cpn-4",
-    code: "FREESHIP",
-    description: "100% Free Botanical Express shipping on any order",
-    discountType: "flat",
-    discountValue: 100,
-    minOrderValueInr: 499,
-    usageCount: 124,
-    usageLimit: 2000,
-    isActive: true,
-    expiresAt: "2026-12-31",
-  },
-];
+const DEFAULT_COUPONS: CouponItem[] = [];
 
 const STORAGE_KEY = "mile-infinity-coupons";
 
@@ -87,7 +37,15 @@ export function CouponsManager() {
   const [coupons, setCoupons] = useState<CouponItem[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        // Clear out legacy dummy coupons
+        if (Array.isArray(parsed) && parsed.some((c: any) => c.id && c.id.startsWith("cpn-"))) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
+          return [];
+        }
+        return parsed;
+      }
     } catch {}
     return DEFAULT_COUPONS;
   });
@@ -178,6 +136,12 @@ export function CouponsManager() {
 
   const activeCount = coupons.filter((c) => c.isActive).length;
   const totalRedemptions = coupons.reduce((acc, c) => acc + c.usageCount, 0);
+  const maxIncentiveText =
+    coupons.length > 0
+      ? coupons.some((c) => c.discountType === "percentage")
+        ? `${Math.max(...coupons.filter((c) => c.discountType === "percentage").map((c) => c.discountValue), 0)}%`
+        : `₹${Math.max(...coupons.map((c) => c.discountValue), 0)}`
+      : "None active";
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -218,9 +182,9 @@ export function CouponsManager() {
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Max Incentive
             </span>
-            <p className="text-2xl font-bold text-slate-900 mt-1">₹500 / 20%</p>
+            <p className="text-2xl font-bold text-slate-900 mt-1">{maxIncentiveText}</p>
             <p className="text-[11px] text-[#c49838] font-medium mt-0.5">
-              Top botanical savings tier
+              {coupons.length > 0 ? "Top promo tier" : "No active campaigns"}
             </p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
@@ -253,7 +217,23 @@ export function CouponsManager() {
 
       {/* Coupons Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredCoupons.map((cpn) => (
+        {filteredCoupons.length === 0 ? (
+          <div className="col-span-full p-12 text-center rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <Tag className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+            <h4 className="text-sm font-semibold text-slate-700">No active coupons created yet</h4>
+            <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+              Create your first promotional discount coupon code for your customers to apply at checkout.
+            </p>
+            <button
+              onClick={() => setShowCreateModal(true)}
+              className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0f3d24] text-white text-xs font-semibold hover:bg-[#092b19] transition-all"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Create Coupon</span>
+            </button>
+          </div>
+        ) : (
+          filteredCoupons.map((cpn) => (
           <div
             key={cpn.id}
             className={`p-5 rounded-2xl border transition-all ${
@@ -340,7 +320,7 @@ export function CouponsManager() {
               {cpn.maxDiscountInr && <span>Capped at ₹{cpn.maxDiscountInr}</span>}
             </div>
           </div>
-        ))}
+        )))}
       </div>
 
       {/* Create Coupon Modal */}

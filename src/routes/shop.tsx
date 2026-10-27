@@ -15,6 +15,7 @@ import { useCart } from "@/lib/cart";
 import { formatInr } from "@/lib/format";
 import { RazorpayCheckoutModal } from "@/components/razorpay-checkout-modal";
 import { gsap } from "@/lib/gsap";
+import { getDatabaseProducts, DEFAULT_SQL_PRODUCTS } from "@/lib/database-service";
 
 // High-resolution assets matching Figma Group 24.png
 import naturalGlowMatchaAdImg from "@/assets/natural-glow-matcha-ad.png";
@@ -151,8 +152,69 @@ function ShopTheEssentialsSection() {
   const [selectedPrice, setSelectedPrice] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("featured");
   const [addedId, setAddedId] = useState<string | null>(null);
-  const [quickPayProduct, setQuickPayProduct] = useState<(typeof products)[0] | null>(null);
+  interface ShopProductItem {
+    id: string;
+    slug: string;
+    categoryKey: string;
+    categoryTag: string;
+    name: string;
+    description: string;
+    priceInr: number;
+    size: string;
+    image: string;
+  }
+
+  const [products, setProducts] = useState<ShopProductItem[]>(() =>
+    DEFAULT_SQL_PRODUCTS.map((p, idx) => ({
+      id: p.id,
+      slug: p.slug,
+      categoryKey: p.category,
+      categoryTag: p.category.toUpperCase(),
+      name: p.name,
+      description: p.description || p.tagline || "",
+      priceInr: p.priceInr,
+      size: p.sizes?.[0] || "50ml",
+      image: p.imageUrl || [cardBeetrootImg, cardGreenImg, cardBlueberryImg, cardSunscreenImg][idx % 4],
+    }))
+  );
+
+  const [quickPayProduct, setQuickPayProduct] = useState<ShopProductItem | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  // Sync products from database on mount & on product updates
+  useEffect(() => {
+    let active = true;
+    const fetchCatalog = async () => {
+      try {
+        const data = await getDatabaseProducts();
+        if (active && data && data.length > 0) {
+          setProducts(
+            data.map((p, idx) => ({
+              id: p.id,
+              slug: p.slug,
+              categoryKey: p.category,
+              categoryTag: p.category.toUpperCase(),
+              name: p.name,
+              description: p.description || p.tagline || "",
+              priceInr: p.priceInr,
+              size: p.sizes?.[0] || "50ml",
+              image: p.imageUrl || [cardBeetrootImg, cardGreenImg, cardBlueberryImg, cardSunscreenImg][idx % 4],
+            }))
+          );
+        }
+      } catch (e) {
+        console.warn("Failed to load shop catalog:", e);
+      }
+    };
+    fetchCatalog();
+
+    const handleProductsUpdated = () => fetchCatalog();
+    window.addEventListener("mile-infinity-products-updated", handleProductsUpdated);
+    return () => {
+      active = false;
+      window.removeEventListener("mile-infinity-products-updated", handleProductsUpdated);
+    };
+  }, []);
 
   // GSAP Staggered product cards entrance on filter / sort
   useEffect(() => {
@@ -163,53 +225,6 @@ function ShopTheEssentialsSection() {
       { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.08, ease: "power3.out", overwrite: "auto" }
     );
   }, [selectedCategory, selectedPrice, sortBy]);
-
-  const products = [
-    {
-      id: "prod-1",
-      slug: "crimson-beauty-beetroot-facewash",
-      categoryKey: "cleanser",
-      categoryTag: "FACE WASH",
-      name: "Mile Infinity Crimson Beauty Beetroot Facewash",
-      description: "A beetroot-inspired face wash to begin your everyday skincare ritual.",
-      priceInr: 999,
-      size: "100ml",
-      image: cardBeetrootImg,
-    },
-    {
-      id: "prod-2",
-      slug: "ceremonial-green-fusion-serum",
-      categoryKey: "serum",
-      categoryTag: "FACE SERUM",
-      name: "Mile Infinity Ceremonial Green Fusion Serum",
-      description: "A green tea-inspired serum for the treatment step in your routine.",
-      priceInr: 1599,
-      size: "30ml",
-      image: cardGreenImg,
-    },
-    {
-      id: "prod-3",
-      slug: "blueberry-lavender-bliss-moisturiser",
-      categoryKey: "moisturiser",
-      categoryTag: "MOISTURISER",
-      name: "Mile Infinity Blue Berry & Lavender Bliss Moisturiser",
-      description: "Blue berry and lavender inspiration for your daily moisturising step.",
-      priceInr: 1099,
-      size: "50ml",
-      image: cardBlueberryImg,
-    },
-    {
-      id: "prod-4",
-      slug: "sunnykiss-radiance-spf-sunscreen",
-      categoryKey: "sunscreen",
-      categoryTag: "SUNSCREEN",
-      name: "Mile Infinity Sunnykiss Radiance SPF 50 Sunscreen",
-      description: "SPF 50 sunscreen to complete your daytime skincare routine.",
-      priceInr: 1299,
-      size: "100ml",
-      image: cardSunscreenImg,
-    },
-  ];
 
   const filteredProducts = products
     .filter((p) => {
@@ -373,11 +388,11 @@ function ShopTheEssentialsSection() {
                     <button
                       type="button"
                       onClick={() => setQuickPayProduct(p)}
-                      className="w-full bg-[#0c2340] hover:bg-[#143763] text-white py-2.5 px-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm border border-[#1a4473] active:scale-95"
+                      className="w-full bg-white hover:bg-[#f7f5ef] text-[#162e21] py-2.5 px-3 text-xs font-bold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm border-2 border-[#162e21] active:scale-95 cursor-pointer"
                     >
-                      <CreditCard className="h-3.5 w-3.5 text-[#528ff0]" />
-                      <span>Pay via Razorpay</span>
-                      <span className="text-[10px] text-white/70">({formatInr(p.priceInr)})</span>
+                      <CreditCard className="h-3.5 w-3.5 text-[#162e21]" />
+                      <span>Buy Now</span>
+                      <span className="text-[11px] font-normal text-[#162e21]/75">({formatInr(p.priceInr)})</span>
                     </button>
 
                     <button

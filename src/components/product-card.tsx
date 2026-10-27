@@ -72,6 +72,8 @@ export function ProductCard({
   // Determine button styling based on Razorpay integration settings
   const getRazorpayButtonStyle = () => {
     switch (settings.buttonStyle) {
+      case "white":
+        return "bg-white hover:bg-[#f7f5ef] text-[#162e21] border-2 border-[#162e21] font-bold";
       case "razorpay":
         return "bg-[#0c2340] hover:bg-[#143763] text-white border border-[#1a4473]";
       case "gold":
@@ -80,7 +82,7 @@ export function ProductCard({
         return "bg-black/85 hover:bg-black text-white";
       case "botanical":
       default:
-        return "bg-[#162e21] hover:bg-[#0c2217] text-[#f7f5ef] border border-[#2b543d]";
+        return "bg-white hover:bg-[#f7f5ef] text-[#162e21] border-2 border-[#162e21] font-bold";
     }
   };
 
@@ -173,7 +175,7 @@ export function ProductCard({
               disabled={product.stock <= 0}
               className={`w-full py-2.5 px-3 rounded-lg text-xs font-semibold uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 ${getRazorpayButtonStyle()}`}
             >
-              <CreditCard className="h-3.5 w-3.5 text-[#528ff0]" />
+              <CreditCard className="h-3.5 w-3.5 text-current" />
               <span>{settings.buttonText}</span>
               <span className="text-[10px] opacity-80 font-normal">({formatInr(product.priceInr)})</span>
             </button>

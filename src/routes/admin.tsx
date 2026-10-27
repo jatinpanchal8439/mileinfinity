@@ -563,9 +563,9 @@ function AdminDashboard() {
                 <div className={`mt-4 font-serif text-3xl font-bold ${isWhite ? "text-slate-900" : "text-white"}`}>
                   {formatInr(totalRevenue)}
                 </div>
-                <div className="mt-2 text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
-                  <span>+18.4%</span>
-                  <span className={isWhite ? "text-slate-400 font-normal" : "text-white/50"}>via Razorpay Gateway</span>
+                <div className={`mt-2 text-[11px] font-medium flex items-center gap-1 ${totalRevenue > 0 ? "text-emerald-600" : isWhite ? "text-slate-500" : "text-white/60"}`}>
+                  <span>{totalOrders > 0 ? `${totalOrders} orders processed` : "No sales recorded yet"}</span>
+                  <span className={isWhite ? "text-slate-400 font-normal" : "text-white/50"}>• Razorpay Active</span>
                 </div>
               </div>
 
@@ -659,44 +659,56 @@ function AdminDashboard() {
                 </div>
 
                 <div className={`mt-4 divide-y ${isWhite ? "divide-slate-100" : "divide-white/5"}`}>
-                  {orders.slice(0, 3).map((o) => (
-                    <div key={o.id} className="py-4 flex items-center justify-between gap-4">
-                      <div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className={`font-mono text-sm font-semibold ${isWhite ? "text-slate-900" : "text-white"}`}>
-                            #{o.orderNumber}
-                          </span>
-                          <span
-                            className={`text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold ${
-                              o.status === "shipped"
-                                ? "bg-blue-100 text-blue-800"
-                                : o.status === "processing"
-                                ? "bg-amber-100 text-amber-800"
-                                : "bg-emerald-100 text-emerald-800"
-                            }`}
-                          >
-                            {o.status}
-                          </span>
-                          <span className="text-[11px] text-slate-400 font-mono">
-                            {formatOrderDateTime(o.createdAt)}
-                          </span>
-                        </div>
-                        <p className={`text-xs mt-1 ${isWhite ? "text-slate-600" : "text-white/70"}`}>
-                          <span className="font-semibold text-slate-900">{o.customerName}</span> ({o.city}) • {o.items.map((i) => i.name).join(", ")}
-                        </p>
-                      </div>
-
-                      <div className="text-right">
-                        <span className={`font-serif text-lg font-bold ${isWhite ? "text-slate-900" : "text-white"}`}>
-                          {formatInr(o.subtotalInr)}
-                        </span>
-                        <div className="text-[11px] text-emerald-600 font-medium flex items-center justify-end gap-1 mt-0.5">
-                          <CheckCircle2 className="h-3 w-3" />
-                          <span>Paid via Razorpay</span>
-                        </div>
-                      </div>
+                  {orders.length === 0 ? (
+                    <div className="py-10 text-center">
+                      <ShoppingBag className={`h-8 w-8 mx-auto mb-2.5 ${isWhite ? "text-slate-300" : "text-white/20"}`} />
+                      <p className={`text-sm font-medium ${isWhite ? "text-slate-700" : "text-white/80"}`}>
+                        No customer orders placed yet
+                      </p>
+                      <p className={`text-xs mt-1 max-w-sm mx-auto ${isWhite ? "text-slate-400" : "text-white/40"}`}>
+                        Orders captured through storefront Buy Now checkout will appear here in real-time.
+                      </p>
                     </div>
-                  ))}
+                  ) : (
+                    orders.slice(0, 3).map((o) => (
+                      <div key={o.id} className="py-4 flex items-center justify-between gap-4">
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className={`font-mono text-sm font-semibold ${isWhite ? "text-slate-900" : "text-white"}`}>
+                              #{o.orderNumber}
+                            </span>
+                            <span
+                              className={`text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold ${
+                                o.status === "shipped"
+                                  ? "bg-blue-100 text-blue-800"
+                                  : o.status === "processing"
+                                  ? "bg-amber-100 text-amber-800"
+                                  : "bg-emerald-100 text-emerald-800"
+                              }`}
+                            >
+                              {o.status}
+                            </span>
+                            <span className="text-[11px] text-slate-400 font-mono">
+                              {formatOrderDateTime(o.createdAt)}
+                            </span>
+                          </div>
+                          <p className={`text-xs mt-1 ${isWhite ? "text-slate-600" : "text-white/70"}`}>
+                            <span className="font-semibold text-slate-900">{o.customerName}</span> ({o.city}) • {o.items.map((i) => i.name).join(", ")}
+                          </p>
+                        </div>
+
+                        <div className="text-right">
+                          <span className={`font-serif text-lg font-bold ${isWhite ? "text-slate-900" : "text-white"}`}>
+                            {formatInr(o.subtotalInr)}
+                          </span>
+                          <div className="text-[11px] text-emerald-600 font-medium flex items-center justify-end gap-1 mt-0.5">
+                            <CheckCircle2 className="h-3 w-3" />
+                            <span>Paid via Razorpay</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
 

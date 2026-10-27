@@ -686,10 +686,10 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
                 <button
                   type="button"
                   onClick={() => setIsRazorpayOpen(true)}
-                  className="bg-[#0c2340] hover:bg-[#143763] text-white py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer border border-[#1a4473] active:scale-95"
+                  className="bg-white hover:bg-[#f7f5ef] text-[#162e21] py-3.5 px-6 text-xs font-bold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer border-2 border-[#162e21] active:scale-95"
                 >
-                  <CreditCard className="h-4 w-4 text-[#528ff0]" />
-                  <span>Instant Pay (Razorpay)</span>
+                  <CreditCard className="h-4 w-4 text-[#162e21]" />
+                  <span>Buy Now</span>
                 </button>
               </div>
             </div>
