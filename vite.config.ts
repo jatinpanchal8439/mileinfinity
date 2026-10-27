@@ -14,10 +14,10 @@ export default defineConfig({
   },
   vite: {
     define: {
-      "process.env.SUPABASE_URL": JSON.stringify(process.env.SUPABASE_URL || "https://howaceawpfbuthzdajdk.supabase.co"),
-      "process.env.SUPABASE_PUBLISHABLE_KEY": JSON.stringify(process.env.SUPABASE_PUBLISHABLE_KEY || "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT"),
-      "process.env.VITE_SUPABASE_URL": JSON.stringify(process.env.VITE_SUPABASE_URL || "https://howaceawpfbuthzdajdk.supabase.co"),
-      "process.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(process.env.VITE_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT"),
+      "process.env.SUPABASE_URL": JSON.stringify(process.env["SUPABASE_URL"] || "https://howaceawpfbuthzdajdk.supabase.co"),
+      "process.env.SUPABASE_PUBLISHABLE_KEY": JSON.stringify(process.env["SUPABASE_PUBLISHABLE_KEY"] || "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT"),
+      "process.env.VITE_SUPABASE_URL": JSON.stringify(process.env["VITE_SUPABASE_URL"] || "https://howaceawpfbuthzdajdk.supabase.co"),
+      "process.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] || "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT"),
     },
   },
 });
