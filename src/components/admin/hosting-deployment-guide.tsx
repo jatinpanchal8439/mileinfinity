@@ -254,15 +254,26 @@ SHIPROCKET_TOKEN=your_shiprocket_bearer_token`;
             </ol>
           </div>
 
-          <a
-            href="https://railway.app"
-            target="_blank"
-            rel="noreferrer"
-            className="w-full py-2.5 px-4 rounded-xl bg-purple-600 text-white text-xs font-semibold text-center hover:bg-purple-700 transition-all flex items-center justify-center gap-1.5"
-          >
-            <span>Deploy to Railway</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+          <div className="grid grid-cols-2 gap-2 pt-2">
+            <a
+              href="https://railway.app"
+              target="_blank"
+              rel="noreferrer"
+              className="py-2.5 px-3 rounded-xl bg-purple-600 text-white text-xs font-semibold text-center hover:bg-purple-700 transition-all flex items-center justify-center gap-1"
+            >
+              <span>Railway</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://render.com"
+              target="_blank"
+              rel="noreferrer"
+              className="py-2.5 px-3 rounded-xl bg-slate-900 text-white text-xs font-semibold text-center hover:bg-black transition-all flex items-center justify-center gap-1"
+            >
+              <span>Render</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
       </div>
 

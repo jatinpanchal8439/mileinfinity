@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: commerce-admin-dashboard
+    runtime: node
+    plan: free
+    buildCommand: NITRO_PRESET=node-server npm run build
+    startCommand: node .output/server/index.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NITRO_PRESET
+        value: node-server
+      - key: SUPABASE_URL
+        value: https://howaceawpfbuthzdajdk.supabase.co
+      - key: VITE_SUPABASE_URL
+        value: https://howaceawpfbuthzdajdk.supabase.co
+      - key: SUPABASE_PUBLISHABLE_KEY
+        value: sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT
+      - key: VITE_SUPABASE_PUBLISHABLE_KEY
+        value: sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT
+      - key: RAZORPAY_KEY_ID
+        value: rzp_test_TsreDTx2vLmBw1
+      - key: VITE_RAZORPAY_KEY_ID
+        value: rzp_test_TsreDTx2vLmBw1
