@@ -14,6 +14,12 @@ import { supabase } from "@/integrations/supabase/client";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
+import { initConsoleSecurityGuard } from "@/lib/console-guard";
+
+// Initialize client console security guard immediately
+if (typeof window !== "undefined") {
+  initConsoleSecurityGuard();
+}
 
 function NotFoundComponent() {
   return (
@@ -38,7 +44,6 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
-  console.error(error);
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });

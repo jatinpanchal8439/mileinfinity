@@ -247,8 +247,8 @@ export function saveAdminSession(session: AdminSession): void {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
-  } catch (e) {
-    console.error("Failed to persist session", e);
+  } catch {
+    // Handled safely
   }
 }
 

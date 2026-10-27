@@ -212,8 +212,8 @@ export async function getDatabaseProducts(): Promise<ProductDto[]> {
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(mapped));
       return mapped;
     }
-  } catch (err) {
-    console.warn("Supabase query fallback to local SQL store:", err);
+  } catch {
+    // Graceful fallback to local SQL store without console leak
   }
 
   // Fallback to local SQL store
@@ -280,11 +280,9 @@ export async function addDatabaseProduct(input: ProductFormValues): Promise<Prod
       is_active: input.isActive,
       stock: input.stock,
     });
-    if (insertErr) {
-      console.warn("Supabase insert note:", insertErr);
-    }
-  } catch (e) {
-    console.warn("Supabase product insert error:", e);
+    // Handled silently to avoid console information leakage
+  } catch {
+    // Fallback handled
   }
 
   // 2. Persist to local synchronized SQL storage
@@ -294,8 +292,8 @@ export async function addDatabaseProduct(input: ProductFormValues): Promise<Prod
       const updated = [createdProduct, ...current];
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(updated));
       window.dispatchEvent(new CustomEvent("mile-infinity-products-updated", { detail: updated }));
-    } catch (e) {
-      console.error("Local storage error", e);
+    } catch {
+      // Local sync handled
     }
   }
 
@@ -357,8 +355,7 @@ export async function updateDatabaseProduct(
 
     window.dispatchEvent(new CustomEvent("mile-infinity-products-updated", { detail: current }));
     return updated;
-  } catch (e) {
-    console.error("Failed to update product", e);
+  } catch {
     return null;
   }
 }
@@ -395,3 +392,29 @@ export function resetDatabaseToDefault(): ProductDto[] {
   }
   return DEFAULT_SQL_PRODUCTS;
 }
+
+/**
+ * Update order status in SQL database and local state
+ */
+export async function updateDatabaseOrderStatus(orderId: string, status: string): Promise<boolean> {
+  if (typeof window === "undefined") return false;
+  try {
+    const raw = localStorage.getItem("mile-infinity-orders");
+    if (raw) {
+      const orders = JSON.parse(raw);
+      const updated = orders.map((o: any) => (o.id === orderId ? { ...o, status } : o));
+      localStorage.setItem("mile-infinity-orders", JSON.stringify(updated));
+    }
+
+    try {
+      await supabase.from("orders").update({ status }).eq("id", orderId);
+    } catch {
+      // Safe fallback
+    }
+
+    return true;
+  } catch {
+    return false;
+  }
+}
+

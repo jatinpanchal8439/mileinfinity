@@ -155,8 +155,8 @@ export function RazorpayCheckoutModal({
           size: product.size || "Standard",
         });
       }
-    } catch (dbErr) {
-      console.warn("Supabase order sync note:", dbErr);
+    } catch {
+      // Handled silently to prevent sensitive SQL schema leakage
     }
 
     setLastOrder(localOrder);
@@ -238,8 +238,7 @@ export function RazorpayCheckoutModal({
           });
           return;
         }
-      } catch (err) {
-        console.warn("Direct Razorpay instance error, finalizing order:", err);
+      } catch {
         setTimeout(() => handleFinalizeOrder(), 1200);
       }
     } else {

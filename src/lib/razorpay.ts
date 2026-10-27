@@ -39,8 +39,7 @@ export function getRazorpaySettings(): RazorpaySettings {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return DEFAULT_RAZORPAY_SETTINGS;
     return { ...DEFAULT_RAZORPAY_SETTINGS, ...JSON.parse(raw) };
-  } catch (e) {
-    console.error("Failed to parse Razorpay settings", e);
+  } catch {
     return DEFAULT_RAZORPAY_SETTINGS;
   }
 }
@@ -50,8 +49,8 @@ export function saveRazorpaySettings(settings: RazorpaySettings): void {
   try {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     window.dispatchEvent(new CustomEvent("mile-infinity-razorpay-settings-updated", { detail: settings }));
-  } catch (e) {
-    console.error("Failed to save Razorpay settings", e);
+  } catch {
+    // Handled safely
   }
 }
 
@@ -156,8 +155,8 @@ export function recordRazorpayOrder(payload: RazorpayDirectOrderPayload): Stored
       const orders = existingRaw ? JSON.parse(existingRaw) : [];
       localStorage.setItem(ORDERS_KEY, JSON.stringify([newOrder, ...orders]));
       window.dispatchEvent(new CustomEvent("mile-infinity-order-created", { detail: newOrder }));
-    } catch (e) {
-      console.error("Failed to record order to localStorage", e);
+    } catch {
+      // Handled safely
     }
   }
 

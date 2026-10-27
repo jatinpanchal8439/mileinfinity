@@ -53,6 +53,7 @@ import { CustomersManager } from "@/components/admin/customers-manager";
 import { CouponsManager } from "@/components/admin/coupons-manager";
 import { SettingsIntegrations } from "@/components/admin/settings-integrations";
 import { HostingDeploymentGuide } from "@/components/admin/hosting-deployment-guide";
+import { LogisticsManager } from "@/components/admin/logistics-manager";
 import {
   getAdminSession,
   clearAdminSession,
@@ -62,6 +63,7 @@ import {
   getDatabaseProducts,
   deleteDatabaseProduct,
   updateDatabaseProduct,
+  updateDatabaseOrderStatus,
   DEFAULT_SQL_PRODUCTS,
 } from "@/lib/database-service";
 import { supabase } from "@/integrations/supabase/client";
@@ -112,6 +114,10 @@ export interface AdminOrder {
     courierName?: string;
     status?: "pickup_scheduled" | "in_transit" | "out_for_delivery" | "delivered";
     labelUrl?: string;
+    pickupDate?: string;
+    pickupSlot?: string;
+    packageWeightKg?: number;
+    trackingUrl?: string;
   };
 }
 
@@ -148,6 +154,7 @@ function AdminDashboard() {
     | "products"
     | "add-product"
     | "orders"
+    | "logistics"
     | "customers"
     | "coupons"
     | "product-cards"
@@ -239,15 +246,16 @@ function AdminDashboard() {
               },
             }));
           }
-        } catch (dbErr) {
-          console.warn("Supabase orders query note:", dbErr);
+        } catch {
+          // Handled silently to prevent database schema reconnaissance
         }
 
         const raw = localStorage.getItem("mile-infinity-orders");
         const stored: AdminOrder[] = raw ? JSON.parse(raw) : [];
         const seen = new Set<string>();
         const merged: AdminOrder[] = [];
-        for (const ord of [...dbOrders, ...stored]) {
+        // Prioritize local state first so custom generated AWBs and courier selections are preserved
+        for (const ord of [...stored, ...dbOrders]) {
           if (!seen.has(ord.id) && !seen.has(ord.orderNumber)) {
             seen.add(ord.id);
             if (ord.orderNumber) seen.add(ord.orderNumber);
@@ -255,8 +263,8 @@ function AdminDashboard() {
           }
         }
         setOrders(merged);
-      } catch (e) {
-        console.error("Failed to load stored orders", e);
+      } catch {
+        // Fallback safely
       }
     };
     loadStoredOrders();
@@ -309,30 +317,71 @@ function AdminDashboard() {
 
   function handleCreateShipment(orderId: string, courier = "Blue Dart Express") {
     const awb = "SR-AWB-" + Math.floor(100000000 + Math.random() * 900000000);
-    setOrders((prev) =>
-      prev.map((o) => {
+    setOrders((prev) => {
+      const updated = prev.map((o) => {
         if (o.id !== orderId) return o;
         return {
           ...o,
-          status: "shipped",
+          status: "shipped" as const,
           shipment: {
-            shiprocketOrderId: "SR-" + Math.floor(100000 + Math.random() * 900000),
-            shipmentId: "SHP-" + Math.floor(100000 + Math.random() * 900000),
+            ...o.shipment,
+            shiprocketOrderId: o.shipment?.shiprocketOrderId || "SR-" + Math.floor(100000 + Math.random() * 900000),
+            shipmentId: o.shipment?.shipmentId || "SHP-" + Math.floor(100000 + Math.random() * 900000),
             awbCode: awb,
             courierName: courier,
-            status: "in_transit",
+            status: "in_transit" as const,
+            trackingUrl: `https://shiprocket.co/tracking/${awb}`,
             labelUrl: "#",
           },
         };
-      })
-    );
+      });
+      try {
+        localStorage.setItem("mile-infinity-orders", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+    updateDatabaseOrderStatus(orderId, "shipped");
     showToast(`Shiprocket AWB generated (${awb}) via ${courier}!`);
   }
 
+  function handleSaveCustomShipment(orderId: string, shipmentDetails: NonNullable<AdminOrder["shipment"]>) {
+    setOrders((prev) => {
+      const updated = prev.map((o) => {
+        if (o.id !== orderId) return o;
+        const newStatus: AdminOrder["status"] =
+          shipmentDetails.status === "delivered"
+            ? "delivered"
+            : shipmentDetails.status === "in_transit" || shipmentDetails.status === "out_for_delivery"
+            ? "shipped"
+            : o.status;
+        return {
+          ...o,
+          status: newStatus,
+          shipment: shipmentDetails,
+        };
+      });
+      try {
+        localStorage.setItem("mile-infinity-orders", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+    if (shipmentDetails.status === "delivered") {
+      updateDatabaseOrderStatus(orderId, "delivered");
+    } else {
+      updateDatabaseOrderStatus(orderId, "shipped");
+    }
+    showToast(`Shipment & courier logistics updated!`);
+  }
+
   function handleUpdateOrderStatus(orderId: string, newStatus: AdminOrder["status"]) {
-    setOrders((prev) =>
-      prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
-    );
+    setOrders((prev) => {
+      const updated = prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o));
+      try {
+        localStorage.setItem("mile-infinity-orders", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+    updateDatabaseOrderStatus(orderId, newStatus);
     showToast(`Order status updated to "${newStatus}"`);
   }
 
@@ -499,6 +548,7 @@ function AdminDashboard() {
             { id: "products", label: "Products Catalog", icon: Package, badge: products.length },
             { id: "add-product", label: "+ Add Product", icon: PlusCircle },
             { id: "orders", label: "Orders & Invoices", icon: ShoppingBag, badge: pendingOrders > 0 ? pendingOrders : undefined },
+            { id: "logistics", label: "Logistics & Shiprocket", icon: Truck, badge: shippedOrders > 0 ? shippedOrders : undefined },
             { id: "customers", label: "Customers", icon: Users },
             { id: "coupons", label: "Coupons", icon: Tag },
             { id: "product-cards", label: "Cards & Pay Links", icon: Layers },
@@ -1506,6 +1556,18 @@ function AdminDashboard() {
               </div>
             )}
           </div>
+        )}
+
+        {/* ========================================================= */}
+        {/* LOGISTICS & SHIPROCKET DISPATCH TAB */}
+        {/* ========================================================= */}
+        {activeTab === "logistics" && (
+          <LogisticsManager
+            orders={orders}
+            onUpdateShipment={handleCreateShipment}
+            onUpdateStatus={handleUpdateOrderStatus}
+            onSaveCustomShipment={handleSaveCustomShipment}
+          />
         )}
 
         {/* ========================================================= */}

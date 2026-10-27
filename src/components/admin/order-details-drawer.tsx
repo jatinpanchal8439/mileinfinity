@@ -458,24 +458,38 @@ export function OrderDetailsDrawer({
             </div>
 
             {order.shipment ? (
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="p-2 bg-slate-50 rounded">
-                  <span className="text-[10px] text-slate-400 block font-semibold uppercase">
-                    Courier Partner
-                  </span>
-                  <span className="font-semibold text-slate-800">
-                    {order.shipment.courierName || "Delhivery Air"}
-                  </span>
+              <>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div className="p-2 bg-slate-50 rounded">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">
+                      Courier Partner
+                    </span>
+                    <span className="font-semibold text-slate-800">
+                      {order.shipment.courierName || "Delhivery Air"}
+                    </span>
+                  </div>
+                  <div className="p-2 bg-slate-50 rounded">
+                    <span className="text-[10px] text-slate-400 block font-semibold uppercase">
+                      Fulfillment Status
+                    </span>
+                    <span className="font-semibold text-purple-700 capitalize">
+                      {(order.shipment.status || "pickup_scheduled").replace(/_/g, " ")}
+                    </span>
+                  </div>
                 </div>
-                <div className="p-2 bg-slate-50 rounded">
-                  <span className="text-[10px] text-slate-400 block font-semibold uppercase">
-                    Fulfillment Status
-                  </span>
-                  <span className="font-semibold text-purple-700 capitalize">
-                    {(order.shipment.status || "pickup_scheduled").replace(/_/g, " ")}
-                  </span>
+                <div className="flex items-center justify-between pt-1 text-xs">
+                  <a
+                    href={`https://shiprocket.co/tracking/${order.shipment.awbCode}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-700 hover:text-purple-900 font-semibold inline-flex items-center gap-1 hover:underline"
+                  >
+                    Track on Shiprocket Network
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                  <span className="text-[10px] text-slate-400">Delhi Central Hub Pickup</span>
                 </div>
-              </div>
+              </>
             ) : (
               <div className="flex items-center justify-between pt-1">
                 <p className="text-xs text-slate-500">No shipment generated yet.</p>

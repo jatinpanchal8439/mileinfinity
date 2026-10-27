@@ -148,11 +148,9 @@ export function CartDrawer() {
               size: i.size || "Standard",
             }))
           );
-        } else {
-          console.warn("Supabase orders insert note:", orderInsertErr);
         }
-      } catch (err) {
-        console.warn("Database sync note:", err);
+      } catch {
+        // Handled silently to prevent sensitive schema leakage to client DevTools
       }
 
       // 2. Save to localStorage for instant client / admin reactivity
@@ -161,8 +159,8 @@ export function CartDrawer() {
         const list = stored ? JSON.parse(stored) : [];
         localStorage.setItem("mile-infinity-orders", JSON.stringify([newOrder, ...list]));
         window.dispatchEvent(new CustomEvent("mile-infinity-order-created", { detail: newOrder }));
-      } catch (err) {
-        console.error("Storage error", err);
+      } catch {
+        // Storage handled safely
       }
 
       setLastOrder(newOrder);

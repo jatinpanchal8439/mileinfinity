@@ -202,8 +202,8 @@ function ShopTheEssentialsSection() {
             }))
           );
         }
-      } catch (e) {
-        console.warn("Failed to load shop catalog:", e);
+      } catch {
+        // Fallback silently to initial catalogue
       }
     };
     fetchCatalog();
