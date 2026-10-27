@@ -158,11 +158,6 @@ function Hero() {
             alt="Mile Infinity Botanical Skincare Collection"
             className="h-full w-full object-cover object-[center_60%] sm:object-[75%_center] lg:object-center select-none"
           />
-          {/* Subtle soft fade on mobile into the clean text area below */}
-          <div className="block sm:hidden absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#faf8f4] to-transparent pointer-events-none" />
-
-          {/* Desktop gradient overlay on left for readable luxury typography */}
-          <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#e8e2d7]/95 via-[#e8e2d7]/60 to-transparent lg:from-[#e8e2d7]/90 lg:via-[#e8e2d7]/50 lg:to-transparent pointer-events-none" />
         </div>
 
         {/* Text Content */}

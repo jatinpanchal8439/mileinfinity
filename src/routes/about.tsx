@@ -84,10 +84,6 @@ function AboutHero() {
             alt="Mile Infinity Botanical Skincare Ritual"
             className="w-full h-full object-cover object-[75%_center] lg:object-center select-none"
           />
-          {/* Subtle gradient feather on the left edge for seamless desktop transition */}
-          <div className="hidden lg:block absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#eee3d5] to-transparent pointer-events-none" />
-          {/* Mobile bottom fade into text */}
-          <div className="block lg:hidden absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#faf8f4] to-transparent pointer-events-none" />
         </div>
 
         {/* Story Copy: Sits BELOW photo on mobile view (order-2), left side on desktop (order-1) */}

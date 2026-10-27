@@ -93,8 +93,6 @@ function ShopHeroBanner() {
             alt="Mile Infinity Botanical Skincare Collection"
             className="h-full w-full object-cover object-[70%_center] sm:object-center select-none"
           />
-          {/* Subtle mobile fade into text section below */}
-          <div className="block sm:hidden absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#faf8f4] to-transparent pointer-events-none" />
         </div>
 
         {/* Text placed below banner on mobile; placed on right on desktop */}
