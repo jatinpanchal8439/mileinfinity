@@ -100,12 +100,9 @@ export interface CheckoutInput {
     phone: string;
     addressLine: string;
     city: string;
-    state?: string;
     pincode: string;
   };
   items: { productId: string; size: string; quantity: number }[];
-  shippingFeeInr?: number;
-  paymentMethod?: "razorpay" | "cod";
 }
 
 function makeOrderNumber(): string {
@@ -152,11 +149,8 @@ export const placeOrder = createServerFn({ method: "POST" })
         customer_phone: data.customer.phone,
         address_line: data.customer.addressLine,
         city: data.customer.city,
-        state: data.customer.state ?? null,
         pincode: data.customer.pincode,
-        subtotal_inr: subtotal + (data.shippingFeeInr ?? 0),
-        payment_method: data.paymentMethod ?? "cod",
-        payment_status: data.paymentMethod === "razorpay" ? "paid" : "pending",
+        subtotal_inr: subtotal,
       })
       .select("id")
       .single();

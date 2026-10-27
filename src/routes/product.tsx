@@ -10,11 +10,13 @@ import {
   Sparkles,
   X,
   Maximize2,
+  CreditCard,
 } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { RunningTicker } from "@/components/running-ticker";
 import { useCart } from "@/lib/cart";
 import { formatInr } from "@/lib/format";
+import { RazorpayCheckoutModal } from "@/components/razorpay-checkout-modal";
 
 // Assets
 import heroBeetrootStillLifeImg from "@/assets/hero-beetroot-still-life.png";
@@ -413,6 +415,7 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
   const [added, setAdded] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [isRazorpayOpen, setIsRazorpayOpen] = useState(false);
 
   // Reset active thumbnail when switching products
   useEffect(() => {
@@ -665,7 +668,7 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className="flex-1 bg-[#162e21] hover:bg-[#0c2217] text-white py-3.5 px-8 text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-3 rounded-none shadow-sm cursor-pointer"
+                  className="flex-1 bg-[#162e21] hover:bg-[#0c2217] text-white py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer"
                 >
                   {added ? (
                     <span className="inline-flex items-center gap-2 text-emerald-300">
@@ -678,10 +681,36 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
                     </>
                   )}
                 </button>
+
+                {/* Instant Buy with Razorpay */}
+                <button
+                  type="button"
+                  onClick={() => setIsRazorpayOpen(true)}
+                  className="bg-[#0c2340] hover:bg-[#143763] text-white py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer border border-[#1a4473] active:scale-95"
+                >
+                  <CreditCard className="h-4 w-4 text-[#528ff0]" />
+                  <span>Instant Pay (Razorpay)</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Direct Razorpay Checkout Modal */}
+        <RazorpayCheckoutModal
+          product={{
+            id: product.id,
+            name: product.name,
+            slug: product.slug,
+            category: product.categoryKicker,
+            priceInr: product.priceInr,
+            imageUrl: product.gallery[0]?.src,
+            size: product.size,
+            tagline: product.description,
+          }}
+          isOpen={isRazorpayOpen}
+          onClose={() => setIsRazorpayOpen(false)}
+        />
       </div>
     </section>
   );

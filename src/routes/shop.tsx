@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   ArrowRight,
   Check,
@@ -8,10 +8,13 @@ import {
   Leaf,
   SlidersHorizontal,
   Sparkles,
+  CreditCard,
 } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { useCart } from "@/lib/cart";
 import { formatInr } from "@/lib/format";
+import { RazorpayCheckoutModal } from "@/components/razorpay-checkout-modal";
+import { gsap } from "@/lib/gsap";
 
 // High-resolution assets matching Figma Group 24.png
 import naturalGlowMatchaAdImg from "@/assets/natural-glow-matcha-ad.png";
@@ -148,6 +151,18 @@ function ShopTheEssentialsSection() {
   const [selectedPrice, setSelectedPrice] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("featured");
   const [addedId, setAddedId] = useState<string | null>(null);
+  const [quickPayProduct, setQuickPayProduct] = useState<(typeof products)[0] | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // GSAP Staggered product cards entrance on filter / sort
+  useEffect(() => {
+    if (!gridRef.current || typeof window === "undefined") return;
+    gsap.fromTo(
+      gridRef.current.children,
+      { opacity: 0, y: 28, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.08, ease: "power3.out", overwrite: "auto" }
+    );
+  }, [selectedCategory, selectedPrice, sortBy]);
 
   const products = [
     {
@@ -308,7 +323,7 @@ function ShopTheEssentialsSection() {
         </div>
 
         {/* 4 Product Cards Grid */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
+        <div ref={gridRef} className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
           {filteredProducts.map((p) => {
             const isAdded = addedId === p.id;
             return (
@@ -354,22 +369,34 @@ function ShopTheEssentialsSection() {
                     </a>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => handleAddToCart(p)}
-                    className="w-full bg-[#162e21] hover:bg-[#0c2217] text-white py-3 text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm"
-                  >
-                    {isAdded ? (
-                      <span className="inline-flex items-center gap-2 text-emerald-300">
-                        <Check className="h-3.5 w-3.5" /> Added to Bag
-                      </span>
-                    ) : (
-                      <>
-                        <span>Add to Bag</span>
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </>
-                    )}
-                  </button>
+                  <div className="flex flex-col gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setQuickPayProduct(p)}
+                      className="w-full bg-[#0c2340] hover:bg-[#143763] text-white py-2.5 px-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm border border-[#1a4473] active:scale-95"
+                    >
+                      <CreditCard className="h-3.5 w-3.5 text-[#528ff0]" />
+                      <span>Pay via Razorpay</span>
+                      <span className="text-[10px] text-white/70">({formatInr(p.priceInr)})</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(p)}
+                      className="w-full bg-[#162e21] hover:bg-[#0c2217] text-white py-2.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm"
+                    >
+                      {isAdded ? (
+                        <span className="inline-flex items-center gap-2 text-emerald-300">
+                          <Check className="h-3.5 w-3.5" /> Added to Bag
+                        </span>
+                      ) : (
+                        <>
+                          <span>Add to Bag</span>
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -380,6 +407,24 @@ function ShopTheEssentialsSection() {
         <p className="mt-12 text-center text-xs text-[#2c3d33]/70 font-sans italic">
           You're viewing all 4 essentials. A complete ritual, thoughtfully kept simple.
         </p>
+
+        {/* Razorpay Direct Checkout Modal */}
+        {quickPayProduct && (
+          <RazorpayCheckoutModal
+            product={{
+              id: quickPayProduct.id,
+              name: quickPayProduct.name,
+              slug: quickPayProduct.slug,
+              category: quickPayProduct.categoryTag,
+              priceInr: quickPayProduct.priceInr,
+              imageUrl: quickPayProduct.image,
+              size: quickPayProduct.size,
+              tagline: quickPayProduct.description,
+            }}
+            isOpen={!!quickPayProduct}
+            onClose={() => setQuickPayProduct(null)}
+          />
+        )}
       </div>
     </section>
   );
