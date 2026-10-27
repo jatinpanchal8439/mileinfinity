@@ -166,14 +166,13 @@ export function AdminLoginPortal({ onLoginSuccess }: AdminLoginPortalProps) {
           ref={cardRef}
           className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-xl shadow-slate-200/50 space-y-5"
         >
-          {/* Security Badge Pill */}
-          <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60 text-xs">
-            <div className="flex items-center gap-1.5 text-emerald-700 font-medium text-[11px]">
-              <ShieldCheck className="h-4 w-4 text-emerald-600" />
-              <span>TLS 1.3 • CSRF Protected</span>
-            </div>
-            <span className="text-[10px] font-mono text-slate-400">
-              RBAC SuperAdmin
+          {/* Simple Professional Header */}
+          <div className="flex items-center justify-between pb-1 border-b border-slate-100 text-xs">
+            <span className="font-semibold text-slate-800">
+              Store Manager Sign In
+            </span>
+            <span className="text-[11px] text-slate-400">
+              Admin Access
             </span>
           </div>
 
