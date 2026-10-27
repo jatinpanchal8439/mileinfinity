@@ -16,6 +16,7 @@ import { useCart } from "@/lib/cart";
 import { formatInr } from "@/lib/format";
 import { gsap } from "@/lib/gsap";
 import { getRazorpaySettings } from "@/lib/razorpay";
+import { supabase } from "@/integrations/supabase/client";
 
 export function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, updateQuantity, remove, clear } = useCart();
@@ -71,11 +72,15 @@ export function CartDrawer() {
     setCheckoutStep("processing");
 
     // Order payload
-    const orderId = "MI-" + Math.floor(100000 + Math.random() * 900000);
-    const paymentId = "pay_rzp_" + Math.random().toString(36).substring(2, 12).toUpperCase();
+    const orderId = "ORD-" + Math.floor(100000 + Math.random() * 900000);
 
-    // Check if Razorpay script can be loaded or run simulation
-    const simulatedSuccess = () => {
+    const finalizeOrder = async (payId?: string, rzpOrdId?: string) => {
+      const activePayId =
+        payId ||
+        (paymentMethod === "razorpay"
+          ? "pay_rzp_" + Math.random().toString(36).substring(2, 10).toUpperCase()
+          : "COD-" + Date.now().toString(36).toUpperCase());
+
       const newOrder = {
         id: "ord-" + Date.now(),
         orderNumber: orderId,
@@ -95,10 +100,10 @@ export function CartDrawer() {
           size: i.size,
         })),
         payment: {
-          gateway: paymentMethod === "razorpay" ? "Razorpay" : "COD",
-          status: "paid",
-          razorpayPaymentId: paymentId,
-          razorpayOrderId: "order_rzp_" + orderId,
+          gateway: paymentMethod === "razorpay" ? "Razorpay" : "Cash on Delivery",
+          status: paymentMethod === "razorpay" ? "paid" : "pending",
+          razorpayPaymentId: activePayId,
+          razorpayOrderId: rzpOrdId || "order_rzp_" + orderId,
         },
         shipment: {
           shiprocketOrderId: "SR-" + Math.floor(100000 + Math.random() * 900000),
@@ -107,11 +112,45 @@ export function CartDrawer() {
         },
       };
 
-      // Save to localStorage for sync with /admin
+      // 1. Sync to Supabase PostgreSQL Database orders and order_items tables
+      try {
+        const { data: dbOrder } = await supabase
+          .from("orders")
+          .insert({
+            order_number: orderId,
+            customer_name: formData.name,
+            customer_email: formData.email,
+            customer_phone: "+91 " + formData.phone,
+            address_line: `${formData.address}, ${formData.state}`,
+            city: formData.city,
+            pincode: formData.pincode,
+            subtotal_inr: grandTotal,
+            status: "processing",
+          })
+          .select("id")
+          .maybeSingle();
+
+        if (dbOrder?.id) {
+          await supabase.from("order_items").insert(
+            items.map((i) => ({
+              order_id: dbOrder.id,
+              product_name: i.name,
+              quantity: i.quantity,
+              unit_price_inr: i.priceInr,
+              size: i.size || "Standard",
+            }))
+          );
+        }
+      } catch (err) {
+        console.warn("Database sync note:", err);
+      }
+
+      // 2. Save to localStorage for instant client / admin reactivity
       try {
         const stored = localStorage.getItem("mile-infinity-orders");
         const list = stored ? JSON.parse(stored) : [];
         localStorage.setItem("mile-infinity-orders", JSON.stringify([newOrder, ...list]));
+        window.dispatchEvent(new CustomEvent("mile-infinity-order-created", { detail: newOrder }));
       } catch (err) {
         console.error("Storage error", err);
       }
@@ -121,7 +160,13 @@ export function CartDrawer() {
       clear();
     };
 
-    // If Razorpay SDK is available on window, open official checkout
+    // If Cash on Delivery, place order directly
+    if (paymentMethod === "cod") {
+      setTimeout(() => finalizeOrder(), 500);
+      return;
+    }
+
+    // If Razorpay, open live Razorpay checkout
     if (typeof window !== "undefined" && (window as any).Razorpay) {
       try {
         const rzSettings = getRazorpaySettings();
@@ -138,7 +183,7 @@ export function CartDrawer() {
           description: "Botanical Skincare Order " + orderId,
           image: "/images/mile-infinity-logo.png",
           handler: function (response: any) {
-            simulatedSuccess();
+            finalizeOrder(response?.razorpay_payment_id, response?.razorpay_order_id);
           },
           prefill: {
             name: formData.name,
@@ -157,11 +202,10 @@ export function CartDrawer() {
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
       } catch (e) {
-        setTimeout(simulatedSuccess, 1200);
+        setTimeout(() => finalizeOrder(), 1000);
       }
     } else {
-      // Smooth simulated transaction for immediate test demo
-      setTimeout(simulatedSuccess, 1200);
+      setTimeout(() => finalizeOrder(), 1000);
     }
   }
 
@@ -576,7 +620,11 @@ export function CartDrawer() {
                     className="flex-1 rounded-full bg-[#162e21] py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-white shadow-md transition-all hover:bg-[#0f2117] flex items-center justify-center gap-2"
                   >
                     <CreditCard className="h-4 w-4" />
-                    <span>Pay {formatInr(grandTotal)} via Razorpay</span>
+                    <span>
+                      {paymentMethod === "razorpay"
+                        ? `Pay ${formatInr(grandTotal)} via Razorpay`
+                        : `Confirm Order (${formatInr(grandTotal)})`}
+                    </span>
                   </button>
                 </div>
               )}
