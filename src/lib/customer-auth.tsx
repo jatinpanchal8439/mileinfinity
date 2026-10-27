@@ -113,16 +113,10 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
       return updated;
     });
   }
-
-  /**
-   * 100% FREE OTP Generation:
-   * Generates a secure 6-digit cryptographic verification code and caches it in memory/localStorage.
-   * Eliminates the need for paid SMS gateway credits (Twilio/MSG91).
-   */
   function generateFreeOtp(destination: string): { code: string; expiresAt: number } {
-    // Generate 6-digit random code (e.g. 849201)
+  
     const code = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes validity
+    const expiresAt = Date.now() + 5 * 60 * 1000; 
 
     const otpData = {
       destination: destination.trim().toLowerCase(),

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import {
   Upload,
   Image as ImageIcon,
-  Sparkles,
+  CreditCard,
   Check,
   AlertCircle,
   Plus,
@@ -414,7 +414,7 @@ export function AddProductPanel({ onProductCreated, onViewCatalog }: AddProductP
                   Supports PNG, JPG, or WEBP (Recommended transparent or white background)
                 </p>
                 <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-medium">
-                  <Sparkles className="w-3.5 h-3.5 text-[#c49838]" />
+                  <Eye className="w-3.5 h-3.5 text-slate-500" />
                   <span>Instant high-res preview on storefront card</span>
                 </div>
               </div>
@@ -714,7 +714,7 @@ export function AddProductPanel({ onProductCreated, onViewCatalog }: AddProductP
                       disabled
                       className="w-full py-2.5 px-3 rounded-xl bg-[#0f3d24] text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm opacity-90 cursor-default"
                     >
-                      <Sparkles className="w-3.5 h-3.5 text-[#c49838]" />
+                      <CreditCard className="w-3.5 h-3.5 text-[#c49838]" />
                       <span>Pay via Razorpay (Instant)</span>
                     </button>
                   </div>

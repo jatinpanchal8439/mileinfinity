@@ -6,7 +6,6 @@ import {
   Eye,
   EyeOff,
   ShieldCheck,
-  Sparkles,
   KeyRound,
   AlertCircle,
   CheckCircle2,
@@ -180,7 +179,7 @@ export function AdminLoginPortal({ onLoginSuccess }: AdminLoginPortalProps) {
           <div className="rounded-xl bg-amber-50/80 border border-amber-200/70 p-3 text-xs space-y-2">
             <div className="flex items-center justify-between text-amber-900 font-semibold">
               <span className="flex items-center gap-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-amber-600" />
+                <KeyRound className="h-3.5 w-3.5 text-amber-700" />
                 Demo Credentials Available
               </span>
               <button

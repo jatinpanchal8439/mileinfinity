@@ -44,16 +44,12 @@ import {
 import { formatInr } from "@/lib/format";
 import logoImg from "@/assets/mile-infinity-logo.png";
 import type { ProductDto } from "@/lib/store.functions";
-import { ProductCardsRazorpayDashboard } from "@/components/admin/product-cards-razorpay-dashboard";
 import { AdminLoginPortal } from "@/components/admin/admin-login-portal";
 import { DynamicProductModal } from "@/components/admin/dynamic-product-modal";
 import { AddProductPanel } from "@/components/admin/add-product-panel";
 import { OrderDetailsDrawer } from "@/components/admin/order-details-drawer";
 import { CustomersManager } from "@/components/admin/customers-manager";
 import { CouponsManager } from "@/components/admin/coupons-manager";
-import { SettingsIntegrations } from "@/components/admin/settings-integrations";
-import { HostingDeploymentGuide } from "@/components/admin/hosting-deployment-guide";
-import { LogisticsManager } from "@/components/admin/logistics-manager";
 import {
   getAdminSession,
   clearAdminSession,
@@ -155,12 +151,8 @@ function AdminDashboard() {
     | "products"
     | "add-product"
     | "orders"
-    | "logistics"
     | "customers"
     | "coupons"
-    | "product-cards"
-    | "settings"
-    | "hosting"
   >("overview");
 
   // Products state (PostgreSQL SQL source)
@@ -549,12 +541,8 @@ function AdminDashboard() {
             { id: "products", label: "Products Catalog", icon: Package, badge: products.length },
             { id: "add-product", label: "+ Add Product", icon: PlusCircle },
             { id: "orders", label: "Orders & Invoices", icon: ShoppingBag, badge: pendingOrders > 0 ? pendingOrders : undefined },
-            { id: "logistics", label: "Logistics & Shiprocket", icon: Truck, badge: shippedOrders > 0 ? shippedOrders : undefined },
             { id: "customers", label: "Customers", icon: Users },
             { id: "coupons", label: "Coupons", icon: Tag },
-            { id: "product-cards", label: "Cards & Pay Links", icon: Layers },
-            { id: "settings", label: "Store & API Settings", icon: Settings },
-            { id: "hosting", label: "Hosting Guide", icon: Cloud },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -648,17 +636,17 @@ function AdminDashboard() {
               >
                 <div className="flex items-center justify-between">
                   <span className={`text-xs uppercase tracking-wider font-semibold ${isWhite ? "text-slate-500" : "text-white/60"}`}>
-                    Shiprocket In-Transit
+                    Fulfilled Orders
                   </span>
                   <div className="h-10 w-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center">
-                    <Truck className="h-5 w-5" />
+                    <CheckCircle2 className="h-5 w-5" />
                   </div>
                 </div>
                 <div className={`mt-4 font-serif text-3xl font-bold ${isWhite ? "text-slate-900" : "text-white"}`}>
-                  {shippedOrders}
+                  {orders.filter((o) => o.status === "delivered" || o.status === "shipped").length}
                 </div>
                 <div className="mt-2 text-[11px] text-blue-600 font-semibold flex items-center gap-1">
-                  <span>AWBs Generated</span>
+                  <span>Completed & Dispatched</span>
                 </div>
               </div>
 
@@ -789,13 +777,6 @@ function AdminDashboard() {
                     </div>
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
                   </div>
-                  <button
-                    onClick={() => setActiveTab("product-cards")}
-                    className="mt-3 w-full py-1.5 px-3 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-semibold flex items-center justify-between transition-colors"
-                  >
-                    <span>Product Cards Gateway Hub</span>
-                    <span>→</span>
-                  </button>
                 </div>
 
                 {/* Photo Upload & Product Creator Card */}
@@ -1199,20 +1180,7 @@ function AdminDashboard() {
           </div>
         )}
 
-        {/* ========================================================= */}
-        {/* 3. PRODUCT CARDS & RAZORPAY GATEWAY TAB */}
-        {/* ========================================================= */}
-        {activeTab === "product-cards" && (
-          <ProductCardsRazorpayDashboard
-            products={products}
-            orders={orders as any}
-            theme={theme}
-            onOrderCreated={(newOrd) => {
-              setOrders((prev) => [newOrd as any, ...prev]);
-              showToast(`New Razorpay order created for ${newOrd.customerName}!`);
-            }}
-          />
-        )}
+
 
         {/* ========================================================= */}
         {/* 4. ORDERS & INVOICES TAB */}
@@ -1559,17 +1527,7 @@ function AdminDashboard() {
           </div>
         )}
 
-        {/* ========================================================= */}
-        {/* LOGISTICS & SHIPROCKET DISPATCH TAB */}
-        {/* ========================================================= */}
-        {activeTab === "logistics" && (
-          <LogisticsManager
-            orders={orders}
-            onUpdateShipment={handleCreateShipment}
-            onUpdateStatus={handleUpdateOrderStatus}
-            onSaveCustomShipment={handleSaveCustomShipment}
-          />
-        )}
+
 
         {/* ========================================================= */}
         {/* 5. CUSTOMERS DIRECTORY TAB */}
@@ -1601,15 +1559,7 @@ function AdminDashboard() {
           />
         )}
 
-        {/* ========================================================= */}
-        {/* 8. API & STORE SETTINGS TAB */}
-        {/* ========================================================= */}
-        {activeTab === "settings" && <SettingsIntegrations />}
 
-        {/* ========================================================= */}
-        {/* 9. HOSTING & PRODUCTION DEPLOYMENT GUIDE */}
-        {/* ========================================================= */}
-        {activeTab === "hosting" && <HostingDeploymentGuide />}
       </main>
 
       {/* ORDER DETAILS & PRINTABLE TAX INVOICE DRAWER */}
