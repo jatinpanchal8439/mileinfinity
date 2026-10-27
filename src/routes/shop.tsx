@@ -84,26 +84,27 @@ function ShopPage() {
  */
 function ShopHeroBanner() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#e8ded1]">
-      <div className="relative min-h-[440px] sm:min-h-[560px] lg:min-h-[640px] xl:min-h-[700px] w-full flex items-center">
-        {/* Full width background image from Natural Glow Matcha Tea Serum Ad 1.png */}
-        <img
-          src={naturalGlowMatchaAdImg}
-          alt="Mile Infinity Botanical Skincare Collection"
-          className="absolute inset-0 h-full w-full object-cover object-[70%_center] sm:object-center select-none pointer-events-none"
-        />
+    <section className="relative w-full overflow-hidden bg-[#faf8f4] sm:bg-[#e8ded1]">
+      <div className="relative flex flex-col sm:block min-h-0 sm:min-h-[560px] lg:min-h-[640px] xl:min-h-[700px] w-full">
+        {/* Banner image: On mobile sits on top with zero obstruction; on desktop full-bleed background */}
+        <div className="relative w-full h-[260px] xs:h-[320px] sm:h-full sm:absolute sm:inset-0 overflow-hidden bg-[#ded8cd]">
+          <img
+            src={naturalGlowMatchaAdImg}
+            alt="Mile Infinity Botanical Skincare Collection"
+            className="h-full w-full object-cover object-[70%_center] sm:object-center select-none"
+          />
+          {/* Subtle mobile fade into text section below */}
+          <div className="block sm:hidden absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#faf8f4] to-transparent pointer-events-none" />
+        </div>
 
-        {/* Soft mobile overlay for readable typography */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#e8ded1]/95 via-[#e8ded1]/60 to-transparent sm:hidden pointer-events-none" />
-
-        {/* Text placed in the top right area, with zero overlap over the model or avocado */}
-        <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16 w-full py-10 sm:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-            {/* Clearance for model and bottle on left 7 columns */}
+        {/* Text placed below banner on mobile; placed on right on desktop */}
+        <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16 w-full py-7 sm:py-16 flex items-center sm:min-h-[560px] lg:min-h-[640px] xl:min-h-[700px] bg-[#faf8f4] sm:bg-transparent">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center w-full">
+            {/* Clearance for model and bottle on left 7 columns on desktop */}
             <div className="hidden lg:block lg:col-span-7 xl:col-span-7 pointer-events-none" />
 
             {/* Content positioned in right columns */}
-            <div className="lg:col-span-5 xl:col-span-5 max-w-lg lg:ml-auto bg-[#e8ded1]/90 sm:bg-transparent p-5 sm:p-0 rounded-xl sm:rounded-none">
+            <div className="lg:col-span-5 xl:col-span-5 max-w-lg lg:ml-auto">
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/75 font-sans">
                 The Mile Infinity Collection
               </p>

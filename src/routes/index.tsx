@@ -147,19 +147,29 @@ function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative w-full overflow-hidden bg-[#e8e2d7]">
-      <div className="relative min-h-[580px] sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] w-full flex items-center">
-        <img
-          src={botanicalHeroImg}
-          alt="Mile Infinity Botanical Skincare Collection"
-          className="absolute inset-0 h-full w-full object-cover object-[center_80%] sm:object-[75%_center] lg:object-center select-none"
-        />
+    <section ref={heroRef} className="relative w-full overflow-hidden bg-[#faf8f4] sm:bg-[#e8e2d7]">
+      <div className="relative flex flex-col sm:block min-h-0 sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] w-full">
+        {/* Banner Image Container */}
+        {/* Mobile View: Displayed prominently on top, full width, crisp, zero text obstruction */}
+        {/* Desktop View: Absolute full-bleed background layout */}
+        <div className="relative w-full h-[280px] xs:h-[340px] sm:h-full sm:absolute sm:inset-0 overflow-hidden bg-[#ded8cd] shadow-xs sm:shadow-none">
+          <img
+            src={botanicalHeroImg}
+            alt="Mile Infinity Botanical Skincare Collection"
+            className="h-full w-full object-cover object-[center_60%] sm:object-[75%_center] lg:object-center select-none"
+          />
+          {/* Subtle soft fade on mobile into the clean text area below */}
+          <div className="block sm:hidden absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#faf8f4] to-transparent pointer-events-none" />
 
-        {/* Ambient luxury gradient overlay on mobile & tablet to guarantee 100% text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#e8e2d7]/95 via-[#e8e2d7]/80 to-transparent sm:bg-gradient-to-r sm:from-[#e8e2d7]/95 sm:via-[#e8e2d7]/60 sm:to-transparent lg:from-transparent lg:via-transparent lg:to-transparent pointer-events-none" />
+          {/* Desktop gradient overlay on left for readable luxury typography */}
+          <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#e8e2d7]/95 via-[#e8e2d7]/60 to-transparent lg:from-[#e8e2d7]/90 lg:via-[#e8e2d7]/50 lg:to-transparent pointer-events-none" />
+        </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 w-full py-10 sm:py-20 lg:py-28">
-          <div className="max-w-xl lg:max-w-2xl bg-[#faf8f4]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-5 sm:p-0 rounded-2xl sm:rounded-none border border-[#162e21]/10 sm:border-none shadow-sm sm:shadow-none">
+        {/* Text Content */}
+        {/* Mobile View: Sits cleanly DIRECTLY BELOW the banner image in natural flow with ivory background */}
+        {/* Desktop View: Overlaid on the left side with seamless backdrop */}
+        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full py-7 sm:py-20 lg:py-28 flex items-center sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] bg-[#faf8f4] sm:bg-transparent">
+          <div className="w-full max-w-xl lg:max-w-2xl">
             <div className="hero-subtag inline-flex items-center gap-2.5 sm:gap-3 mb-3.5 sm:mb-6">
               <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
               <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/90">
@@ -168,19 +178,19 @@ function Hero() {
               <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
             </div>
 
-            <h1 className="hero-heading font-display text-[28px] sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.12] sm:leading-[1.05] drop-shadow-sm">
+            <h1 className="hero-heading font-display text-[32px] xs:text-4xl sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.12] sm:leading-[1.05] drop-shadow-xs">
               Skincare,<br />
               Rooted in Nature.<br />
               Designed for<br />
               Modern Rituals.
             </h1>
 
-            <p className="hero-desc mt-3 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans">
+            <p className="hero-desc mt-3.5 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans">
               Thoughtfully formulated skincare inspired by botanical ingredients and created to
               bring conscious care into your everyday routine.
             </p>
 
-            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
               <a
                 href="#essentials"
                 className="hero-cta-btn group btn-shimmer hover-lift inline-flex items-center justify-center gap-3 rounded-full bg-[#162e21] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-white shadow-md transition-all duration-300 hover:bg-[#0f2117] hover:shadow-lg hover:gap-4 text-center active:scale-95"
@@ -190,7 +200,7 @@ function Hero() {
               </a>
               <a
                 href="#approach"
-                className="hero-cta-btn group hover-lift inline-flex items-center justify-center gap-3 rounded-full border border-[#162e21]/30 bg-[#f7f5f0]/85 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-[#162e21] shadow-sm transition-all duration-300 hover:bg-[#f7f5f0] hover:border-[#162e21]/60 hover:gap-4 text-center active:scale-95"
+                className="hero-cta-btn group hover-lift inline-flex items-center justify-center gap-3 rounded-full border border-[#162e21]/30 bg-[#f7f5f0]/85 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-[#162e21] shadow-xs transition-all duration-300 hover:bg-[#f7f5f0] hover:border-[#162e21]/60 hover:gap-4 text-center active:scale-95"
               >
                 <span>Explore The Collection</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -198,12 +208,12 @@ function Hero() {
             </div>
 
             {/* 4 Benefit Icon Badges with hover micro-animations */}
-            <div className="mt-6 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-6 pt-5 sm:pt-7 border-t border-[#162e21]/20 max-w-xl">
+            <div className="mt-7 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 pt-5 sm:pt-7 border-t border-[#162e21]/20 max-w-xl">
               <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Leaf className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
-                <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
                   Plant-Based<br />Formulations
                 </span>
               </div>
@@ -212,7 +222,7 @@ function Hero() {
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Droplets className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
-                <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
                   Clean<br />Ingredients
                 </span>
               </div>
@@ -221,7 +231,7 @@ function Hero() {
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Sprout className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
-                <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
                   Thoughtfully<br />Crafted
                 </span>
               </div>
@@ -230,7 +240,7 @@ function Hero() {
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
                 </div>
-                <span className="text-[9px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
                   Skincare<br />Rituals
                 </span>
               </div>

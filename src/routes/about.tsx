@@ -75,11 +75,24 @@ export function AboutPage() {
  */
 function AboutHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#eee3d5] border-b border-[#e5dfd5]">
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 min-h-[580px] sm:min-h-[640px] lg:min-h-[680px] xl:min-h-[740px] 2xl:min-h-[800px] items-stretch">
-        {/* Left Column: Story Copy */}
-        <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-center px-6 sm:px-12 lg:pl-16 xl:pl-24 2xl:pl-32 lg:pr-8 py-14 sm:py-20 lg:py-24 z-10">
-          <div className="inline-flex items-center gap-3 mb-4 sm:mb-6">
+    <section className="relative w-full overflow-hidden bg-[#faf8f4] lg:bg-[#eee3d5] border-b border-[#e5dfd5]">
+      <div className="w-full flex flex-col lg:grid lg:grid-cols-12 min-h-0 lg:min-h-[680px] xl:min-h-[740px] 2xl:min-h-[800px] items-stretch">
+        {/* Photo Container: Sits on TOP on mobile view (order-1), right side on desktop (order-2) */}
+        <div className="order-1 lg:order-2 lg:col-span-7 xl:col-span-7 relative w-full h-[280px] xs:h-[340px] sm:h-[420px] lg:h-auto min-h-full overflow-hidden bg-[#ded8cd]">
+          <img
+            src={playfulGlowTrioImg}
+            alt="Mile Infinity Botanical Skincare Ritual"
+            className="w-full h-full object-cover object-[75%_center] lg:object-center select-none"
+          />
+          {/* Subtle gradient feather on the left edge for seamless desktop transition */}
+          <div className="hidden lg:block absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#eee3d5] to-transparent pointer-events-none" />
+          {/* Mobile bottom fade into text */}
+          <div className="block lg:hidden absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#faf8f4] to-transparent pointer-events-none" />
+        </div>
+
+        {/* Story Copy: Sits BELOW photo on mobile view (order-2), left side on desktop (order-1) */}
+        <div className="order-2 lg:order-1 lg:col-span-5 xl:col-span-5 flex flex-col justify-center px-6 sm:px-12 lg:pl-16 xl:pl-24 2xl:pl-32 lg:pr-8 py-8 sm:py-14 lg:py-24 z-10 bg-[#faf8f4] lg:bg-transparent">
+          <div className="inline-flex items-center gap-3 mb-3.5 sm:mb-6">
             <span className="h-[1px] w-6 bg-[#162e21]/40" />
             <span className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/80 font-sans">
               Our Story
@@ -93,13 +106,13 @@ function AboutHero() {
             Modern Rituals.
           </h1>
 
-          <p className="mt-6 sm:mt-8 text-sm sm:text-base leading-relaxed text-[#2c3d33]/85 max-w-lg font-sans">
+          <p className="mt-4 sm:mt-8 text-sm sm:text-base leading-relaxed text-[#2c3d33]/85 max-w-lg font-sans">
             Discover Mile Infinity's thoughtful approach to everyday skincare,
             inspired by botanical ingredients and designed to bring a more
             intentional feel to your daily rituals.
           </p>
 
-          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-6 max-w-xs sm:max-w-none">
+          <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-6 max-w-xs sm:max-w-none">
             <Link
               to="/shop"
               className="inline-flex items-center justify-center gap-3 rounded-none bg-[#162e21] hover:bg-[#0e2017] px-7 sm:px-8 py-3.5 sm:py-4 text-xs font-semibold uppercase tracking-[0.16em] text-white transition-all duration-300 hover:shadow-lg group text-center"
@@ -115,17 +128,6 @@ function AboutHero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
           </div>
-        </div>
-
-        {/* Right Column: Full-Width Photo touching the right edge seamlessly */}
-        <div className="lg:col-span-7 xl:col-span-7 relative w-full h-[360px] sm:h-[460px] lg:h-auto min-h-full overflow-hidden">
-          <img
-            src={playfulGlowTrioImg}
-            alt="Mile Infinity Botanical Skincare Ritual"
-            className="w-full h-full object-cover object-[75%_center] lg:object-center select-none"
-          />
-          {/* Subtle gradient feather on the left edge for seamless desktop transition */}
-          <div className="hidden lg:block absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#eee3d5] to-transparent pointer-events-none" />
         </div>
       </div>
     </section>

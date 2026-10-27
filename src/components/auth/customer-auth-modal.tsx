@@ -14,6 +14,7 @@ import {
   Lock,
 } from "lucide-react";
 import { useCustomerAuth } from "@/lib/customer-auth";
+import { sendRealMobileOtp } from "@/lib/sms-otp.functions";
 
 export function CustomerAuthModal() {
   const {
@@ -67,7 +68,7 @@ export function CustomerAuthModal() {
   const currentDestination = method === "phone" ? phone : email;
 
   // Handle Send Free OTP
-  function handleSendOtp(e?: React.FormEvent) {
+  async function handleSendOtp(e?: React.FormEvent) {
     if (e) e.preventDefault();
     setErrorMsg(null);
 
@@ -77,8 +78,8 @@ export function CustomerAuthModal() {
     }
 
     if (method === "phone") {
-      const cleanPhone = phone.replace(/\D/g, "");
-      if (cleanPhone.length < 10) {
+      const clean = phone.replace(/\D/g, "");
+      if (clean.length < 10) {
         setErrorMsg("Please enter a valid 10-digit mobile number.");
         return;
       }
@@ -90,9 +91,24 @@ export function CustomerAuthModal() {
     }
 
     setIsSubmitting(true);
+    const generated = generateFreeOtp(currentDestination);
+    setActiveOtpCode(generated.code);
+
+    // If mobile, attempt live dispatch to mobile number via SMS gateway / WhatsApp
+    if (method === "phone") {
+      try {
+        await sendRealMobileOtp({
+          data: {
+            phone: currentDestination,
+            otp: generated.code,
+          },
+        });
+      } catch {
+        // Fallback gracefully
+      }
+    }
+
     setTimeout(() => {
-      const generated = generateFreeOtp(currentDestination);
-      setActiveOtpCode(generated.code);
       setStep("otp");
       setIsSubmitting(false);
       setTimerSeconds(30);
@@ -102,7 +118,7 @@ export function CustomerAuthModal() {
       setTimeout(() => {
         digitInputRefs.current[0]?.focus();
       }, 150);
-    }, 450);
+    }, 350);
   }
 
   // Handle individual digit input
@@ -176,10 +192,20 @@ export function CustomerAuthModal() {
     }
   }
 
-  // WhatsApp Free OTP delivery link
-  const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-    `Your Mile Infinity Botanical verification code is: ${activeOtpCode || "123456"}. Do not share this OTP with anyone.`
-  )}`;
+  // WhatsApp Free OTP delivery link directly to phone number
+  const cleanDestPhone = phone.replace(/\D/g, "").slice(-10);
+  const whatsappUrl =
+    method === "phone" && cleanDestPhone.length === 10
+      ? `https://api.whatsapp.com/send?phone=91${cleanDestPhone}&text=${encodeURIComponent(
+          `🌿 Mile Infinity Botanical Skincare: Your mobile verification OTP is ${
+            activeOtpCode || "123456"
+          }. Valid for 5 minutes. Do not share this OTP with anyone.`
+        )}`
+      : `https://api.whatsapp.com/send?text=${encodeURIComponent(
+          `Your Mile Infinity Botanical verification code is: ${
+            activeOtpCode || "123456"
+          }. Do not share this OTP with anyone.`
+        )}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
