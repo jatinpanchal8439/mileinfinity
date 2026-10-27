@@ -86,9 +86,6 @@ function Index() {
       {/* 1. Hero Section matching reference */}
       <Hero />
 
-      {/* 2. Dark Green Ticker Ribbon Strip */}
-      <TickerRibbon />
-
       {/* 3. The Mile Infinity Approach Section (Slide 1) — Full-Width Background */}
       <ApproachSection />
 
@@ -104,9 +101,6 @@ function Index() {
       {/* 8. Botanical Inspiration & Formulation Standards — Matching Rooted in Nature */}
       <BotanicalInspirationSection />
       <FormulationStandardsBanner />
-
-      {/* 9. The Four-Step Edit matching Botanical Ingredient Collage */}
-      <FourStepEditSection />
 
       {/* 10. Powered by Botanicals Active Ingredients Table */}
       <PoweredByBotanicalsSection />
@@ -154,38 +148,39 @@ function Hero() {
 
   return (
     <section ref={heroRef} className="relative w-full overflow-hidden bg-[#e8e2d7]">
-      <div className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] w-full flex items-center">
+      <div className="relative min-h-[580px] sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] w-full flex items-center">
         <img
           src={botanicalHeroImg}
           alt="Mile Infinity Botanical Skincare Collection"
-          className="absolute inset-0 h-full w-full object-cover object-[75%_center] lg:object-center select-none"
+          className="absolute inset-0 h-full w-full object-cover object-[center_80%] sm:object-[75%_center] lg:object-center select-none"
         />
 
-        {/* Natural photo colors preserved with clean text clearance — no milky white haze */}
+        {/* Ambient luxury gradient overlay on mobile & tablet to guarantee 100% text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#e8e2d7]/95 via-[#e8e2d7]/80 to-transparent sm:bg-gradient-to-r sm:from-[#e8e2d7]/95 sm:via-[#e8e2d7]/60 sm:to-transparent lg:from-transparent lg:via-transparent lg:to-transparent pointer-events-none" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full py-16 sm:py-20 lg:py-28">
-          <div className="max-w-xl lg:max-w-2xl">
-            <div className="hero-subtag inline-flex items-center gap-3 mb-5 sm:mb-6">
-              <span className="h-[1px] w-8 bg-[#162e21]/40" />
-              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/90">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 w-full py-10 sm:py-20 lg:py-28">
+          <div className="max-w-xl lg:max-w-2xl bg-[#faf8f4]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-5 sm:p-0 rounded-2xl sm:rounded-none border border-[#162e21]/10 sm:border-none shadow-sm sm:shadow-none">
+            <div className="hero-subtag inline-flex items-center gap-2.5 sm:gap-3 mb-3.5 sm:mb-6">
+              <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
+              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/90">
                 Plant-Based Skincare
               </span>
-              <span className="h-[1px] w-8 bg-[#162e21]/40" />
+              <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
             </div>
 
-            <h1 className="hero-heading font-display text-3xl sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.08] sm:leading-[1.05] drop-shadow-sm">
+            <h1 className="hero-heading font-display text-[28px] sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.12] sm:leading-[1.05] drop-shadow-sm">
               Skincare,<br />
               Rooted in Nature.<br />
               Designed for<br />
               Modern Rituals.
             </h1>
 
-            <p className="hero-desc mt-5 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans">
+            <p className="hero-desc mt-3 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans">
               Thoughtfully formulated skincare inspired by botanical ingredients and created to
               bring conscious care into your everyday routine.
             </p>
 
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
               <a
                 href="#essentials"
                 className="hero-cta-btn group btn-shimmer hover-lift inline-flex items-center justify-center gap-3 rounded-full bg-[#162e21] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-white shadow-md transition-all duration-300 hover:bg-[#0f2117] hover:shadow-lg hover:gap-4 text-center active:scale-95"
@@ -203,7 +198,7 @@ function Hero() {
             </div>
 
             {/* 4 Benefit Icon Badges with hover micro-animations */}
-            <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 pt-6 sm:pt-7 border-t border-[#162e21]/20 max-w-xl">
+            <div className="mt-6 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-6 pt-5 sm:pt-7 border-t border-[#162e21]/20 max-w-xl">
               <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
                 <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
                   <Leaf className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
