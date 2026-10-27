@@ -1257,24 +1257,25 @@ function WhyMileInfinitySection() {
       <img
         src={dewyMatchaForestImg}
         alt="Mile Infinity Matcha Tea Serum in a Lush Forest"
-        className="absolute inset-0 h-full w-full object-cover object-left opacity-90 lg:opacity-95 select-none pointer-events-none"
+        className="absolute inset-0 h-full w-full object-cover object-[25%_center] sm:object-[28%_center] lg:object-[32%_center] opacity-90 lg:opacity-95 select-none pointer-events-none"
       />
 
-      {/* Subtle overlay for text contrast while preserving lush sunlit green photography */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0d2218]/90 via-[#0d2218]/40 to-transparent sm:bg-gradient-to-r sm:from-black/25 sm:via-transparent sm:to-[#081710]/50 pointer-events-none" />
+      {/* Text protection gradient: ensures the typography stays crisp with zero bottle overlap */}
+      <div className="absolute inset-y-0 left-0 w-full sm:w-3/5 lg:w-1/2 bg-gradient-to-r from-[#0d2218] via-[#0d2218]/85 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0d2218]/90 via-transparent to-transparent sm:hidden pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
         <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 lg:items-start">
-          {/* Left Title Copy from Screenshot — Aligned to top */}
-          <div className="lg:col-span-5 max-w-md lg:pt-0">
+          {/* Left Title Copy with constrained max-width so it never touches the bottle */}
+          <div className="lg:col-span-5 max-w-[310px] sm:max-w-xs lg:max-w-sm lg:pt-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#c4af78] font-sans">
               Why Mile Infinity
             </p>
-            <h2 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-[52px] font-normal leading-[1.08] text-white">
+            <h2 className="mt-3 font-serif text-2xl sm:text-3xl lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] text-white">
               Thoughtful care.<br />
               <span className="italic font-normal">Everyday beauty.</span>
             </h2>
-            <p className="mt-5 text-xs sm:text-[13px] leading-relaxed text-white/85 font-sans max-w-sm">
+            <p className="mt-4 sm:mt-5 text-xs sm:text-[13px] leading-relaxed text-white/85 font-sans max-w-[280px]">
               Skincare that's rooted in nature, crafted with care and made for your everyday rituals.
             </p>
           </div>
