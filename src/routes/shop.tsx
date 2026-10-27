@@ -15,7 +15,7 @@ import { useCart } from "@/lib/cart";
 import { formatInr } from "@/lib/format";
 import { RazorpayCheckoutModal } from "@/components/razorpay-checkout-modal";
 import { gsap } from "@/lib/gsap";
-import { getDatabaseProducts, DEFAULT_SQL_PRODUCTS } from "@/lib/database-service";
+import { getDatabaseProducts, getCachedProducts, DEFAULT_SQL_PRODUCTS } from "@/lib/database-service";
 
 // High-resolution assets matching Figma Group 24.png
 import naturalGlowMatchaAdImg from "@/assets/natural-glow-matcha-ad.png";
@@ -165,7 +165,7 @@ function ShopTheEssentialsSection() {
   }
 
   const [products, setProducts] = useState<ShopProductItem[]>(() =>
-    DEFAULT_SQL_PRODUCTS.map((p, idx) => ({
+    getCachedProducts().map((p, idx) => ({
       id: p.id,
       slug: p.slug,
       categoryKey: p.category,
@@ -187,7 +187,7 @@ function ShopTheEssentialsSection() {
     const fetchCatalog = async () => {
       try {
         const data = await getDatabaseProducts();
-        if (active && data && data.length > 0) {
+        if (active && data) {
           setProducts(
             data.map((p, idx) => ({
               id: p.id,

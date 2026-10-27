@@ -62,7 +62,53 @@ export const DEFAULT_SQL_PRODUCTS: ProductDto[] = [
   },
 ];
 
-const PRODUCTS_STORAGE_KEY = "mile-infinity-sql-products";
+export const PRODUCTS_STORAGE_KEY = "mile-infinity-sql-products";
+export const DELETED_PRODUCT_IDS_KEY = "mile-infinity-deleted-product-ids";
+
+export function getDeletedProductIds(): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = localStorage.getItem(DELETED_PRODUCT_IDS_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+export function markProductAsDeleted(id: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    const ids = getDeletedProductIds();
+    ids.add(id);
+    localStorage.setItem(DELETED_PRODUCT_IDS_KEY, JSON.stringify(Array.from(ids)));
+  } catch {}
+}
+
+export function unmarkProductAsDeleted(id: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    const ids = getDeletedProductIds();
+    ids.delete(id);
+    localStorage.setItem(DELETED_PRODUCT_IDS_KEY, JSON.stringify(Array.from(ids)));
+  } catch {}
+}
+
+export function getCachedProducts(): ProductDto[] {
+  if (typeof window === "undefined") return DEFAULT_SQL_PRODUCTS;
+  try {
+    const deleted = getDeletedProductIds();
+    const raw = localStorage.getItem(PRODUCTS_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        return parsed.filter((p) => p && p.id && !deleted.has(p.id));
+      }
+    }
+    return DEFAULT_SQL_PRODUCTS.filter((p) => !deleted.has(p.id));
+  } catch {
+    return DEFAULT_SQL_PRODUCTS;
+  }
+}
 
 /**
  * Complete SQL Schema DDL (PostgreSQL / Supabase compatible)
@@ -186,52 +232,72 @@ ON CONFLICT (slug) DO NOTHING;
 export async function getDatabaseProducts(): Promise<ProductDto[]> {
   if (typeof window === "undefined") return DEFAULT_SQL_PRODUCTS;
 
+  const deletedIds = getDeletedProductIds();
+
+  // 1. Check local storage first
+  let localProducts: ProductDto[] | null = null;
   try {
-    // Attempt remote Supabase query first if online
+    const raw = localStorage.getItem(PRODUCTS_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        localProducts = parsed.filter((p) => p && p.id && !deletedIds.has(p.id));
+      }
+    }
+  } catch {}
+
+  // 2. Query remote Supabase
+  try {
     const { data, error } = await supabase
       .from("products")
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (!error && data && data.length > 0) {
-      const mapped: ProductDto[] = data.map((p) => ({
-        id: p.id,
-        name: p.name,
-        slug: p.slug,
-        tagline: p.tagline,
-        description: p.description,
-        category: p.category,
-        priceInr: p.price_inr,
-        comparePriceInr: p.compare_price_inr,
-        imageUrl: p.image_url,
-        sizes: p.sizes || ["30ml"],
-        isNew: p.is_new,
-        stock: p.stock,
-      }));
-      // Cache locally
-      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(mapped));
-      return mapped;
+    if (!error && data) {
+      const remoteMapped: ProductDto[] = data
+        .filter((p) => !deletedIds.has(p.id)) // NEVER RESTORE DELETED PRODUCTS
+        .map((p) => ({
+          id: p.id,
+          name: p.name,
+          slug: p.slug,
+          tagline: p.tagline,
+          description: p.description,
+          category: p.category,
+          priceInr: p.price_inr,
+          comparePriceInr: p.compare_price_inr,
+          imageUrl: p.image_url,
+          sizes: p.sizes || ["30ml"],
+          isNew: p.is_new,
+          stock: p.stock,
+        }));
+
+      // Merge locally created products that haven't synced to remote yet
+      const remoteIdSet = new Set(remoteMapped.map((p) => p.id));
+      const merged = [...remoteMapped];
+      if (localProducts) {
+        for (const lp of localProducts) {
+          if (!remoteIdSet.has(lp.id) && !deletedIds.has(lp.id)) {
+            merged.push(lp);
+          }
+        }
+      }
+
+      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(merged));
+      return merged;
     }
   } catch {
     // Graceful fallback to local SQL store without console leak
   }
 
-  // Fallback to local SQL store
-  try {
-    const raw = localStorage.getItem(PRODUCTS_STORAGE_KEY);
-    if (!raw) {
-      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(DEFAULT_SQL_PRODUCTS));
-      return DEFAULT_SQL_PRODUCTS;
-    }
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.some((p: any) => p.id && p.id.startsWith("prod-"))) {
-      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(DEFAULT_SQL_PRODUCTS));
-      return DEFAULT_SQL_PRODUCTS;
-    }
-    return parsed;
-  } catch {
-    return DEFAULT_SQL_PRODUCTS;
+  // 3. Fallback to local SQL store
+  if (localProducts !== null) {
+    return localProducts;
   }
+
+  // 4. Default seed filtered by deletedIds
+  const initial = DEFAULT_SQL_PRODUCTS.filter((p) => !deletedIds.has(p.id));
+  localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(initial));
+  return initial;
 }
 
 /**
@@ -367,14 +433,21 @@ export async function deleteDatabaseProduct(id: string): Promise<boolean> {
   if (typeof window === "undefined") return false;
 
   try {
-    const current = await getDatabaseProducts();
+    // 1. Permanently record in tombstone blacklist
+    markProductAsDeleted(id);
+
+    // 2. Remove from local storage immediately
+    const current = getCachedProducts();
     const filtered = current.filter((p) => p.id !== id);
     localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(filtered));
 
+    // 3. Attempt remote delete & soft-delete in Supabase
     try {
       await supabase.from("products").delete().eq("id", id);
+      await supabase.from("products").update({ is_active: false }).eq("id", id);
     } catch {}
 
+    // 4. Notify app listeners
     window.dispatchEvent(new CustomEvent("mile-infinity-products-updated", { detail: filtered }));
     return true;
   } catch {
@@ -387,8 +460,11 @@ export async function deleteDatabaseProduct(id: string): Promise<boolean> {
  */
 export function resetDatabaseToDefault(): ProductDto[] {
   if (typeof window !== "undefined") {
-    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(DEFAULT_SQL_PRODUCTS));
-    window.dispatchEvent(new CustomEvent("mile-infinity-products-updated", { detail: DEFAULT_SQL_PRODUCTS }));
+    try {
+      localStorage.removeItem(DELETED_PRODUCT_IDS_KEY);
+      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(DEFAULT_SQL_PRODUCTS));
+      window.dispatchEvent(new CustomEvent("mile-infinity-products-updated", { detail: DEFAULT_SQL_PRODUCTS }));
+    } catch {}
   }
   return DEFAULT_SQL_PRODUCTS;
 }

@@ -1,7 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, User } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart";
+import { useCustomerAuth } from "@/lib/customer-auth";
 import logoImg from "@/assets/mile-infinity-logo.png";
 
 const NAV_LINKS = [
@@ -14,6 +15,7 @@ const NAV_LINKS = [
 
 export function SiteHeader() {
   const { count, openCart } = useCart();
+  const { user, isAuthenticated, openAuthModal, openProfileDrawer } = useCustomerAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -174,6 +176,33 @@ export function SiteHeader() {
           </div>
 
 
+          {/* Customer Profile / Sign In Button */}
+          {isAuthenticated ? (
+            <button
+              type="button"
+              onClick={openProfileDrawer}
+              className="flex items-center gap-1.5 text-[#162e21] hover:text-[#0f261c] transition-transform hover:scale-105 cursor-pointer py-1 px-2 rounded-full hover:bg-black/5"
+              title="My Account & Orders"
+            >
+              <div className="w-7 h-7 rounded-full bg-[#163729] text-white flex items-center justify-center text-xs font-bold font-serif shadow-xs">
+                {user?.name?.[0]?.toUpperCase() || "M"}
+              </div>
+              <span className="hidden md:inline text-xs font-semibold text-slate-800">
+                {user?.name?.split(" ")[0]}
+              </span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => openAuthModal("login")}
+              className="flex items-center gap-1.5 text-[#162e21] hover:text-[#0f261c] transition-all hover:scale-105 cursor-pointer py-1.5 px-3 rounded-full border border-[#162e21]/30 hover:bg-[#162e21]/5 text-xs font-semibold"
+              title="Sign In / Register with Free OTP"
+            >
+              <User className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Sign In</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={openCart}
@@ -230,7 +259,35 @@ export function SiteHeader() {
               );
             })}
           </div>
-          <div className="mt-5 border-t border-[#e5dfd5] pt-4">
+
+          {/* Mobile Customer Auth */}
+          <div className="mt-4 border-t border-[#e5dfd5] pt-3">
+            {isAuthenticated ? (
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  openProfileDrawer();
+                }}
+                className="w-full flex items-center justify-between py-2 text-sm font-semibold text-[#162e21]"
+              >
+                <span>Hi, {user?.name} (My Account)</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-[#163729] text-white">VIP</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  openAuthModal("login");
+                }}
+                className="w-full flex items-center gap-2 py-2 text-sm font-semibold text-[#162e21]"
+              >
+                <User className="w-4 h-4" />
+                <span>Customer Sign In / Sign Up (Free OTP)</span>
+              </button>
+            )}
+          </div>
+
+          <div className="mt-4 border-t border-[#e5dfd5] pt-4">
             <Link
               to="/shop"
               className="inline-block w-full rounded-none bg-[#162e21] py-3 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white"

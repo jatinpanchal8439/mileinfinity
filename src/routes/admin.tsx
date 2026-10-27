@@ -61,6 +61,7 @@ import {
 } from "@/lib/security";
 import {
   getDatabaseProducts,
+  getCachedProducts,
   deleteDatabaseProduct,
   updateDatabaseProduct,
   updateDatabaseOrderStatus,
@@ -163,7 +164,7 @@ function AdminDashboard() {
   >("overview");
 
   // Products state (PostgreSQL SQL source)
-  const [products, setProducts] = useState<ProductDto[]>(DEFAULT_SQL_PRODUCTS);
+  const [products, setProducts] = useState<ProductDto[]>(getCachedProducts);
   const [orders, setOrders] = useState<AdminOrder[]>(INITIAL_ORDERS);
   const [orderStatusFilter, setOrderStatusFilter] = useState<string>("all");
   const [orderViewMode, setOrderViewMode] = useState<"table" | "cards">("table");

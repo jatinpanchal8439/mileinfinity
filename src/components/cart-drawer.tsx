@@ -13,6 +13,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { useCustomerAuth } from "@/lib/customer-auth";
 import { formatInr } from "@/lib/format";
 import { gsap } from "@/lib/gsap";
 import { getRazorpaySettings } from "@/lib/razorpay";
@@ -20,9 +21,11 @@ import { supabase } from "@/integrations/supabase/client";
 
 export function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, updateQuantity, remove, clear } = useCart();
+  const { user } = useCustomerAuth();
   const [checkoutStep, setCheckoutStep] = useState<"cart" | "address" | "processing" | "success">("cart");
   const [paymentMethod, setPaymentMethod] = useState<"razorpay" | "cod">("razorpay");
   const [lastOrder, setLastOrder] = useState<any>(null);
+
   const panelRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
 
@@ -37,16 +40,30 @@ export function CartDrawer() {
     }
   }, [isOpen]);
 
-  // Customer shipping details
+  // Customer shipping details (Clean real inputs prefilled if logged in)
   const [formData, setFormData] = useState({
-    name: "Aanya Sen",
-    email: "aanya.sen@example.com",
-    phone: "9876543210",
-    address: "702, Magnolia Residency, Indiranagar",
-    city: "Bengaluru",
-    state: "Karnataka",
-    pincode: "560038",
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+    address: user?.savedAddress?.addressLine || "",
+    city: user?.savedAddress?.city || "",
+    state: "Delhi",
+    pincode: user?.savedAddress?.pincode || "",
   });
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        name: user.name || prev.name,
+        email: user.email || prev.email,
+        phone: user.phone || prev.phone,
+        address: user.savedAddress?.addressLine || prev.address,
+        city: user.savedAddress?.city || prev.city,
+        pincode: user.savedAddress?.pincode || prev.pincode,
+      }));
+    }
+  }, [user]);
 
   if (!isOpen) return null;
 
@@ -57,15 +74,27 @@ export function CartDrawer() {
   const grandTotal = subtotal + shippingFee;
 
   function handleAutoFill() {
-    setFormData({
-      name: "Rhea Kapoor",
-      email: "rhea.kapoor@example.com",
-      phone: "9820123456",
-      address: "B-14, Green Valley Heights, Powai",
-      city: "Mumbai",
-      state: "Maharashtra",
-      pincode: "400076",
-    });
+    if (user) {
+      setFormData({
+        name: user.name,
+        email: user.email,
+        phone: user.phone || "9811188990",
+        address: user.savedAddress?.addressLine || "Flat 402, Green Meadows, Okhla Phase III",
+        city: user.savedAddress?.city || "New Delhi",
+        state: "Delhi",
+        pincode: user.savedAddress?.pincode || "110020",
+      });
+    } else {
+      setFormData({
+        name: "Jatin Sharma",
+        email: "customer@mileinfinity.com",
+        phone: "9811188990",
+        address: "Flat 402, Green Meadows, Okhla Phase III",
+        city: "New Delhi",
+        state: "Delhi",
+        pincode: "110020",
+      });
+    }
   }
 
   function handleProceedToRazorpay() {
