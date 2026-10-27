@@ -16,7 +16,7 @@ export interface RazorpaySettings {
 
 export const DEFAULT_RAZORPAY_SETTINGS: RazorpaySettings = {
   enabled: true,
-  keyId: "rzp_test_mileinfinity",
+  keyId: "rzp_test_TsreDTx2vLmBw1",
   keySecret: "rzp_sec_mileinfinity2026",
   mode: "test",
   buttonStyle: "botanical",

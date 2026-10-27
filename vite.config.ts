@@ -18,6 +18,8 @@ export default defineConfig({
       "process.env.SUPABASE_PUBLISHABLE_KEY": JSON.stringify(process.env["SUPABASE_PUBLISHABLE_KEY"] || "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT"),
       "process.env.VITE_SUPABASE_URL": JSON.stringify(process.env["VITE_SUPABASE_URL"] || "https://howaceawpfbuthzdajdk.supabase.co"),
       "process.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] || "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT"),
+      "process.env.RAZORPAY_KEY_ID": JSON.stringify(process.env["RAZORPAY_KEY_ID"] || "rzp_test_TsreDTx2vLmBw1"),
+      "process.env.VITE_RAZORPAY_KEY_ID": JSON.stringify(process.env["VITE_RAZORPAY_KEY_ID"] || "rzp_test_TsreDTx2vLmBw1"),
     },
   },
 });

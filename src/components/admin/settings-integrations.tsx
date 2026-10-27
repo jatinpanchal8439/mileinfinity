@@ -44,8 +44,8 @@ export interface StoreApiSettings {
 
 const DEFAULT_SETTINGS: StoreApiSettings = {
   razorpayMode: "test",
-  razorpayKeyId: "rzp_test_mileinfinity2026",
-  razorpayKeySecret: "sec_test_mile_salt9810",
+  razorpayKeyId: "rzp_test_TsreDTx2vLmBw1",
+  razorpayKeySecret: "",
   razorpayWebhookSecret: "whsec_live_92018491",
   razorpayAutoCapture: true,
 

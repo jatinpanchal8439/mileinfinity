@@ -15,6 +15,7 @@ import {
 import { useCart } from "@/lib/cart";
 import { formatInr } from "@/lib/format";
 import { gsap } from "@/lib/gsap";
+import { getRazorpaySettings } from "@/lib/razorpay";
 
 export function CartDrawer() {
   const { items, count, subtotal, isOpen, closeCart, updateQuantity, remove, clear } = useCart();
@@ -123,8 +124,14 @@ export function CartDrawer() {
     // If Razorpay SDK is available on window, open official checkout
     if (typeof window !== "undefined" && (window as any).Razorpay) {
       try {
+        const rzSettings = getRazorpaySettings();
+        const activeKey =
+          (typeof process !== "undefined" &&
+            (process.env["RAZORPAY_KEY_ID"] || process.env["VITE_RAZORPAY_KEY_ID"])) ||
+          rzSettings.keyId ||
+          "rzp_test_TsreDTx2vLmBw1";
         const options = {
-          key: "rzp_test_mileinfinity", // Default test key
+          key: activeKey,
           amount: grandTotal * 100,
           currency: "INR",
           name: "Mile Infinity Skincare",

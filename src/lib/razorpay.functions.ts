@@ -132,15 +132,12 @@ export const verifyRazorpayPayment = createServerFn({ method: "POST" })
         customer_name: data.customer.name,
         customer_email: data.customer.email,
         customer_phone: data.customer.phone,
-        address_line: data.customer.addressLine,
+        address_line: data.customer.state
+          ? `${data.customer.addressLine}, ${data.customer.state}`
+          : data.customer.addressLine,
         city: data.customer.city,
-        state: data.customer.state,
         pincode: data.customer.pincode,
         subtotal_inr: subtotal + data.shippingFeeInr,
-        payment_method: "razorpay",
-        payment_status: "paid",
-        razorpay_order_id: data.razorpayOrderId,
-        razorpay_payment_id: data.razorpayPaymentId,
         status: "processing",
       })
       .select("id")

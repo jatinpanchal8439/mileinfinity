@@ -64,7 +64,7 @@ export const createRazorpayOrder = createServerFn({ method: "POST" })
     const keyId =
       (typeof process !== "undefined" &&
         (process.env["RAZORPAY_KEY_ID"] || process.env["VITE_RAZORPAY_KEY_ID"])) ||
-      "rzp_test_mileinfinity2026";
+      "rzp_test_TsreDTx2vLmBw1";
     const keySecret =
       (typeof process !== "undefined" &&
         (process.env["RAZORPAY_KEY_SECRET"] || process.env["VITE_RAZORPAY_KEY_SECRET"])) ||
