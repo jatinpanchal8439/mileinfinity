@@ -69,7 +69,12 @@ export type Database = {
           customer_phone: string | null
           id: string
           order_number: string
+          payment_method: string
+          payment_status: string
           pincode: string | null
+          razorpay_order_id: string | null
+          razorpay_payment_id: string | null
+          state: string | null
           status: string
           subtotal_inr: number
           user_id: string | null
@@ -83,7 +88,12 @@ export type Database = {
           customer_phone?: string | null
           id?: string
           order_number: string
+          payment_method?: string
+          payment_status?: string
           pincode?: string | null
+          razorpay_order_id?: string | null
+          razorpay_payment_id?: string | null
+          state?: string | null
           status?: string
           subtotal_inr: number
           user_id?: string | null
@@ -97,7 +107,12 @@ export type Database = {
           customer_phone?: string | null
           id?: string
           order_number?: string
+          payment_method?: string
+          payment_status?: string
           pincode?: string | null
+          razorpay_order_id?: string | null
+          razorpay_payment_id?: string | null
+          state?: string | null
           status?: string
           subtotal_inr?: number
           user_id?: string | null
