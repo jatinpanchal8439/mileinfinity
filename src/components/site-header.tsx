@@ -21,11 +21,10 @@ export function SiteHeader() {
   const [badgeBump, setBadgeBump] = useState(false);
 
   useEffect(() => {
-    if (count > 0) {
-      setBadgeBump(true);
-      const timer = setTimeout(() => setBadgeBump(false), 450);
-      return () => clearTimeout(timer);
-    }
+    if (count <= 0) return;
+    setBadgeBump(true);
+    const timer = setTimeout(() => setBadgeBump(false), 450);
+    return () => clearTimeout(timer);
   }, [count]);
 
   const routerState = useRouterState({
