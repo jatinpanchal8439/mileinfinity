@@ -16,7 +16,8 @@ import { useCart } from "@/lib/cart";
 import { useCustomerAuth } from "@/lib/customer-auth";
 import { formatInr } from "@/lib/format";
 import { gsap } from "@/lib/gsap";
-import { getRazorpaySettings } from "@/lib/razorpay";
+import { getRazorpaySettings, loadRazorpaySDK } from "@/lib/razorpay";
+import { createRazorpayOrder } from "@/lib/razorpay-server";
 import { supabase } from "@/integrations/supabase/client";
 
 export function CartDrawer() {
@@ -97,7 +98,7 @@ export function CartDrawer() {
     }
   }
 
-  function handleProceedToRazorpay() {
+  async function handleProceedToRazorpay() {
     setCheckoutStep("processing");
 
     // Order payload
@@ -165,17 +166,19 @@ export function CartDrawer() {
 
         if (!orderInsertErr) {
           await supabase.from("order_items").insert(
-            items.map((i) => ({
-              id:
-                typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
-                  ? crypto.randomUUID()
-                  : undefined,
-              order_id: orderDbId,
-              product_name: i.name,
-              quantity: i.quantity,
-              unit_price_inr: i.priceInr,
-              size: i.size || "Standard",
-            }))
+            items.map((i) => {
+              const itemPayload: any = {
+                order_id: orderDbId,
+                product_name: i.name,
+                quantity: i.quantity,
+                unit_price_inr: i.priceInr,
+                size: i.size || "Standard",
+              };
+              if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+                itemPayload.id = crypto.randomUUID();
+              }
+              return itemPayload;
+            })
           );
         }
       } catch {
@@ -203,22 +206,51 @@ export function CartDrawer() {
       return;
     }
 
-    // If Razorpay, open live Razorpay checkout
-    if (typeof window !== "undefined" && (window as any).Razorpay) {
+    // If Razorpay, create official order via server function and open live Razorpay checkout
+    if (paymentMethod === "razorpay") {
       try {
+        await loadRazorpaySDK();
         const rzSettings = getRazorpaySettings();
         const activeKey =
+          rzSettings.keyId ||
           (typeof process !== "undefined" &&
             (process.env["RAZORPAY_KEY_ID"] || process.env["VITE_RAZORPAY_KEY_ID"])) ||
-          rzSettings.keyId ||
-          "rzp_test_TsreDTx2vLmBw1";
+          "rzp_test_TvIzrMorwKE36R";
+        const activeSecret =
+          rzSettings.keySecret ||
+          (typeof process !== "undefined" &&
+            (process.env["RAZORPAY_KEY_SECRET"] || process.env["VITE_RAZORPAY_KEY_SECRET"])) ||
+          "t4CF83zF9cPqjdL0GWB7Fcdf";
+
+        const orderResult = await createRazorpayOrder({
+          data: {
+            amountInr: grandTotal,
+            receipt: `mi_${Date.now().toString(36)}`,
+            customerName: formData.name,
+            customerEmail: formData.email,
+            customerPhone: formData.phone,
+            keyId: activeKey,
+            keySecret: activeSecret,
+            notes: {
+              store: "Mile Infinity Botanical Skincare",
+              itemsCount: String(items.length),
+              address: `${formData.address}, ${formData.city} - ${formData.pincode}`,
+            },
+          },
+        });
+
+        if (!orderResult || !orderResult.orderId) {
+          throw new Error("Could not initialize Razorpay order.");
+        }
+
         const options = {
-          key: activeKey,
-          amount: grandTotal * 100,
-          currency: "INR",
+          key: orderResult.keyId || activeKey,
+          amount: orderResult.amount,
+          currency: orderResult.currency || "INR",
           name: "Mile Infinity Skincare",
           description: "Botanical Skincare Order " + orderId,
           image: "/images/mile-infinity-logo.png",
+          order_id: orderResult.orderId,
           handler: function (response: any) {
             finalizeOrder(response?.razorpay_payment_id, response?.razorpay_order_id);
           },
@@ -236,13 +268,21 @@ export function CartDrawer() {
             },
           },
         };
-        const rzp = new (window as any).Razorpay(options);
-        rzp.open();
+
+        if (typeof window !== "undefined" && (window as any).Razorpay) {
+          const rzp = new (window as any).Razorpay(options);
+          rzp.on("payment.failed", function () {
+            setCheckoutStep("address");
+          });
+          rzp.open();
+        } else {
+          throw new Error("Razorpay Checkout SDK is not loaded.");
+        }
       } catch (e) {
-        setTimeout(() => finalizeOrder(), 1000);
+        console.error("[Cart Razorpay Error]:", e);
+        setCheckoutStep("address");
       }
-    } else {
-      setTimeout(() => finalizeOrder(), 1000);
+      return;
     }
   }
 

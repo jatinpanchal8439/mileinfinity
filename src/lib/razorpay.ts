@@ -16,8 +16,8 @@ export interface RazorpaySettings {
 
 export const DEFAULT_RAZORPAY_SETTINGS: RazorpaySettings = {
   enabled: true,
-  keyId: "rzp_test_TsreDTx2vLmBw1",
-  keySecret: "rzp_sec_mileinfinity2026",
+  keyId: "rzp_test_TvIzrMorwKE36R",
+  keySecret: "t4CF83zF9cPqjdL0GWB7Fcdf",
   mode: "test",
   buttonStyle: "white",
   buttonText: "Buy Now",
@@ -36,9 +36,46 @@ const ORDERS_KEY = "mile-infinity-orders";
 export function getRazorpaySettings(): RazorpaySettings {
   if (typeof window === "undefined") return DEFAULT_RAZORPAY_SETTINGS;
   try {
+    let keyId = DEFAULT_RAZORPAY_SETTINGS.keyId;
+    let keySecret = DEFAULT_RAZORPAY_SETTINGS.keySecret;
+    let mode = DEFAULT_RAZORPAY_SETTINGS.mode;
+
+    // Read admin integrations settings if present
+    const storeRaw = localStorage.getItem("mile-infinity-store-settings");
+    if (storeRaw) {
+      const storeParsed = JSON.parse(storeRaw);
+      if (storeParsed.razorpayKeyId && storeParsed.razorpayKeyId !== "rzp_test_TsreDTx2vLmBw1") {
+        keyId = storeParsed.razorpayKeyId;
+      }
+      if (storeParsed.razorpayKeySecret && storeParsed.razorpayKeySecret !== "rzp_sec_mileinfinity2026") {
+        keySecret = storeParsed.razorpayKeySecret;
+      }
+      if (storeParsed.razorpayMode) {
+        mode = storeParsed.razorpayMode;
+      }
+    }
+
     const raw = localStorage.getItem(SETTINGS_KEY);
-    if (!raw) return DEFAULT_RAZORPAY_SETTINGS;
-    return { ...DEFAULT_RAZORPAY_SETTINGS, ...JSON.parse(raw) };
+    if (!raw) {
+      return { ...DEFAULT_RAZORPAY_SETTINGS, keyId, keySecret, mode };
+    }
+    const parsed = JSON.parse(raw);
+    if (
+      parsed.keyId === "rzp_test_TsreDTx2vLmBw1" ||
+      parsed.keySecret === "rzp_sec_mileinfinity2026" ||
+      !parsed.keyId ||
+      !parsed.keySecret
+    ) {
+      parsed.keyId = keyId;
+      parsed.keySecret = keySecret;
+    }
+    return {
+      ...DEFAULT_RAZORPAY_SETTINGS,
+      ...parsed,
+      keyId: parsed.keyId || keyId,
+      keySecret: parsed.keySecret || keySecret,
+      mode: parsed.mode || mode,
+    };
   } catch {
     return DEFAULT_RAZORPAY_SETTINGS;
   }

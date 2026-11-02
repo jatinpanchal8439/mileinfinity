@@ -26,6 +26,8 @@ export interface CreateRazorpayOrderInput {
   customerName?: string;
   customerEmail?: string;
   customerPhone?: string;
+  keyId?: string;
+  keySecret?: string;
 }
 
 export interface CreateRazorpayOrderResult {
@@ -42,6 +44,7 @@ export interface VerifyRazorpayPaymentInput {
   razorpayOrderId: string;
   razorpayPaymentId: string;
   razorpaySignature: string;
+  keySecret?: string;
 }
 
 export interface VerifyRazorpayPaymentResult {
@@ -54,79 +57,75 @@ export interface VerifyRazorpayPaymentResult {
 
 /**
  * Server Function: Creates a real Razorpay Order.
- * If RAZORPAY_KEY_ID & RAZORPAY_KEY_SECRET env vars are set, it makes an authenticated
- * API request to `https://api.razorpay.com/v1/orders`.
- * Otherwise, it creates a secure deterministic mock order ID for development & testing.
+ * Authenticates with Razorpay API (`https://api.razorpay.com/v1/orders`) using HTTP Basic Auth
+ * with the active Key ID and Key Secret.
  */
 export const createRazorpayOrder = createServerFn({ method: "POST" })
-  .inputValidator((input: CreateRazorpayOrderInput) => input)
+  .validator((input: CreateRazorpayOrderInput) => input)
   .handler(async ({ data }): Promise<CreateRazorpayOrderResult> => {
     const keyId =
+      data?.keyId ||
       (typeof process !== "undefined" &&
         (process.env["RAZORPAY_KEY_ID"] || process.env["VITE_RAZORPAY_KEY_ID"])) ||
-      "rzp_test_TsreDTx2vLmBw1";
+      "rzp_test_TvIzrMorwKE36R";
     const keySecret =
+      data?.keySecret ||
       (typeof process !== "undefined" &&
         (process.env["RAZORPAY_KEY_SECRET"] || process.env["VITE_RAZORPAY_KEY_SECRET"])) ||
-      "";
+      "t4CF83zF9cPqjdL0GWB7Fcdf";
 
     const amountPaise = Math.round(data.amountInr * 100);
     const receipt = data.receipt || `rcpt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const isLive = keyId.startsWith("rzp_live_");
 
-    // If real keys are provided and not default mock keys, invoke Razorpay API
-    if (keySecret && !keyId.includes("mileinfinity2026")) {
-      try {
-        const credentials = btoa(`${keyId}:${keySecret}`);
-        const response = await fetch("https://api.razorpay.com/v1/orders", {
-          method: "POST",
-          headers: {
-            Authorization: `Basic ${credentials}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount: amountPaise,
-            currency: "INR",
-            receipt,
-            notes: data.notes || {
-              store: "Mile Infinity Botanical Skincare",
-              customerName: data.customerName || "Store Customer",
-            },
-          }),
-        });
-
-        if (response.ok) {
-          const rzpData = (await response.json()) as { id: string; amount: number; currency: string };
-          return {
-            orderId: rzpData.id,
-            amount: rzpData.amount,
-            amountInr: data.amountInr,
-            currency: rzpData.currency || "INR",
-            receipt,
-            keyId,
-            mode: isLive ? "live" : "test",
-          };
-        } else {
-          const errText = await response.text();
-          console.warn("[Razorpay API] Live create order failed, falling back to simulated order:", errText);
-        }
-      } catch (err) {
-        console.warn("[Razorpay API] Network request error:", err);
-      }
+    if (!keySecret) {
+      throw new Error("Razorpay Key Secret is missing. Please configure it in your settings.");
     }
 
-    // High-fidelity fallback order for local/test environments
-    const mockOrderId = `order_${isLive ? "live" : "test"}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
+    try {
+      const authHeader =
+        typeof Buffer !== "undefined"
+          ? `Basic ${Buffer.from(`${keyId}:${keySecret}`).toString("base64")}`
+          : `Basic ${btoa(`${keyId}:${keySecret}`)}`;
 
-    return {
-      orderId: mockOrderId,
-      amount: amountPaise,
-      amountInr: data.amountInr,
-      currency: "INR",
-      receipt,
-      keyId,
-      mode: isLive ? "live" : "test",
-    };
+      const response = await fetch("https://api.razorpay.com/v1/orders", {
+        method: "POST",
+        headers: {
+          Authorization: authHeader,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: amountPaise,
+          currency: "INR",
+          receipt,
+          notes: data.notes || {
+            store: "Mile Infinity Botanical Skincare",
+            customerName: data.customerName || "Store Customer",
+            customerPhone: data.customerPhone || "",
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error("[Razorpay API Error]:", response.status, errText);
+        throw new Error(`Razorpay Order creation failed (${response.status}): ${errText}`);
+      }
+
+      const rzpData = (await response.json()) as { id: string; amount: number; currency: string };
+      return {
+        orderId: rzpData.id,
+        amount: rzpData.amount,
+        amountInr: data.amountInr,
+        currency: rzpData.currency || "INR",
+        receipt,
+        keyId,
+        mode: isLive ? "live" : "test",
+      };
+    } catch (err: any) {
+      console.error("[Razorpay Server Function Error]:", err);
+      throw err;
+    }
   });
 
 /**
@@ -134,12 +133,13 @@ export const createRazorpayOrder = createServerFn({ method: "POST" })
  * Computes HMAC-SHA256 of `razorpay_order_id + "|" + razorpay_payment_id` with `RAZORPAY_KEY_SECRET`
  */
 export const verifyRazorpayPayment = createServerFn({ method: "POST" })
-  .inputValidator((input: VerifyRazorpayPaymentInput) => input)
+  .validator((input: VerifyRazorpayPaymentInput) => input)
   .handler(async ({ data }): Promise<VerifyRazorpayPaymentResult> => {
     const keySecret =
+      data?.keySecret ||
       (typeof process !== "undefined" &&
         (process.env["RAZORPAY_KEY_SECRET"] || process.env["VITE_RAZORPAY_KEY_SECRET"])) ||
-      "mile_secret_salt_2026";
+      "t4CF83zF9cPqjdL0GWB7Fcdf";
 
     const payload = `${data.razorpayOrderId}|${data.razorpayPaymentId}`;
     const calculatedSignature = await calculateHmacSha256(keySecret, payload);

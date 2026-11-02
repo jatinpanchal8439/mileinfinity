@@ -33,6 +33,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.code-workspace
 
 # Root reference mockup images
 /*.png

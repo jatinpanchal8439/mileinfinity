@@ -21,6 +21,10 @@ services:
       - key: VITE_SUPABASE_PUBLISHABLE_KEY
         value: sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT
       - key: RAZORPAY_KEY_ID
-        value: rzp_test_TsreDTx2vLmBw1
+        value: rzp_test_TvIzrMorwKE36R
       - key: VITE_RAZORPAY_KEY_ID
-        value: rzp_test_TsreDTx2vLmBw1
+        value: rzp_test_TvIzrMorwKE36R
+      - key: RAZORPAY_KEY_SECRET
+        value: t4CF83zF9cPqjdL0GWB7Fcdf
+      - key: VITE_RAZORPAY_KEY_SECRET
+        value: t4CF83zF9cPqjdL0GWB7Fcdf

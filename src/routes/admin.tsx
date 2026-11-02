@@ -50,6 +50,7 @@ import { AddProductPanel } from "@/components/admin/add-product-panel";
 import { OrderDetailsDrawer } from "@/components/admin/order-details-drawer";
 import { CustomersManager } from "@/components/admin/customers-manager";
 import { CouponsManager } from "@/components/admin/coupons-manager";
+import { ShopifyIntegrationModal, ShopifyBagIcon } from "@/components/admin/shopify-integration-modal";
 import {
   getAdminSession,
   clearAdminSession,
@@ -170,6 +171,7 @@ function AdminDashboard() {
 
   // Dynamic Modals state
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showShopifyModal, setShowShopifyModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState<ProductDto | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
   const tabContainerRef = useRef<HTMLElement>(null);
@@ -491,6 +493,21 @@ function AdminDashboard() {
               <span className="hidden sm:inline">Storefront</span>
             </Link>
 
+            {/* Shopify Storefront & Channel Link */}
+            <button
+              onClick={() => setShowShopifyModal(true)}
+              className={`text-xs px-3 py-2 rounded-xl border transition-all inline-flex items-center gap-1.5 font-semibold cursor-pointer shadow-xs ${
+                isWhite
+                  ? "border-emerald-200 bg-emerald-50/80 text-[#008060] hover:bg-emerald-100"
+                  : "border-[#008060]/50 bg-[#008060]/20 text-emerald-300 hover:bg-[#008060]/30"
+              }`}
+              title="Connect & Manage Shopify Store (8x051y-ku.myshopify.com)"
+            >
+              <ShopifyBagIcon className="h-4 w-4 text-[#008060]" />
+              <span className="hidden sm:inline">Shopify</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            </button>
+
             <div className={`h-8 w-[1px] ${isWhite ? "bg-slate-200" : "bg-white/10"}`} />
 
             {/* Admin Profile & Logout */}
@@ -779,6 +796,55 @@ function AdminDashboard() {
                   </div>
                 </div>
 
+                {/* Shopify Storefront & Channel Integration */}
+                <div className={`rounded-xl p-4 border transition-all ${
+                  isWhite ? "bg-slate-50 border-slate-200 hover:border-emerald-300" : "bg-[#0d2218] border-[#1b3d2c] hover:border-emerald-600/40"
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-100 text-[#008060] flex items-center justify-center font-bold shadow-xs">
+                        <ShopifyBagIcon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <p className={`text-xs font-semibold ${isWhite ? "text-slate-900" : "text-white"}`}>
+                            Shopify Store
+                          </p>
+                          <span className="px-1.5 py-0.2 rounded-full bg-emerald-100 text-[#008060] text-[9px] font-bold uppercase">
+                            Live
+                          </span>
+                        </div>
+                        <p className={`text-[10px] font-mono truncate max-w-[170px] ${isWhite ? "text-slate-500" : "text-white/60"}`}>
+                          8x051y-ku.myshopify.com
+                        </p>
+                      </div>
+                    </div>
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  </div>
+                  <div className="mt-3 flex items-center gap-2">
+                    <button
+                      onClick={() => setShowShopifyModal(true)}
+                      className="flex-1 py-1.5 px-3 rounded-lg bg-[#008060] hover:bg-[#004c3f] text-white text-[11px] font-semibold flex items-center justify-between transition-colors cursor-pointer shadow-xs"
+                    >
+                      <span>Manage &amp; Sync</span>
+                      <span>→</span>
+                    </button>
+                    <a
+                      href="https://8x051y-ku.myshopify.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`p-1.5 rounded-lg border text-xs transition-colors flex items-center justify-center ${
+                        isWhite
+                          ? "border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                          : "border-white/10 text-white/70 hover:text-white hover:bg-white/10"
+                      }`}
+                      title="Open Storefront in New Tab"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
+                </div>
+
                 {/* Photo Upload & Product Creator Card */}
                 <div className={`rounded-xl p-4 border ${isWhite ? "bg-slate-50 border-slate-200" : "bg-[#0d2218] border-[#1b3d2c]"}`}>
                   <div className="flex items-center justify-between">
@@ -814,7 +880,7 @@ function AdminDashboard() {
                   className="w-full py-3.5 rounded-xl bg-[#0f3d24] hover:bg-[#092b19] active:scale-95 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
                 >
                   <Plus className="h-4 w-4 text-[#c49838]" />
-                  <span>+ Create New Botanical Product</span>
+                  <span>+ Create New Product</span>
                 </button>
               </div>
             </div>
@@ -843,6 +909,19 @@ function AdminDashboard() {
               </div>
 
               <div className="flex items-center gap-2.5 self-start md:self-auto">
+                <button
+                  type="button"
+                  onClick={() => setShowShopifyModal(true)}
+                  className={`py-2.5 px-4 rounded-xl border text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer shadow-xs ${
+                    isWhite
+                      ? "bg-white border-emerald-300 hover:bg-emerald-50 text-emerald-900"
+                      : "bg-[#0d2218] border-emerald-700/50 hover:bg-emerald-950/50 text-emerald-300"
+                  }`}
+                  title="Sync Catalog with 8x051y-ku.myshopify.com"
+                >
+                  <ShopifyBagIcon className="h-4 w-4 text-[#008060]" />
+                  <span>Shopify Sync</span>
+                </button>
                 <button
                   onClick={() => setActiveTab("add-product")}
                   className="py-2.5 px-5 rounded-xl bg-[#0f3d24] hover:bg-[#092b19] active:scale-95 text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md transition-all cursor-pointer"
@@ -986,9 +1065,15 @@ function AdminDashboard() {
                             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#b48326]">
                               {p.category}
                             </span>
-                            <span className={`text-[10px] font-mono ${isWhite ? "text-slate-400" : "text-white/50"}`}>
-                              {p.sizes[0] || "Standard"}
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded-full bg-emerald-50 text-[#008060] text-[9px] font-semibold border border-emerald-200">
+                                <ShopifyBagIcon className="w-2.5 h-2.5" />
+                                <span>Shopify</span>
+                              </span>
+                              <span className={`text-[10px] font-mono ${isWhite ? "text-slate-400" : "text-white/50"}`}>
+                                {p.sizes[0] || "Standard"}
+                              </span>
+                            </div>
                           </div>
 
                           <h4 className={`font-serif text-base font-semibold line-clamp-1 ${isWhite ? "text-slate-900" : "text-white"}`}>
@@ -1113,7 +1198,12 @@ function AdminDashboard() {
                               />
                               <div>
                                 <p className={`font-semibold line-clamp-1 ${isWhite ? "text-slate-900" : "text-white"}`}>{p.name}</p>
-                                <p className="text-[10px] text-slate-400 font-mono">{p.slug}</p>
+                                <p className="text-[10px] text-slate-400 font-mono flex items-center gap-1.5">
+                                  <span className="text-[#008060] font-semibold flex items-center gap-0.5">
+                                    <ShopifyBagIcon className="w-2.5 h-2.5" /> 8x051y-ku
+                                  </span>
+                                  <span>• /{p.slug}</span>
+                                </p>
                               </div>
                             </div>
                           </td>
@@ -1588,6 +1678,15 @@ function AdminDashboard() {
           });
           showToast(`Product "${savedProduct.name}" saved to store catalog!`);
         }}
+      />
+
+      {/* SHOPIFY CONNECTION & SALES CHANNEL MODAL */}
+      <ShopifyIntegrationModal
+        isOpen={showShopifyModal}
+        onClose={() => setShowShopifyModal(false)}
+        products={products}
+        theme={theme}
+        onToast={(msg) => showToast(msg)}
       />
     </div>
   );

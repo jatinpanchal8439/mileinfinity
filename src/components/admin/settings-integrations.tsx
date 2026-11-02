@@ -26,6 +26,13 @@ export interface StoreApiSettings {
   razorpayWebhookSecret: string;
   razorpayAutoCapture: boolean;
 
+  // Shopify
+  shopifyStoreDomain: string;
+  shopifyStorefrontToken: string;
+  shopifyAdminToken: string;
+  shopifyThemeId: string;
+  shopifyAutoSyncOrders: boolean;
+
   // Shiprocket
   shiprocketEmail: string;
   shiprocketToken: string;
@@ -44,20 +51,26 @@ export interface StoreApiSettings {
 
 const DEFAULT_SETTINGS: StoreApiSettings = {
   razorpayMode: "test",
-  razorpayKeyId: "rzp_test_TsreDTx2vLmBw1",
-  razorpayKeySecret: "",
+  razorpayKeyId: "rzp_test_TvIzrMorwKE36R",
+  razorpayKeySecret: "t4CF83zF9cPqjdL0GWB7Fcdf",
   razorpayWebhookSecret: "whsec_live_92018491",
   razorpayAutoCapture: true,
 
-  shiprocketEmail: "logistics@mileinfinity.com",
+  shopifyStoreDomain: "8x051y-ku.myshopify.com",
+  shopifyStorefrontToken: "shpat_live_8x051y_storefront_92384a8",
+  shopifyAdminToken: "shpat_8x051y_admin_prod_ku294819",
+  shopifyThemeId: "194172256535",
+  shopifyAutoSyncOrders: true,
+
+  shiprocketEmail: "logistics@8x051y-ku.myshopify.com",
   shiprocketToken: "sr_token_prod_9481928419",
   shiprocketPickupPincode: "110001",
-  shiprocketWarehouseName: "Delhi Central Botanical Hub",
+  shiprocketWarehouseName: "Central Warehouse Hub",
   shiprocketAutoAwb: true,
 
-  storeName: "Mile Infinity Botanical Skincare",
-  storeTagline: "Botanical skincare rituals, formulated for everyday radiance.",
-  supportEmail: "support@mileinfinity.com",
+  storeName: "My Store (8x051y-ku)",
+  storeTagline: "Shopify 2.0 Online Store",
+  supportEmail: "support@8x051y-ku.myshopify.com",
   supportPhone: "+91 98111 88990",
   gstin: "07AAECM4819Q1ZU",
   currency: "INR (₹)",
@@ -388,6 +401,102 @@ export function SettingsIntegrations() {
               />
               <span className="font-semibold text-slate-800">
                 Auto-generate AWB immediately upon Razorpay payment capture
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      {/* Shopify Section */}
+      <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-6">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#008060] flex items-center justify-center font-bold">
+              <Store className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-bold text-slate-900">Shopify Online Storefront &amp; Sales Channel</h3>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-[#008060] text-[10px] font-bold">
+                  CONNECTED
+                </span>
+              </div>
+              <p className="text-xs text-slate-500">
+                Connected store: <span className="font-mono font-semibold">8x051y-ku.myshopify.com</span> • Theme: Horizon (#194172256535)
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="https://8x051y-ku.myshopify.com"
+            target="_blank"
+            rel="noreferrer"
+            className="px-3 py-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5"
+          >
+            <ExternalLink className="w-3.5 h-3.5 text-[#008060]" />
+            <span>Open Store</span>
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div>
+            <label className="block text-slate-700 font-semibold mb-1.5 uppercase tracking-wider text-[11px]">
+              Shopify Store Domain
+            </label>
+            <input
+              type="text"
+              value={settings.shopifyStoreDomain}
+              onChange={(e) => setSettings({ ...settings, shopifyStoreDomain: e.target.value })}
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-slate-900 focus:bg-white focus:outline-none focus:border-[#0f3d24]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-slate-700 font-semibold mb-1.5 uppercase tracking-wider text-[11px]">
+              Live Theme ID
+            </label>
+            <input
+              type="text"
+              value={settings.shopifyThemeId}
+              onChange={(e) => setSettings({ ...settings, shopifyThemeId: e.target.value })}
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-slate-900 focus:bg-white focus:outline-none focus:border-[#0f3d24]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-slate-700 font-semibold mb-1.5 uppercase tracking-wider text-[11px]">
+              Storefront API Access Token
+            </label>
+            <input
+              type="password"
+              value={settings.shopifyStorefrontToken}
+              onChange={(e) => setSettings({ ...settings, shopifyStorefrontToken: e.target.value })}
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-slate-900 focus:bg-white focus:outline-none focus:border-[#0f3d24]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-slate-700 font-semibold mb-1.5 uppercase tracking-wider text-[11px]">
+              Admin API Access Token (Private App)
+            </label>
+            <input
+              type="password"
+              value={settings.shopifyAdminToken}
+              onChange={(e) => setSettings({ ...settings, shopifyAdminToken: e.target.value })}
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 font-mono text-slate-900 focus:bg-white focus:outline-none focus:border-[#0f3d24]"
+            />
+          </div>
+
+          <div className="md:col-span-2 flex items-center pt-2">
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={settings.shopifyAutoSyncOrders}
+                onChange={(e) => setSettings({ ...settings, shopifyAutoSyncOrders: e.target.checked })}
+                className="h-4 w-4 rounded border-slate-300 text-[#008060] focus:ring-[#008060]"
+              />
+              <span className="font-semibold text-slate-800">
+                Forward captured orders directly into Shopify 8x051y-ku merchant orders feed
               </span>
             </label>
           </div>

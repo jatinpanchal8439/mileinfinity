@@ -748,6 +748,10 @@ export function AddProductPanel({ onProductCreated, onViewCatalog }: AddProductP
                   />
                   <span>Stock allocated ({stock} units)</span>
                 </div>
+                <div className="flex items-center gap-2 text-emerald-800 font-medium text-xs">
+                  <Check className="w-3.5 h-3.5 text-[#008060]" />
+                  <span>Sync to Shopify (8x051y-ku.myshopify.com)</span>
+                </div>
               </div>
 
               {/* Action Submit Button */}

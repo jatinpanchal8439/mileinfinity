@@ -421,6 +421,17 @@ export function DynamicProductModal({
                   />
                   <span>Publish &amp; Make Active in Store</span>
                 </label>
+                <label className="flex items-center gap-2 cursor-pointer font-medium text-emerald-800">
+                  <input
+                    type="checkbox"
+                    defaultChecked={true}
+                    className="h-4 w-4 rounded border-emerald-300 text-[#008060] focus:ring-[#008060]"
+                  />
+                  <span className="flex items-center gap-1.5 text-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>Sync to Shopify (8x051y-ku.myshopify.com)</span>
+                  </span>
+                </label>
               </div>
             </div>
 

@@ -24,6 +24,7 @@ import {
   loadRazorpaySDK,
   type StoredOrder,
 } from "@/lib/razorpay";
+import { createRazorpayOrder } from "@/lib/razorpay-server";
 import { supabase } from "@/integrations/supabase/client";
 
 export interface ProductCheckoutItem {
@@ -143,17 +144,17 @@ export function RazorpayCheckoutModal({
       });
 
       if (!orderInsertErr) {
-        await supabase.from("order_items").insert({
-          id:
-            typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
-              ? crypto.randomUUID()
-              : undefined,
+        const itemPayload: any = {
           order_id: orderDbId,
           product_name: product.name,
           quantity,
           unit_price_inr: product.priceInr,
           size: product.size || "Standard",
-        });
+        };
+        if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+          itemPayload.id = crypto.randomUUID();
+        }
+        await supabase.from("order_items").insert(itemPayload);
       }
     } catch {
       // Handled silently to prevent sensitive SQL schema leakage
@@ -164,7 +165,7 @@ export function RazorpayCheckoutModal({
     if (onSuccess) onSuccess(localOrder);
   }
 
-  function handleProcessPayment() {
+  async function handleProcessPayment() {
     setErrorMessage(null);
 
     // Validate shipping details
@@ -172,7 +173,8 @@ export function RazorpayCheckoutModal({
       setErrorMessage("Please enter your full name for delivery.");
       return;
     }
-    if (!formData.phone.trim() || formData.phone.trim().length < 10) {
+    const cleanPhone = formData.phone.trim().replace(/\D/g, "");
+    if (!cleanPhone || cleanPhone.length < 10) {
       setErrorMessage("Please provide a valid 10-digit mobile number for order updates.");
       return;
     }
@@ -187,62 +189,97 @@ export function RazorpayCheckoutModal({
 
     setStep("processing");
 
-    // Load and launch Razorpay Checkout SDK
-    if (typeof window !== "undefined") {
+    try {
+      // 1. Ensure Razorpay Checkout SDK is loaded
+      await loadRazorpaySDK();
+
+      // 2. Active Razorpay keys
       const activeKey =
+        settings.keyId ||
         (typeof process !== "undefined" &&
           (process.env["RAZORPAY_KEY_ID"] || process.env["VITE_RAZORPAY_KEY_ID"])) ||
-        settings.keyId ||
-        "rzp_test_TsreDTx2vLmBw1";
+        "rzp_test_TvIzrMorwKE36R";
 
+      const activeSecret =
+        settings.keySecret ||
+        (typeof process !== "undefined" &&
+          (process.env["RAZORPAY_KEY_SECRET"] || process.env["VITE_RAZORPAY_KEY_SECRET"])) ||
+        "t4CF83zF9cPqjdL0GWB7Fcdf";
+
+      // 3. Create official order using Razorpay Orders API via server function
+      const orderResult = await createRazorpayOrder({
+        data: {
+          amountInr: totalAmount,
+          receipt: `mi_${Date.now().toString(36)}`,
+          customerName: formData.name.trim(),
+          customerEmail: formData.email.trim(),
+          customerPhone: cleanPhone,
+          keyId: activeKey,
+          keySecret: activeSecret,
+          notes: {
+            product: product.name,
+            quantity: String(quantity),
+            size: product.size || "Standard",
+            address: `${formData.address.trim()}, ${formData.city.trim()} - ${formData.pincode.trim()}`,
+          },
+        },
+      });
+
+      if (!orderResult || !orderResult.orderId) {
+        throw new Error("Could not initialize Razorpay order. Please try again.");
+      }
+
+      // 4. Configure Razorpay checkout options with the real order_id
       const rzpOptions = {
-        key: activeKey,
-        amount: totalAmount * 100,
-        currency: "INR",
+        key: orderResult.keyId || activeKey,
+        amount: orderResult.amount,
+        currency: orderResult.currency || "INR",
         name: "Mile Infinity Botanical Skincare",
         description: `Order: ${product.name} (Qty: ${quantity})`,
         image: product.imageUrl || "/images/card-green.png",
-        handler: function (response: any) {
-          handleFinalizeOrder(response?.razorpay_payment_id, response?.razorpay_order_id);
-        },
+        order_id: orderResult.orderId,
         prefill: {
           name: formData.name.trim(),
           email: formData.email.trim() || "support@mileinfinity.com",
-          contact: formData.phone.trim(),
+          contact: cleanPhone,
+        },
+        notes: {
+          address: `${formData.address.trim()}, ${formData.city.trim()} - ${formData.pincode.trim()}`,
+          product: product.name,
+          quantity: String(quantity),
         },
         theme: {
           color: "#0f3d24",
+          backdrop_color: "rgba(0, 0, 0, 0.65)",
         },
         modal: {
           ondismiss: function () {
             setStep("details");
           },
         },
+        handler: async function (response: any) {
+          await handleFinalizeOrder(response?.razorpay_payment_id, response?.razorpay_order_id);
+        },
       };
 
-      try {
-        if ((window as any).Razorpay) {
-          const rzp = new (window as any).Razorpay(rzpOptions);
-          rzp.open();
-          return;
-        } else {
-          // Attempt on-demand SDK load
-          loadRazorpaySDK().then((loaded) => {
-            if (loaded && (window as any).Razorpay) {
-              const rzp = new (window as any).Razorpay(rzpOptions);
-              rzp.open();
-            } else {
-              // Direct fallback order finalization
-              setTimeout(() => handleFinalizeOrder(), 1200);
-            }
-          });
-          return;
-        }
-      } catch {
-        setTimeout(() => handleFinalizeOrder(), 1200);
+      if (typeof window !== "undefined" && (window as any).Razorpay) {
+        const rzp = new (window as any).Razorpay(rzpOptions);
+        rzp.on("payment.failed", function (failResp: any) {
+          setErrorMessage(
+            failResp?.error?.description || "Payment was not completed. Please try again."
+          );
+          setStep("details");
+        });
+        rzp.open();
+      } else {
+        throw new Error("Razorpay Checkout SDK is not available. Please refresh the page.");
       }
-    } else {
-      setTimeout(() => handleFinalizeOrder(), 1200);
+    } catch (err: any) {
+      console.error("[Razorpay Checkout Failed]:", err);
+      setErrorMessage(
+        err?.message || "Could not launch Razorpay gateway. Please check your credentials and try again."
+      );
+      setStep("details");
     }
   }
 
@@ -676,8 +713,18 @@ export function RazorpayCheckoutModal({
           )}
 
           {step === "processing" && (
-            <div className="w-full text-center text-xs text-slate-400 py-1">
-              Please complete authorization in the Razorpay gateway popup window.
+            <div className="w-full flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={() => setStep("details")}
+                className="px-4 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-colors"
+              >
+                Back to Details
+              </button>
+              <div className="text-xs text-slate-600 py-1 text-right flex items-center gap-2">
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Complete payment in Razorpay window</span>
+              </div>
             </div>
           )}
 

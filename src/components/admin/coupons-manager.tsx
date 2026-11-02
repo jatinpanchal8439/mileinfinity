@@ -186,6 +186,9 @@ export function CouponsManager() {
               {coupons.length > 0 ? "Top promo tier" : "No active campaigns"}
             </p>
           </div>
+          <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
+            <Sparkles className="w-6 h-6" />
+          </div>
         </div>
       </div>
 
