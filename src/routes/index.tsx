@@ -54,6 +54,7 @@ import cropStep04 from "@/assets/crop-step-04.png";
 import cinematicEmeraldBg from "@/assets/cinematic-emerald-arc-bg.png";
 import routineFinderArtworkImg from "@/assets/routine-finder-artwork.png";
 import naturalGlowMatchaAdImg from "@/assets/natural-glow-matcha-ad.png";
+import heroBeetrootProductImg from "@/assets/hero-beetroot-still-life.png";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(productsQueryOptions),
@@ -147,98 +148,45 @@ function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative w-full overflow-hidden bg-[#faf8f4] sm:bg-[#e8e2d7]">
-      <div className="relative flex flex-col sm:block min-h-0 sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] w-full">
-        {/* Banner Image Container */}
-        {/* Mobile View: Displayed prominently on top, full width, crisp, zero text obstruction */}
-        {/* Desktop View: Absolute full-bleed background layout */}
-        <div className="relative w-full h-[280px] xs:h-[340px] sm:h-full sm:absolute sm:inset-0 overflow-hidden bg-[#ded8cd] shadow-xs sm:shadow-none">
+    <section ref={heroRef} className="w-full overflow-hidden bg-background">
+      <div className="mx-auto grid w-full max-w-[1440px] lg:min-h-[660px] lg:grid-cols-2">
+        <div className="hero-product-image relative order-1 min-h-[270px] overflow-hidden bg-secondary sm:min-h-[390px] lg:order-2 lg:min-h-[660px]">
           <img
-            src={botanicalHeroImg}
-            alt="Mile Infinity Botanical Skincare Collection"
-            className="h-full w-full object-cover object-[center_60%] sm:object-[75%_center] lg:object-center select-none"
+            src={heroBeetrootProductImg}
+            alt="Mile Infinity Beetroot Face Wash with fresh beetroot and botanicals"
+            className="h-full w-full object-cover object-center"
           />
+          <div className="absolute bottom-4 left-4 bg-background/95 px-4 py-3 shadow-sm sm:bottom-7 sm:left-7 sm:px-5">
+            <span className="block text-[9px] font-medium uppercase tracking-[0.18em] text-muted-foreground">Featured ritual</span>
+            <span className="mt-1 block font-display text-lg leading-tight text-foreground sm:text-xl">Beetroot Face Wash</span>
+          </div>
         </div>
 
-        {/* Text Content */}
-        {/* Mobile View: Sits cleanly DIRECTLY BELOW the banner image in natural flow with ivory background */}
-        {/* Desktop View: Overlaid on the left side with seamless backdrop */}
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full py-7 sm:py-20 lg:py-28 flex items-center sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] bg-[#faf8f4] sm:bg-transparent">
-          <div className="w-full max-w-xl lg:max-w-2xl">
-            <div className="hero-subtag inline-flex items-center gap-2.5 sm:gap-3 mb-3.5 sm:mb-6">
-              <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/90">
-                Plant-Based Skincare
-              </span>
-              <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
+        <div className="order-2 flex items-center px-5 py-10 sm:px-10 sm:py-14 lg:order-1 lg:px-14 lg:py-20 xl:px-20">
+          <div className="w-full max-w-xl">
+            <div className="hero-subtag eyebrow mb-4 inline-flex items-center gap-3 text-muted-foreground sm:mb-6">
+              <span className="h-px w-8 bg-primary/50" />
+              Botanical skincare, made for you
             </div>
-
-            <h1 className="hero-heading font-display text-[32px] xs:text-4xl sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.12] sm:leading-[1.05] drop-shadow-xs">
-              Skincare,<br />
-              Rooted in Nature.<br />
-              Designed for<br />
-              Modern Rituals.
+            <h1 className="hero-heading font-display text-[42px] font-medium leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
+              Your skin,<br />
+              <span className="italic text-primary">back to its</span><br />
+              natural glow.
             </h1>
-
-            <p className="hero-desc mt-3.5 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans">
-              Thoughtfully formulated skincare inspired by botanical ingredients and created to
-              bring conscious care into your everyday routine.
+            <p className="hero-desc mt-5 max-w-md text-sm leading-relaxed text-muted-foreground sm:mt-7 sm:text-base">
+              Meet your new everyday ritual: botanical-inspired care that feels considered, simple, and beautifully yours.
             </p>
-
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
-              <a
-                href="#essentials"
-                className="hero-cta-btn group btn-shimmer hover-lift inline-flex items-center justify-center gap-3 rounded-full bg-[#162e21] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-white shadow-md transition-all duration-300 hover:bg-[#0f2117] hover:shadow-lg hover:gap-4 text-center active:scale-95"
-              >
-                <span>Shop Skincare</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
-                href="#approach"
-                className="hero-cta-btn group hover-lift inline-flex items-center justify-center gap-3 rounded-full border border-[#162e21]/30 bg-[#f7f5f0]/85 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-[#162e21] shadow-xs transition-all duration-300 hover:bg-[#f7f5f0] hover:border-[#162e21]/60 hover:gap-4 text-center active:scale-95"
-              >
-                <span>Explore The Collection</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
+              <Link to="/shop" className="hero-cta-btn btn-primary group">
+                Shop skincare <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <a href="#approach" className="hero-cta-btn inline-flex min-h-12 items-center justify-center gap-2 border border-primary/30 px-6 text-xs font-medium uppercase tracking-[0.14em] text-primary transition-colors hover:bg-secondary">
+                Discover our approach
               </a>
             </div>
-
-            {/* 4 Benefit Icon Badges with hover micro-animations */}
-            <div className="mt-7 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 pt-5 sm:pt-7 border-t border-[#162e21]/20 max-w-xl">
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Leaf className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
-                </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
-                  Plant-Based<br />Formulations
-                </span>
-              </div>
-
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Droplets className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
-                </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
-                  Clean<br />Ingredients
-                </span>
-              </div>
-
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Sprout className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
-                </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
-                  Thoughtfully<br />Crafted
-                </span>
-              </div>
-
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
-                </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
-                  Skincare<br />Rituals
-                </span>
-              </div>
+            <div className="mt-8 flex items-center gap-3 border-t border-border pt-5 text-xs text-muted-foreground sm:mt-10">
+              <Leaf className="h-4 w-4 shrink-0 text-primary" strokeWidth={1.7} />
+              Thoughtful botanicals. Everyday care.
             </div>
           </div>
         </div>
