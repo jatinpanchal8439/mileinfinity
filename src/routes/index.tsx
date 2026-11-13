@@ -301,11 +301,11 @@ function TwoBrandsEcosystem() {
         <div className="mt-10 sm:mt-16 grid gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-12 items-center">
           {/* Left Column: Navtaksh Wellness */}
           <Reveal direction="right" delay={150} className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="inline-flex items-center lg:items-start transition-transform duration-300 hover:scale-105">
+            <div className="flex h-20 w-full items-center justify-center transition-transform duration-300 hover:scale-105 sm:h-24 lg:h-28 lg:justify-start">
               <img
                 src={navtakshLogo}
                 alt="NavTaksh Wellness — नव आयामेषु सम्पूर्ण कल्याणम्"
-                className="h-16 sm:h-20 lg:h-24 w-auto object-contain"
+                className="max-h-full max-w-full object-contain"
               />
             </div>
 
@@ -339,11 +339,11 @@ function TwoBrandsEcosystem() {
 
           {/* Right Column: Mile Infinity */}
           <Reveal direction="left" delay={350} className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="inline-flex items-center lg:items-start transition-transform duration-300 hover:scale-105">
+            <div className="flex h-20 w-full items-center justify-center transition-transform duration-300 hover:scale-105 sm:h-24 lg:h-28 lg:justify-start">
               <img
                 src={mileInfinityLogo}
                 alt="Mile Infinity"
-                className="h-12 sm:h-14 lg:h-16 w-auto object-contain"
+                className="max-h-full max-w-full object-contain"
               />
             </div>
 
