@@ -150,7 +150,7 @@ function Hero() {
   return (
     <section ref={heroRef} className="w-full overflow-hidden bg-background">
       <div className="mx-auto grid w-full max-w-[1440px] lg:min-h-[660px] lg:grid-cols-2">
-        <div className="hero-product-image relative order-1 min-h-[270px] overflow-hidden bg-secondary sm:min-h-[390px] lg:order-2 lg:min-h-[660px]">
+        <div className="hero-product-image relative order-2 h-[280px] overflow-hidden bg-secondary sm:h-[340px] lg:order-2 lg:h-auto lg:min-h-[660px]">
           <img
             src={heroBeetrootProductImg}
             alt="Mile Infinity Beetroot Face Wash with fresh beetroot and botanicals"
@@ -162,7 +162,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="order-2 flex items-center px-5 py-10 sm:px-10 sm:py-14 lg:order-1 lg:px-14 lg:py-20 xl:px-20">
+        <div className="order-1 flex items-center px-5 py-8 sm:px-10 sm:py-14 lg:order-1 lg:px-14 lg:py-20 xl:px-20">
           <div className="w-full max-w-xl">
             <div className="hero-subtag eyebrow mb-4 inline-flex items-center gap-3 text-muted-foreground sm:mb-6">
               <span className="h-px w-8 bg-primary/50" />
