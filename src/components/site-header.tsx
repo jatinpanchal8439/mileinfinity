@@ -131,7 +131,7 @@ export function SiteHeader() {
                 ? "h-10 sm:h-12 md:h-13"
                 : "h-12 sm:h-14 md:h-16 lg:h-18"
             }`}
-            style={{ imageRendering: "crisp-edges" }}
+            style={{ imageRendering: "auto", WebkitFontSmoothing: "antialiased" }}
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).src = logoImg;
             }}

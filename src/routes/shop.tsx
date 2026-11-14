@@ -433,8 +433,16 @@ function ShopTheEssentialsSection() {
       try {
         const data = await getDatabaseProducts();
         if (active && data) {
+          // Only show Mile Infinity branded products — filter out any non-Mile-Infinity items from Supabase
+          const mileInfinityOnly = data.filter(
+            (p) =>
+              p.name.toLowerCase().includes("mile infinity") ||
+              p.id.startsWith("hero-") ||
+              p.id.startsWith("dummy-") ||
+              p.id.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
+          );
           setProducts(
-            data.map((p, idx) => ({
+            mileInfinityOnly.map((p, idx) => ({
               id: p.id,
               slug: p.slug,
               categoryKey: p.category,

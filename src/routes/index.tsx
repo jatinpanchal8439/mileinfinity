@@ -392,8 +392,8 @@ function TwoBrandsEcosystem() {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16">
+    <section className="relative w-full bg-white py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16 overflow-x-hidden">
         {/* Header matching screenshot */}
         <Reveal direction="up" className="text-center max-w-3xl mx-auto">
           <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/75 font-sans">
@@ -416,7 +416,7 @@ function TwoBrandsEcosystem() {
         {/* 3-Column Bridge Ecosystem matching screenshot with PERFECT SAME LOGO ALIGNMENT */}
         <div className="mt-12 sm:mt-16 grid gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-12 items-start">
           {/* Left Column: Navtaksh Wellness */}
-          <Reveal direction="right" delay={150} className="lg:col-span-3 flex flex-col">
+          <Reveal direction="right" delay={150} className="lg:col-span-3 flex flex-col min-w-0">
             {/* Logo Container - Exact same height (h-20 sm:h-24) as right logo for perfect vertical alignment */}
             <div className="h-20 sm:h-24 flex items-center justify-center lg:justify-start">
               <img
@@ -427,7 +427,7 @@ function TwoBrandsEcosystem() {
             </div>
 
             {/* Highlighted Card Container matching Image 3 */}
-            <div className="mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#c29653]/40">
+            <div className="mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#c29653]/40 overflow-visible">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#c29653]/15 text-[#966b2e] mb-3">
                 <Sparkles className="w-3 h-3" /> Holistic Wellness
               </div>
@@ -473,7 +473,7 @@ function TwoBrandsEcosystem() {
           </Reveal>
 
           {/* Right Column: Mile Infinity */}
-          <Reveal direction="left" delay={350} className="lg:col-span-3 flex flex-col">
+          <Reveal direction="left" delay={350} className="lg:col-span-3 flex flex-col min-w-0">
             {/* Logo Container - Exact same height (h-20 sm:h-24) as left logo for perfect vertical alignment */}
             <div className="h-20 sm:h-24 flex items-center justify-center lg:justify-start">
               <img
