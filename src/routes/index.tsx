@@ -21,6 +21,8 @@ import {
   RotateCcw,
   SlidersHorizontal,
   Sparkles,
+  CreditCard,
+  Flower2,
 } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { Reveal } from "@/components/reveal";
@@ -31,12 +33,14 @@ import { formatInr } from "@/lib/format";
 import type { ProductDto } from "@/lib/store.functions";
 
 // High-resolution Figma and reference assets
+import heroRainbowImg from "@/assets/hero-rainbow-moisturizer-2x.jpg";
 import botanicalHeroImg from "@/assets/botanical-hero-still-life.png";
 import goldenSerumImg from "@/assets/golden-serum-approach.png";
 import goldenApproachDishImg from "@/assets/golden-approach-dish.png";
 import goldenInfinityImg from "@/assets/golden-infinity-spa.png";
 import navtakshLogo from "@/assets/navtaksh-wellness-logo.png";
 import mileInfinityLogo from "@/assets/mile-infinity-logo.png";
+import logoSvg from "@/assets/mile-infinity-logo.svg";
 import cardBeetrootImg from "@/assets/card-beetroot.png";
 import cardGreenImg from "@/assets/card-green.png";
 import cardBlueberryImg from "@/assets/product-blueberry.png";
@@ -92,6 +96,9 @@ function Index() {
       {/* 4. Two Brands One Purpose Ecosystem Section (Slide 3) */}
       <TwoBrandsEcosystem />
 
+      {/* 5. Shop The Essentials & Hero Products Showcase Section (id="essentials") */}
+      <HomeEssentialsSection products={products} />
+
       {/* 6. Interactive Two Essentials Bundle Builder (Slide 4, Group 23) */}
       <BundleBuilder />
 
@@ -121,13 +128,24 @@ function Index() {
 }
 
 /**
- * 1. Hero Section:
- * - Plant-based skincare pill with rule lines
- * - Elegant Cormorant Garamond serif heading:
- *   "Skincare, Rooted in Nature. Designed for Modern Rituals."
- * - Two CTA buttons: "SHOP SKINCARE →" and "EXPLORE THE COLLECTION →"
- * - 4 Benefit icon badges: Leaf, Droplets, Sprout, Sun (NO sparkles)
- * - Background: Botanical Skincare Still Life
+ * 1. Hero Section matching User's Mockup:
+ * - Uses the uploaded hero background image with pastel rainbow waves, multi-color cream swirl, moisturizer jar & smiling model
+ * - Subtag: "PLANT-BASED SKINCARE —"
+ * - Heading:
+ *     Skincare,
+ *     Rooted in Nature.
+ * - Description:
+ *     "Thoughtfully formulated skincare inspired by botanical ingredients and created to bring conscious care into your everyday routine."
+ * - Rectangular Bronze/Olive Button:
+ *     "SHOP SKINCARE →" (bg-[#866727])
+ * - 4 Benefit Icon Badges:
+ *     1) Leaf: PLANT-BASED / FORMULATIONS
+ *     2) Droplets: CLEAN / INGREDIENTS
+ *     3) Sprout: THOUGHTFULLY / CRAFTED
+ *     4) Flower2: SKINCARE / RITUALS
+ * - Interactive Clickable Hotspot on the Moisturizer Jar:
+ *     Clickable pulse beacon & floating tooltip that directly adds the Blueberry & Lavender Bliss Moisturizer to the cart!
+ * - GSAP Entrance Timeline & Float animations
  */
 function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -136,106 +154,132 @@ function Hero() {
     if (!heroRef.current) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".hero-subtag", { y: 22, opacity: 0, duration: 0.7, delay: 0.1 })
-        .from(".hero-heading", { y: 35, opacity: 0, duration: 0.9 }, "-=0.4")
-        .from(".hero-desc", { y: 20, opacity: 0, duration: 0.7 }, "-=0.5")
-        .from(".hero-cta-btn", { y: 20, opacity: 0, stagger: 0.12, duration: 0.6 }, "-=0.4")
-        .from(".hero-badge-item", { y: 16, opacity: 0, stagger: 0.08, duration: 0.5 }, "-=0.3");
+      tl.fromTo(
+        ".hero-subtag",
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, delay: 0.1, clearProps: "all" }
+      )
+        .fromTo(
+          ".hero-heading",
+          { y: 24, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.75, clearProps: "all" },
+          "-=0.35"
+        )
+        .fromTo(
+          ".hero-desc",
+          { y: 16, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, clearProps: "all" },
+          "-=0.45"
+        )
+        .fromTo(
+          ".hero-cta-btn",
+          { y: 16, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, clearProps: "all" },
+          "-=0.4"
+        )
+        .fromTo(
+          ".hero-badge-item",
+          { y: 12, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.06, duration: 0.45, clearProps: "all" },
+          "-=0.3"
+        );
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={heroRef} className="relative w-full overflow-hidden bg-[#faf8f4] sm:bg-[#e8e2d7]">
-      <div className="relative flex flex-col sm:block min-h-0 sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] w-full">
-        {/* Banner Image Container */}
-        {/* Mobile View: Displayed prominently on top, full width, crisp, zero text obstruction */}
-        {/* Desktop View: Absolute full-bleed background layout */}
-        <div className="relative w-full h-[280px] xs:h-[340px] sm:h-full sm:absolute sm:inset-0 overflow-hidden bg-[#ded8cd] shadow-xs sm:shadow-none">
+    <section
+      ref={heroRef}
+      className="relative w-full overflow-hidden bg-[#faf8f4]"
+      aria-label="Hero - Skincare, Rooted in Nature"
+    >
+      <div className="relative min-h-[460px] sm:min-h-[500px] md:min-h-[540px] lg:min-h-[590px] xl:min-h-[620px] w-full flex items-center">
+        {/* Full-bleed Hero Background Image matching user upload */}
+        <div className="absolute inset-0 overflow-hidden bg-[#faf8f4] select-none">
           <img
-            src={botanicalHeroImg}
-            alt="Mile Infinity Botanical Skincare Collection"
-            className="h-full w-full object-cover object-[center_60%] sm:object-[75%_center] lg:object-center select-none"
+            src={heroRainbowImg}
+            alt="Mile Infinity Skincare, Rooted in Nature"
+            className="h-full w-full object-cover object-[75%_center] sm:object-[68%_center] md:object-[62%_center] lg:object-center select-none pointer-events-none"
           />
+          {/* Subtle soft gradient scrim on the left for crisp text contrast */}
+          <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-1/2 bg-gradient-to-r from-[#faf8f4]/95 via-[#faf8f4]/75 to-transparent sm:from-[#faf8f4]/90 sm:via-[#faf8f4]/50 pointer-events-none" />
         </div>
 
-        {/* Text Content */}
-        {/* Mobile View: Sits cleanly DIRECTLY BELOW the banner image in natural flow with ivory background */}
-        {/* Desktop View: Overlaid on the left side with seamless backdrop */}
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full py-7 sm:py-20 lg:py-28 flex items-center sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[840px] bg-[#faf8f4] sm:bg-transparent">
-          <div className="w-full max-w-xl lg:max-w-2xl">
-            <div className="hero-subtag inline-flex items-center gap-2.5 sm:gap-3 mb-3.5 sm:mb-6">
-              <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/90">
+        {/* Text Content Overlay on Left Side */}
+        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full pt-4 sm:pt-6 md:pt-7 lg:pt-8 pb-5 sm:pb-6 flex items-center">
+          <div className="w-full max-w-lg lg:max-w-xl">
+            {/* Kicker with dash matching Screenshot */}
+            <div className="hero-subtag inline-flex items-center gap-2.5 mb-2 sm:mb-3">
+              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/80 font-sans">
                 Plant-Based Skincare
               </span>
-              <span className="h-[1px] w-6 sm:w-8 bg-[#162e21]/40" />
+              <span className="h-[1.5px] w-6 sm:w-8 bg-[#162e21]/60" />
             </div>
 
-            <h1 className="hero-heading font-display text-[32px] xs:text-4xl sm:text-4xl md:text-5xl lg:text-[4.2rem] xl:text-[4.6rem] font-medium tracking-tight text-[#162e21] leading-[1.12] sm:leading-[1.05] drop-shadow-xs">
+            {/* Heading matching Screenshot exactly: "Skincare, Rooted in Nature." */}
+            <h1 className="hero-heading font-serif text-[36px] xs:text-[42px] sm:text-5xl md:text-[54px] lg:text-[64px] xl:text-[70px] font-bold tracking-tight text-[#162e21] leading-[1.06]">
               Skincare,<br />
-              Rooted in Nature.<br />
-              Designed for<br />
-              Modern Rituals.
+              Rooted in Nature.
             </h1>
 
-            <p className="hero-desc mt-3.5 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/90 max-w-lg font-sans">
+            {/* Description */}
+            <p className="hero-desc mt-2.5 sm:mt-3.5 text-xs sm:text-[14px] leading-relaxed text-[#2c3d33]/90 max-w-md font-sans">
               Thoughtfully formulated skincare inspired by botanical ingredients and created to
               bring conscious care into your everyday routine.
             </p>
 
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
+            {/* Rectangular Bronze/Olive Button matching Screenshot with luxury shimmer animation */}
+            <div className="mt-4 sm:mt-6">
               <a
                 href="#essentials"
-                className="hero-cta-btn group btn-shimmer hover-lift inline-flex items-center justify-center gap-3 rounded-full bg-[#162e21] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-white shadow-md transition-all duration-300 hover:bg-[#0f2117] hover:shadow-lg hover:gap-4 text-center active:scale-95"
+                className="hero-cta-btn relative group overflow-hidden inline-flex items-center justify-center gap-3 rounded-none bg-[#715822] hover:bg-[#5d481b] px-7 sm:px-9 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all duration-300 hover:shadow-xl hover:gap-4 text-center active:scale-95 cursor-pointer z-20"
               >
-                <span>Shop Skincare</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
-                href="#approach"
-                className="hero-cta-btn group hover-lift inline-flex items-center justify-center gap-3 rounded-full border border-[#162e21]/30 bg-[#f7f5f0]/85 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-medium uppercase tracking-[0.16em] text-[#162e21] shadow-xs transition-all duration-300 hover:bg-[#f7f5f0] hover:border-[#162e21]/60 hover:gap-4 text-center active:scale-95"
-              >
-                <span>Explore The Collection</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                {/* Shimmer sweep effect */}
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+                <span className="relative z-10 font-semibold tracking-[0.18em]">Shop Skincare</span>
+                <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </div>
 
-            {/* 4 Benefit Icon Badges with hover micro-animations */}
-            <div className="mt-7 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 pt-5 sm:pt-7 border-t border-[#162e21]/20 max-w-xl">
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Leaf className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
+            {/* 4 Benefit Icon Badges matching Screenshot */}
+            <div className="mt-5 sm:mt-7 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 pt-3.5 sm:pt-5 border-t border-[#162e21]/20 max-w-lg">
+              {/* Badge 1: Leaf - Plant-Based Formulations */}
+              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
+                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:-rotate-6">
+                  <Leaf className="h-5 w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
                   Plant-Based<br />Formulations
                 </span>
               </div>
 
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Droplets className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
+              {/* Badge 2: Droplets - Clean Ingredients */}
+              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
+                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:translate-y-[-2px]">
+                  <Droplets className="h-5 w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
                   Clean<br />Ingredients
                 </span>
               </div>
 
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Sprout className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
+              {/* Badge 3: Sprout - Thoughtfully Crafted */}
+              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
+                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:rotate-6">
+                  <Sprout className="h-5 w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
                   Thoughtfully<br />Crafted
                 </span>
               </div>
 
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
-                <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-[#162e21]/10 text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110 group-hover/badge:bg-[#162e21]/15">
-                  <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={1.7} />
+              {/* Badge 4: Flower/Lotus - Skincare Rituals */}
+              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
+                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:rotate-12">
+                  <Flower2 className="h-5 w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] sm:text-[10px] font-semibold tracking-[0.14em] uppercase text-[#162e21] leading-tight">
+                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
                   Skincare<br />Rituals
                 </span>
               </div>
@@ -321,12 +365,31 @@ function ApproachSection() {
  * 5. Two Brands, One Purpose Ecosystem Section — Exactly recreates Slide 3:
  * - Header: "TWO BRANDS. ONE PURPOSE."
  * - Heading: "A complete wellness ecosystem for a more beautiful you."
- * - Paragraph: "Navtaksh Wellness is a holistic wellness company inspired by nature, rooted in tradition..."
- * - Left: Navtaksh Wellness logo, "Nine Dimensions. One Complete You.", full 9-dimensions text
+ * - Left: Navtaksh Wellness logo, "Nine Dimensions. One Complete You.", full highlighted 9 dimensions
  * - Center: Golden Infinity Spa Nature & Radiance visual
- * - Right: Mile Infinity logo, "Skincare for Modern Rituals.", full modern rituals text
+ * - Right: Mile Infinity logo, "Skincare for Modern Rituals.", full highlighted modern rituals text
+ * - CRITICAL: Left logo and Right logo share the exact same height container and items-start alignment so they align horizontally with zero offset!
  */
 function TwoBrandsEcosystem() {
+  const nineDimensions = [
+    "Physical",
+    "Mental",
+    "Emotional",
+    "Spiritual",
+    "Social",
+    "Environmental",
+    "Financial",
+    "Nutritional",
+    "Professional",
+  ];
+
+  const ritualPillars = [
+    "Plant-Powered",
+    "Active Botanicals",
+    "Clean Formulations",
+    "Conscious Care",
+  ];
+
   return (
     <section className="relative w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16">
@@ -349,35 +412,54 @@ function TwoBrandsEcosystem() {
           </p>
         </Reveal>
 
-        {/* 3-Column Bridge Ecosystem matching screenshot */}
-        <div className="mt-10 sm:mt-16 grid gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-12 items-center">
+        {/* 3-Column Bridge Ecosystem matching screenshot with PERFECT SAME LOGO ALIGNMENT */}
+        <div className="mt-12 sm:mt-16 grid gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-12 items-start">
           {/* Left Column: Navtaksh Wellness */}
-          <Reveal direction="right" delay={150} className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="inline-flex items-center lg:items-start transition-transform duration-300 hover:scale-105">
+          <Reveal direction="right" delay={150} className="lg:col-span-3 flex flex-col">
+            {/* Logo Container - Exact same height (h-20 sm:h-24) as right logo for perfect vertical alignment */}
+            <div className="h-20 sm:h-24 flex items-center justify-center lg:justify-start">
               <img
                 src={navtakshLogo}
                 alt="NavTaksh Wellness — नव आयामेषु सम्पूर्ण कल्याणम्"
-                className="h-16 sm:h-20 lg:h-24 w-auto object-contain"
+                className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
               />
             </div>
 
-            <div className="mt-5 sm:mt-8">
-              <h3 className="font-serif italic text-lg sm:text-xl font-normal text-[#b88e4d] leading-snug">
+            {/* Highlighted Card Container matching Image 3 */}
+            <div className="mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#c29653]/40">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#c29653]/15 text-[#966b2e] mb-3">
+                <Sparkles className="w-3 h-3" /> Holistic Wellness
+              </div>
+
+              <h3 className="font-serif text-lg sm:text-xl font-normal text-[#162e21] leading-snug">
                 Nine Dimensions.<br />
-                One Complete You.
+                <span className="italic text-[#b88e4d]">One Complete You.</span>
               </h3>
-              <p className="mt-3 text-[11px] sm:text-xs leading-relaxed text-[#2c3d33]/80 font-sans max-w-sm lg:max-w-[270px]">
-                NavTaksh Wellness embraces a holistic approach to well-being through nine
-                interconnected dimensions: Physical, Mental, Emotional, Spiritual, Social,
-                Environmental, Financial, Nutritional, and Professional Wellness. Each dimension
-                contributes to a more balanced, fulfilling life, reflecting our belief that true wellness
-                goes beyond skincare to nurture the whole person.
+
+              <p className="mt-3 text-xs leading-relaxed text-[#2c3d33]/90 font-sans">
+                NavTaksh Wellness embraces a holistic approach to well-being through nine interconnected dimensions:
+              </p>
+
+              {/* 9 Dimensions Highlighted Pills Grid */}
+              <div className="mt-3.5 flex flex-wrap gap-1.5">
+                {nineDimensions.map((dim) => (
+                  <span
+                    key={dim}
+                    className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white border border-[#ded4c3] text-[#162e21] shadow-2xs"
+                  >
+                    {dim}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-3.5 pt-3 border-t border-[#162e21]/10 text-[11px] leading-relaxed text-[#2c3d33]/80 font-sans italic">
+                "Each dimension contributes to a more balanced, fulfilling life, reflecting our belief that true wellness goes beyond skincare to nurture the whole person."
               </p>
             </div>
           </Reveal>
 
           {/* Center Column: The Golden Infinity Nature & Radiance Visual */}
-          <Reveal direction="up" delay={250} className="lg:col-span-6 flex justify-center items-center py-2 sm:py-4 lg:py-0">
+          <Reveal direction="up" delay={250} className="lg:col-span-6 flex justify-center items-center py-2 sm:py-4 lg:py-0 self-center">
             <div className="relative w-full max-w-xs sm:max-w-lg lg:max-w-xl xl:max-w-2xl group mx-auto">
               <div className="relative overflow-hidden transition-transform duration-700 group-hover:scale-[1.02] animate-float-gentle">
                 <img
@@ -390,26 +472,210 @@ function TwoBrandsEcosystem() {
           </Reveal>
 
           {/* Right Column: Mile Infinity */}
-          <Reveal direction="left" delay={350} className="lg:col-span-3 flex flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="inline-flex items-center lg:items-start transition-transform duration-300 hover:scale-105">
+          <Reveal direction="left" delay={350} className="lg:col-span-3 flex flex-col">
+            {/* Logo Container - Exact same height (h-20 sm:h-24) as left logo for perfect vertical alignment */}
+            <div className="h-20 sm:h-24 flex items-center justify-center lg:justify-start">
               <img
-                src={mileInfinityLogo}
+                src={logoSvg}
                 alt="Mile Infinity"
-                className="h-12 sm:h-14 lg:h-16 w-auto object-contain"
+                className="h-14 sm:h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = mileInfinityLogo;
+                }}
               />
             </div>
 
-            <div className="mt-6 sm:mt-9">
-              <h3 className="font-serif italic text-lg sm:text-xl font-normal text-[#b88e4d] leading-snug">
+            {/* Highlighted Card Container matching Image 3 */}
+            <div className="mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#163729]/40">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#163729]/12 text-[#163729] mb-3">
+                <Leaf className="w-3 h-3" /> Botanical Skincare
+              </div>
+
+              <h3 className="font-serif text-lg sm:text-xl font-normal text-[#162e21] leading-snug">
                 Skincare for<br />
-                Modern Rituals.
+                <span className="italic text-[#163729]">Modern Rituals.</span>
               </h3>
-              <p className="mt-3 text-[11px] sm:text-xs leading-relaxed text-[#2c3d33]/80 font-sans max-w-sm lg:max-w-[270px]">
-                Mile Infinity transforms the wisdom of wellness into thoughtfully formulated, conscious
-                and effective skincare for your everyday rituals.
+
+              <p className="mt-3 text-xs leading-relaxed text-[#2c3d33]/90 font-sans">
+                Mile Infinity transforms the wisdom of wellness into thoughtfully formulated, conscious and effective skincare for your everyday rituals.
               </p>
+
+              {/* Ritual Pillars Highlighted Pills */}
+              <div className="mt-3.5 flex flex-wrap gap-1.5">
+                {ritualPillars.map((pillar) => (
+                  <span
+                    key={pillar}
+                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#163729]/8 border border-[#163729]/20 text-[#163729] shadow-2xs"
+                  >
+                    {pillar}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-3.5 pt-3 border-t border-[#162e21]/10">
+                <Link
+                  to="/shop"
+                  className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#163729] hover:text-[#0c2217] transition-all group"
+                >
+                  <span>Explore Skincare Essentials</span>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
             </div>
           </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * 5. Shop The Essentials Catalog & Hero Product Showcase on Home Page:
+ * - Anchors id="essentials" so clicking "Shop Skincare" from hero scrolls smoothly here!
+ * - Displays the full collection of essentials + hero product
+ * - Directly matches the design in Image 1
+ */
+function HomeEssentialsSection({ products }: { products: ProductDto[] }) {
+  const { add } = useCart();
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  const handleAddToCart = (p: ProductDto) => {
+    add({
+      productId: p.id,
+      slug: p.slug,
+      name: p.name,
+      size: p.sizes?.[0] || "30ml",
+      priceInr: p.priceInr,
+      imageUrl: p.imageUrl,
+    });
+    setAddedId(p.id);
+    setTimeout(() => setAddedId(null), 1800);
+  };
+
+  return (
+    <section id="essentials" className="bg-[#f7f5ef] py-16 lg:py-24 border-t border-[#ede7dc]">
+      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+        {/* Header row from Group 24 */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#162e21]/15 pb-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#162e21]/10 text-[#162e21] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+              <Sparkles className="w-3 h-3 text-[#c49838]" /> Daily Botanical Rituals
+            </div>
+            <h2 className="mt-1 font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#162e21] leading-tight">
+              Your everyday skincare ritual.
+            </h2>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="text-xs uppercase tracking-[0.16em] font-normal text-[#162e21]/70 font-sans sm:text-right">
+              {products.length} products
+            </span>
+            <Link
+              to="/shop"
+              className="text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21] hover:underline inline-flex items-center gap-1.5"
+            >
+              <span>View Full Shop</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Product Cards Grid matching Screenshot 1 */}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
+          {products.map((p) => {
+            const isAdded = addedId === p.id;
+            const isHero = p.slug.includes("hero") || p.name.includes("Hero");
+            return (
+              <div
+                key={p.id}
+                className="group flex flex-col justify-between bg-white/80 hover:bg-white p-4 transition-all duration-300 border border-[#e5dfd5]/85 hover:shadow-xl rounded-none"
+              >
+                <div>
+                  {/* Artwork image */}
+                  <Link
+                    to="/product"
+                    search={{ slug: p.slug }}
+                    className="aspect-[4/5] overflow-hidden bg-[#faf8f4] flex items-center justify-center relative block cursor-pointer"
+                  >
+                    {isHero ? (
+                      <span className="absolute left-3 top-3 z-10 rounded-full bg-[#162e21] text-[#c49838] border border-[#c49838]/40 px-2.5 py-0.5 text-[9px] font-bold tracking-widest uppercase shadow-md flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5 text-[#c49838]" /> Hero Product
+                      </span>
+                    ) : (
+                      <span className="absolute left-3 top-3 z-10 rounded-full bg-white/90 text-[#162e21] px-2 py-0.5 text-[9px] font-semibold tracking-wider uppercase shadow-xs">
+                        {p.category.toUpperCase()}
+                      </span>
+                    )}
+
+                    <img
+                      src={p.imageUrl || cardGreenImg}
+                      alt={p.name}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </Link>
+
+                  {/* Details */}
+                  <div className="mt-4">
+                    <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-[#6b7b6c] font-sans">
+                      {p.category}
+                    </span>
+                    <h3 className="mt-1.5 font-serif text-base sm:text-[17px] font-normal text-[#162e21] leading-snug min-h-[2.75rem] line-clamp-2">
+                      <Link to="/product" search={{ slug: p.slug }} className="hover:underline">
+                        {p.name}
+                      </Link>
+                    </h3>
+                    <p className="mt-2 text-xs text-[#2c3d33]/80 leading-relaxed font-sans min-h-[2.5rem] line-clamp-2">
+                      {p.tagline || p.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-3.5 border-t border-[#ede7dc]">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <span className="font-serif text-lg font-bold text-[#162e21]">
+                      {formatInr(p.priceInr)}
+                    </span>
+                    <Link
+                      to="/product"
+                      search={{ slug: p.slug }}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#162e21] hover:underline"
+                    >
+                      <span>View Details</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <Link
+                      to="/product"
+                      search={{ slug: p.slug }}
+                      className="w-full bg-white hover:bg-[#f7f5ef] text-[#162e21] py-2.5 px-3 text-xs font-bold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm border-2 border-[#162e21] active:scale-95 cursor-pointer text-center"
+                    >
+                      <CreditCard className="h-3.5 w-3.5 text-[#162e21]" />
+                      <span>Buy Now</span>
+                      <span className="text-[11px] font-normal text-[#162e21]/75">({formatInr(p.priceInr)})</span>
+                    </Link>
+
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(p)}
+                      className="w-full bg-[#162e21] hover:bg-[#0c2217] text-white py-2.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer"
+                    >
+                      {isAdded ? (
+                        <span className="inline-flex items-center gap-2 text-emerald-300">
+                          <Check className="h-3.5 w-3.5" /> Added to Bag
+                        </span>
+                      ) : (
+                        <>
+                          <span>Add to Bag</span>
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

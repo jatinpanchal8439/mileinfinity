@@ -3,7 +3,9 @@ import { Search, ShoppingBag, Menu, X, User } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart";
 import { useCustomerAuth } from "@/lib/customer-auth";
+import logoSvg from "@/assets/mile-infinity-logo.svg";
 import logoImg from "@/assets/mile-infinity-logo.png";
+import { RainbowAnnouncementBar } from "@/components/rainbow-announcement-bar";
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
@@ -88,15 +90,15 @@ export function SiteHeader() {
       className={`sticky top-0 z-40 border-b transition-all duration-300 ease-in-out ${
         scrolled
           ? "border-[#e5dfd5]/80 bg-[#f7f4ee]/95 backdrop-blur-xl shadow-md shadow-[#162e21]/5"
-          : "border-[#e5dfd5]/60 bg-[#f7f4ee]/88 backdrop-blur-md shadow-none"
+          : "border-[#e5dfd5]/60 bg-[#f7f4ee]/95 backdrop-blur-md shadow-none"
       }`}
     >
-      {/* Luxury botanical shimmer hairline */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#163729]/30 to-transparent transition-opacity duration-300" />
+      {/* Top Multi-Color Pastel Rainbow Announcement Ribbon matching Screenshot */}
+      <RainbowAnnouncementBar />
 
       <div
         className={`relative mx-auto flex max-w-[1760px] 2xl:max-w-none items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 xl:px-16 transition-all duration-300 ease-in-out ${
-          scrolled ? "h-16" : "h-20"
+          scrolled ? "h-15 sm:h-16" : "h-18 sm:h-20 lg:h-22"
         }`}
       >
         {/* Mobile menu toggle with smooth rotate animation */}
@@ -114,17 +116,25 @@ export function SiteHeader() {
           </div>
         </button>
 
-        {/* Brand Logo on the left with luxury organic hover animation */}
+        {/* Brand Logo on the left with prominent luxury presence */}
         <Link
           to="/"
-          className="flex items-center gap-2 group transition-all duration-300 hover:opacity-95 shrink-0"
+          className="flex items-center gap-2 group transition-all duration-300 hover:opacity-95 shrink-0 py-1"
         >
           <img
-            src={logoImg}
+            src={logoSvg}
             alt="Mile Infinity"
-            className={`w-auto object-contain transition-all duration-300 ease-out group-hover:scale-105 group-hover:-rotate-1 ${
-              scrolled ? "h-9 sm:h-10" : "h-10 sm:h-11"
+            width={260}
+            height={126}
+            className={`w-auto object-contain transition-all duration-300 ease-out group-hover:scale-105 ${
+              scrolled
+                ? "h-10 sm:h-12 md:h-13"
+                : "h-12 sm:h-14 md:h-16 lg:h-18"
             }`}
+            style={{ imageRendering: "crisp-edges" }}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = logoImg;
+            }}
           />
         </Link>
 
@@ -212,54 +222,36 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={openProfileDrawer}
-              className="flex items-center gap-1.5 text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer py-1 px-2.5 rounded-full hover:bg-[#163729]/5 border border-transparent hover:border-[#163729]/20 group"
+              className="flex items-center gap-1.5 text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer py-1.5 px-2 rounded-full hover:bg-black/5"
               title="My Account & Orders"
+              aria-label="User Account"
             >
-              <div className="w-7 h-7 rounded-full bg-[#163729] text-white flex items-center justify-center text-xs font-bold font-serif shadow-xs transition-transform duration-200 group-hover:scale-110 group-hover:ring-2 group-hover:ring-[#163729]/30">
-                {user?.name?.[0]?.toUpperCase() || "M"}
-              </div>
-              <span className="hidden md:inline text-xs font-semibold text-slate-800 transition-colors group-hover:text-[#163729]">
-                {user?.name?.split(" ")[0]}
-              </span>
+              <User className="h-[18px] w-[18px]" strokeWidth={1.7} />
             </button>
           ) : (
             <button
               type="button"
               onClick={() => openAuthModal("login")}
-              className="flex items-center gap-1.5 text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer py-1.5 px-3 rounded-full border border-[#162e21]/30 hover:border-[#162e21]/70 hover:bg-[#162e21]/5 text-xs font-semibold shadow-2xs hover:shadow-xs group"
+              className="text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer p-1.5 rounded-full hover:bg-black/5"
               title="Sign In / Register with Free OTP"
+              aria-label="User Account"
             >
-              <User className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" />
-              <span className="hidden sm:inline">Sign In</span>
+              <User className="h-[18px] w-[18px]" strokeWidth={1.7} />
             </button>
           )}
 
-          {/* Shopping Bag with wiggle hover animation & badge pop */}
+          {/* Olive-Moss Rectangular CART button matching Screenshot 2 */}
           <button
             type="button"
             onClick={openCart}
-            className="relative text-[#162e21] p-1.5 rounded-full hover:bg-black/5 transition-all duration-200 hover:scale-110 active:scale-90 group cursor-pointer"
-            aria-label="Shopping bag"
+            className={`inline-flex items-center justify-center gap-2 rounded-none bg-[#847c43] hover:bg-[#736c39] px-4 sm:px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-white transition-all shadow-xs hover:shadow-md active:scale-95 cursor-pointer ${
+              badgeBump ? "scale-105" : ""
+            }`}
+            aria-label="Shopping Cart"
           >
-            <ShoppingBag className="h-[19px] w-[19px] transition-transform duration-300 group-hover:-rotate-12" strokeWidth={1.5} />
-            {count > 0 && (
-              <span
-                className={`absolute -right-1.5 -top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#162e21] px-1 text-[10px] font-bold text-white shadow-sm ring-2 ring-[#f7f4ee] ${
-                  badgeBump ? "animate-badge-pop" : "animate-scale-in"
-                }`}
-              >
-                {count}
-              </span>
-            )}
+            <ShoppingBag className="h-4 w-4" strokeWidth={1.7} />
+            <span>CART ({count})</span>
           </button>
-
-          {/* Rectangular solid dark green button matching screenshot with shimmer sweep & hover-lift */}
-          <Link
-            to="/shop"
-            className="btn-shimmer hover-lift-sm hidden sm:inline-flex items-center justify-center rounded-none bg-[#163729] hover:bg-[#0f261c] px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:shadow-md hover:scale-102 active:scale-95 group"
-          >
-            <span>Shop Skincare</span>
-          </Link>
         </div>
       </div>
 

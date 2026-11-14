@@ -54,7 +54,10 @@ function ShopPage() {
       {/* 1. Hero Banner: The Mile Infinity Collection */}
       <ShopHeroBanner />
 
-      {/* 2. Shop The Essentials: 4 Products Filterable Catalog */}
+      {/* 1.5. Dedicated Hero Product Spotlight Section */}
+      <ShopHeroProductShowcase />
+
+      {/* 2. Shop The Essentials: Products Catalog */}
       <ShopTheEssentialsSection />
 
       {/* 3. The Art of Pairing: Two Essentials Bundle Builder */}
@@ -126,6 +129,249 @@ function ShopHeroBanner() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+/**
+ * 1.5. Dedicated Hero Product Spotlight Section
+ * - Highlighting Mile Infinity's flagship formulation:
+ *   "Mile Infinity Ceremonial Green Fusion Hero Serum"
+ * - Gold badge, 4.9★ rating, interactive size switcher (30ml / 50ml)
+ * - Botanical ingredients & clinical efficacy
+ * - Direct Add to Bag & Razorpay 1-Click Checkout
+ */
+function ShopHeroProductShowcase() {
+  const { add } = useCart();
+  const [selectedSize, setSelectedSize] = useState<"30ml" | "50ml">("30ml");
+  const [added, setAdded] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
+  const price = selectedSize === "30ml" ? 1699 : 2399;
+  const comparePrice = selectedSize === "30ml" ? 2199 : 2999;
+  const savings = comparePrice - price;
+
+  const heroItem = {
+    productId: "hero-ceremonial-green-fusion",
+    slug: "ceremonial-green-fusion-hero-serum",
+    name: "Mile Infinity Ceremonial Green Fusion Hero Serum",
+    size: selectedSize,
+    priceInr: price,
+    imageUrl: cardGreenImg,
+  };
+
+  const handleAddHero = () => {
+    add(heroItem);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
+  return (
+    <section id="hero-product-section" className="relative w-full bg-[#faf7f2] py-14 sm:py-20 lg:py-24 border-t border-b border-[#ede7dc] overflow-hidden">
+      {/* Subtle luxury background radial tint */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#163729]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#c29653]/8 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16">
+        {/* Top Eyebrow row */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-8 sm:mb-12 pb-4 border-b border-[#162e21]/10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#162e21] text-[#c49838] border border-[#c49838]/40 shadow-xs">
+            <Sparkles className="h-3 w-3 text-[#c49838]" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.22em]">
+              Flagship Hero Formulation
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs text-[#162e21]/80 font-sans">
+            <span className="flex text-[#c49838]">★★★★★</span>
+            <span className="font-semibold text-[#162e21]">4.9 / 5.0</span>
+            <span className="text-[#2c3d33]/60">(380+ Verified Ritualists)</span>
+          </div>
+        </div>
+
+        {/* 2-Column Hero Showcase */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          {/* Left Column: Visual Artwork Presentation */}
+          <div className="lg:col-span-5 relative flex justify-center">
+            <div className="relative w-full max-w-md bg-gradient-to-b from-[#f3eee4] to-[#e8decb]/60 p-6 sm:p-8 rounded-3xl border border-[#ded4c3] shadow-lg group">
+              {/* Product Badge */}
+              <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5">
+                <span className="rounded-full bg-[#163729] text-white px-3 py-1 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                  ★ Bestseller
+                </span>
+                <span className="rounded-full bg-[#c29653] text-[#0d2218] px-2.5 py-0.5 text-[9px] font-bold tracking-wider uppercase shadow-xs">
+                  Save {formatInr(savings)}
+                </span>
+              </div>
+
+              {/* Product Bottle Artwork */}
+              <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-white/80 flex items-center justify-center p-4 relative shadow-inner">
+                <img
+                  src={cardGreenImg}
+                  alt="Mile Infinity Ceremonial Green Fusion Hero Serum"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              </div>
+
+              {/* Floating ingredient highlight badge */}
+              <div className="mt-4 flex items-center justify-between text-xs text-[#162e21] font-sans bg-white/90 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-[#162e21]/10 shadow-xs">
+                <span className="font-semibold">Step 02 / Treat</span>
+                <span className="text-[#2c3d33]/70">Ceremonial Matcha &amp; Avocado</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Editorial & Conversion Controls */}
+          <div className="lg:col-span-7 flex flex-col">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#b88e4d] font-sans">
+              The Crown Jewel of The Ritual
+            </p>
+
+            <h2 className="mt-2 font-serif text-3xl sm:text-4xl lg:text-[44px] font-normal text-[#162e21] leading-[1.12]">
+              Mile Infinity Ceremonial<br />
+              <span className="italic">Green Fusion Hero Serum</span>
+            </h2>
+
+            <p className="mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/90 font-sans">
+              Our signature hero formulation crafted with antioxidant-rich ceremonial green tea, Japanese matcha, cold-pressed avocado oil, and vitamins C &amp; E. Designed to replenish the skin barrier, soothe redness, and unlock luminous, dewy hydration with every drop.
+            </p>
+
+            {/* 3 Clinical / Botanical Result Metrics */}
+            <div className="mt-6 grid grid-cols-3 gap-3 sm:gap-4 py-4 border-y border-[#162e21]/15 font-sans">
+              <div className="text-left">
+                <span className="block font-serif text-2xl sm:text-3xl font-bold text-[#163729]">98%</span>
+                <span className="text-[10px] sm:text-[11px] text-[#2c3d33]/80 leading-tight block mt-0.5">
+                  Instant hydration &amp; barrier comfort
+                </span>
+              </div>
+              <div className="text-left border-l border-[#162e21]/15 pl-3 sm:pl-4">
+                <span className="block font-serif text-2xl sm:text-3xl font-bold text-[#163729]">94%</span>
+                <span className="text-[10px] sm:text-[11px] text-[#2c3d33]/80 leading-tight block mt-0.5">
+                  Noticeable radiance in 7 days
+                </span>
+              </div>
+              <div className="text-left border-l border-[#162e21]/15 pl-3 sm:pl-4">
+                <span className="block font-serif text-2xl sm:text-3xl font-bold text-[#163729]">3x</span>
+                <span className="text-[10px] sm:text-[11px] text-[#2c3d33]/80 leading-tight block mt-0.5">
+                  Antioxidant cellular defense
+                </span>
+              </div>
+            </div>
+
+            {/* Key Active Botanicals Pills */}
+            <div className="mt-5 flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <span className="text-[11px] font-semibold text-[#162e21]/70 font-sans mr-1">Actives:</span>
+              {["Ceremonial Matcha", "Cold-Pressed Avocado", "White Tea Polyphenols", "Vitamin C & E", "Hyaluronic Acid"].map((ing) => (
+                <span key={ing} className="rounded-full bg-white border border-[#ded4c3] px-2.5 py-1 text-[10px] font-medium text-[#162e21] shadow-2xs">
+                  {ing}
+                </span>
+              ))}
+            </div>
+
+            {/* Price & Size Selector */}
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-4 bg-white/70 backdrop-blur-xs p-4 rounded-xl border border-[#e5ded0]">
+              <div>
+                <span className="text-[10px] uppercase tracking-wider text-[#2c3d33]/65 font-sans block">Ritual Investment</span>
+                <div className="flex items-baseline gap-2.5 mt-0.5">
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#162e21]">
+                    {formatInr(price)}
+                  </span>
+                  <span className="text-xs sm:text-sm line-through text-[#2c3d33]/50 font-sans">
+                    {formatInr(comparePrice)}
+                  </span>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Save {formatInr(savings)}
+                  </span>
+                </div>
+              </div>
+
+              {/* Size Buttons */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedSize("30ml")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
+                    selectedSize === "30ml"
+                      ? "bg-[#162e21] text-white border-[#162e21] shadow-xs"
+                      : "bg-white text-[#162e21] border-[#162e21]/20 hover:border-[#162e21]"
+                  }`}
+                >
+                  30ml (Daily)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedSize("50ml")}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
+                    selectedSize === "50ml"
+                      ? "bg-[#162e21] text-white border-[#162e21] shadow-xs"
+                      : "bg-white text-[#162e21] border-[#162e21]/20 hover:border-[#162e21]"
+                  }`}
+                >
+                  50ml (Luxury Pack)
+                </button>
+              </div>
+            </div>
+
+            {/* Action Buttons: Add to Bag & Instant Buy */}
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={handleAddHero}
+                className="w-full bg-[#162e21] hover:bg-[#0c2217] text-white py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none shadow-md cursor-pointer active:scale-98"
+              >
+                {added ? (
+                  <span className="inline-flex items-center gap-2 text-emerald-300">
+                    <Check className="h-4 w-4" /> Added Hero to Bag
+                  </span>
+                ) : (
+                  <>
+                    <span>Add Hero Product to Bag</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsCheckoutOpen(true)}
+                className="w-full bg-white hover:bg-[#f7f5ef] text-[#162e21] py-3.5 px-6 text-xs font-bold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-2 rounded-none border-2 border-[#162e21] shadow-xs cursor-pointer active:scale-98"
+              >
+                <CreditCard className="h-4 w-4 text-[#162e21]" />
+                <span>Instant Buy Now</span>
+                <span className="text-[11px] font-normal text-[#162e21]/75">({formatInr(price)})</span>
+              </button>
+            </div>
+
+            {/* Trust assurance footnote */}
+            <div className="mt-5 flex flex-wrap items-center gap-4 text-[11px] text-[#2c3d33]/75 font-sans">
+              <span className="inline-flex items-center gap-1.5">
+                <Leaf className="h-3.5 w-3.5 text-emerald-700" /> 100% Active Botanicals
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Check className="h-3.5 w-3.5 text-emerald-700" /> Free Express Shipping
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-[#c29653]" /> Clinically Proven
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Razorpay Direct Checkout Modal */}
+      {isCheckoutOpen && (
+        <RazorpayCheckoutModal
+          isOpen={isCheckoutOpen}
+          onClose={() => setIsCheckoutOpen(false)}
+          product={{
+            id: heroItem.productId,
+            name: heroItem.name,
+            priceInr: heroItem.priceInr,
+            size: heroItem.size,
+            imageUrl: heroItem.imageUrl,
+          }}
+        />
+      )}
     </section>
   );
 }
@@ -227,7 +473,15 @@ function ShopTheEssentialsSection() {
 
   const filteredProducts = products
     .filter((p) => {
-      if (selectedCategory !== "all" && p.categoryKey !== selectedCategory) return false;
+      if (selectedCategory === "hero") {
+        return p.slug.includes("hero") || p.name.includes("Hero");
+      }
+      if (selectedCategory !== "all") {
+        if (selectedCategory === "moisturizer" || selectedCategory === "moisturiser") {
+          return p.categoryKey === "moisturizer" || p.categoryKey === "moisturiser";
+        }
+        return p.categoryKey === selectedCategory;
+      }
       if (selectedPrice === "under1200" && p.priceInr >= 1200) return false;
       if (selectedPrice === "over1200" && p.priceInr < 1200) return false;
       return true;
@@ -285,10 +539,13 @@ function ShopTheEssentialsSection() {
                 className="appearance-none bg-white/90 border border-[#162e21]/20 rounded-none px-2.5 sm:px-3 py-1.5 pr-6 sm:pr-7 text-xs font-medium text-[#162e21] cursor-pointer focus:outline-none focus:border-[#162e21]"
               >
                 <option value="all">Category: All</option>
-                <option value="cleanser">Face Wash</option>
+                <option value="hero">★ Hero Product</option>
                 <option value="serum">Face Serum</option>
-                <option value="moisturiser">Moisturiser</option>
+                <option value="cleanser">Face Wash &amp; Cleanser</option>
+                <option value="moisturizer">Moisturiser</option>
                 <option value="sunscreen">Sunscreen</option>
+                <option value="oil">Face Oil &amp; Elixir</option>
+                <option value="mist">Essence Mist</option>
               </select>
               <ChevronDown className="h-3 w-3 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-[#162e21]/60" />
             </div>
@@ -351,6 +608,17 @@ function ShopTheEssentialsSection() {
                     href={`/product?id=${p.id}&slug=${p.slug}`}
                     className="aspect-[4/5] overflow-hidden bg-[#faf8f4] flex items-center justify-center relative block cursor-pointer"
                   >
+                    {/* Hero Product Badge or Category Pill */}
+                    {p.slug.includes("hero") || p.name.includes("Hero") ? (
+                      <span className="absolute left-3 top-3 z-10 rounded-full bg-[#162e21] text-[#c49838] border border-[#c49838]/40 px-2.5 py-0.5 text-[9px] font-bold tracking-widest uppercase shadow-md flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5 text-[#c49838]" /> Hero Product
+                      </span>
+                    ) : p.categoryKey === "oil" || p.categoryKey === "mist" || p.categoryKey === "cleanser" ? (
+                      <span className="absolute left-3 top-3 z-10 rounded-full bg-white/95 text-[#162e21] px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase shadow-xs border border-[#162e21]/10">
+                        {p.categoryTag}
+                      </span>
+                    ) : null}
+
                     <img
                       src={p.image}
                       alt={p.name}
@@ -423,7 +691,7 @@ function ShopTheEssentialsSection() {
 
         {/* Centered Footnote from Group 24 */}
         <p className="mt-12 text-center text-xs text-[#2c3d33]/70 font-sans italic">
-          You're viewing all 4 essentials. A complete ritual, thoughtfully kept simple.
+          You're viewing all {filteredProducts.length} considered essentials &amp; hero formulations. Thoughtfully crafted for your everyday ritual.
         </p>
 
         {/* Razorpay Direct Checkout Modal */}

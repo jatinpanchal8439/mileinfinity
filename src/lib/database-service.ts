@@ -2,8 +2,22 @@ import { supabase } from "@/integrations/supabase/client";
 import type { ProductDto } from "@/lib/store.functions";
 import { sanitizeInput, type ProductFormValues } from "@/lib/security";
 
-// Real Botanical Skincare Products matching Supabase Cloud Database
+// Real Botanical Skincare Products matching Supabase Cloud Database + Hero & Dummy Products
 export const DEFAULT_SQL_PRODUCTS: ProductDto[] = [
+  {
+    id: "hero-ceremonial-green-fusion",
+    name: "Mile Infinity Ceremonial Green Fusion Hero Serum",
+    slug: "ceremonial-green-fusion-hero-serum",
+    tagline: "★ OUR #1 BESTSELLING HERO ESSENTIAL — Ceremonial Matcha & Avocado Barrier Elixir",
+    description: "Our signature hero formulation crafted with antioxidant-rich ceremonial green tea, Japanese matcha, cold-pressed avocado, and vitamins C & E to revitalize, hydrate, and impart an ethereal botanical glow.",
+    category: "serum",
+    priceInr: 1699,
+    comparePriceInr: 2199,
+    imageUrl: "/images/card-green.png",
+    sizes: ["30ml", "50ml"],
+    isNew: true,
+    stock: 65,
+  },
   {
     id: "3f147579-1e72-4338-855a-b9d816a40f7c",
     name: "Mile Infinity Crimson Beauty Beetroot Serum",
@@ -59,6 +73,48 @@ export const DEFAULT_SQL_PRODUCTS: ProductDto[] = [
     sizes: ["50ml"],
     isNew: true,
     stock: 50,
+  },
+  {
+    id: "dummy-white-tea-aloe-cleanser",
+    name: "Mile Infinity Clarifying White Tea & Aloe Gentle Cleanser",
+    slug: "clarifying-white-tea-aloe-gentle-cleanser",
+    tagline: "Purifying white tea extract and organic aloe for a balanced, clear complexion",
+    description: "A silky, pH-balanced botanical cleanser that dissolves impurities, excess oils, and daily pollution without disrupting the skin's moisture barrier.",
+    category: "cleanser",
+    priceInr: 899,
+    comparePriceInr: 1099,
+    imageUrl: "/images/contact-beetroot-wash.png",
+    sizes: ["100ml", "200ml"],
+    isNew: true,
+    stock: 45,
+  },
+  {
+    id: "dummy-avocado-calendula-night-oil",
+    name: "Mile Infinity Golden Radiance Avocado & Calendula Night Oil",
+    slug: "golden-radiance-avocado-calendula-night-oil",
+    tagline: "Cold-pressed avocado and restorative calendula to lock in overnight regeneration",
+    description: "A golden botanical facial oil that seals in moisture, supports natural cell turnover, and leaves skin waking up supple and illuminated.",
+    category: "oil",
+    priceInr: 1499,
+    comparePriceInr: 1899,
+    imageUrl: "/images/golden-serum-approach.png",
+    sizes: ["30ml"],
+    isNew: false,
+    stock: 40,
+  },
+  {
+    id: "dummy-rose-chamomile-essence-mist",
+    name: "Mile Infinity Velvet Rose & Chamomile Calming Essence Mist",
+    slug: "velvet-rose-chamomile-calming-essence-mist",
+    tagline: "Pure steam-distilled rose water and chamomile to soothe and rehydrate on the go",
+    description: "An ultra-fine hydration mist infused with soothing chamomile and Bulgarian rose water that refreshes tired skin and sets your skincare ritual.",
+    category: "mist",
+    priceInr: 799,
+    comparePriceInr: 999,
+    imageUrl: "/images/ritual-belong-bottles.png",
+    sizes: ["100ml"],
+    isNew: true,
+    stock: 55,
   },
 ];
 
@@ -273,12 +329,24 @@ export async function getDatabaseProducts(): Promise<ProductDto[]> {
 
       // Merge locally created products that haven't synced to remote yet
       const remoteIdSet = new Set(remoteMapped.map((p) => p.id));
+      const remoteSlugSet = new Set(remoteMapped.map((p) => p.slug));
       const merged = [...remoteMapped];
       if (localProducts) {
         for (const lp of localProducts) {
-          if (!remoteIdSet.has(lp.id) && !deletedIds.has(lp.id)) {
+          if (!remoteIdSet.has(lp.id) && !remoteSlugSet.has(lp.slug) && !deletedIds.has(lp.id)) {
             merged.push(lp);
+            remoteIdSet.add(lp.id);
+            remoteSlugSet.add(lp.slug);
           }
+        }
+      }
+
+      // Ensure hero product and dummy catalog products from DEFAULT_SQL_PRODUCTS are merged in
+      for (const dp of DEFAULT_SQL_PRODUCTS) {
+        if (!remoteIdSet.has(dp.id) && !remoteSlugSet.has(dp.slug) && !deletedIds.has(dp.id)) {
+          merged.push(dp);
+          remoteIdSet.add(dp.id);
+          remoteSlugSet.add(dp.slug);
         }
       }
 

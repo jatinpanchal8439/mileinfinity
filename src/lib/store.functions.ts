@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { DEFAULT_SQL_PRODUCTS } from "@/lib/database-service";
 
 const DEFAULT_SUPABASE_URL = "https://howaceawpfbuthzdajdk.supabase.co";
 const DEFAULT_SUPABASE_KEY = "sb_publishable_KUwQZumjzBkTo2TXfcgQzg_4s017KmT";
@@ -46,8 +47,8 @@ export const getProducts = createServerFn({ method: "GET" }).handler(async () =>
     .select("id, name, slug, tagline, description, category, price_inr, compare_price_inr, image_url, sizes, is_new, stock")
     .eq("is_active", true)
     .order("created_at", { ascending: true });
-  if (error) throw new Error("Could not load products");
-  return (data ?? []).map(
+
+  const remoteMapped = (data ?? []).map(
     (p): ProductDto => ({
       id: p.id,
       name: p.name,
@@ -63,6 +64,16 @@ export const getProducts = createServerFn({ method: "GET" }).handler(async () =>
       stock: p.stock,
     }),
   );
+
+  const remoteSlugSet = new Set(remoteMapped.map((p) => p.slug));
+  const merged = [...remoteMapped];
+  for (const def of DEFAULT_SQL_PRODUCTS) {
+    if (!remoteSlugSet.has(def.slug)) {
+      merged.push(def);
+      remoteSlugSet.add(def.slug);
+    }
+  }
+  return merged;
 });
 
 export const getProduct = createServerFn({ method: "GET" })
@@ -75,22 +86,25 @@ export const getProduct = createServerFn({ method: "GET" })
       .eq("slug", data.slug)
       .eq("is_active", true)
       .maybeSingle();
-    if (error || !p) return null;
-    const product: ProductDto = {
-      id: p.id,
-      name: p.name,
-      slug: p.slug,
-      tagline: p.tagline,
-      description: p.description,
-      category: p.category,
-      priceInr: p.price_inr,
-      comparePriceInr: p.compare_price_inr,
-      imageUrl: p.image_url,
-      sizes: p.sizes ?? [],
-      isNew: p.is_new,
-      stock: p.stock,
-    };
-    return product;
+    if (!error && p) {
+      const product: ProductDto = {
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        tagline: p.tagline,
+        description: p.description,
+        category: p.category,
+        priceInr: p.price_inr,
+        comparePriceInr: p.compare_price_inr,
+        imageUrl: p.image_url,
+        sizes: p.sizes ?? [],
+        isNew: p.is_new,
+        stock: p.stock,
+      };
+      return product;
+    }
+    const fallback = DEFAULT_SQL_PRODUCTS.find((item) => item.slug === data.slug);
+    return fallback ?? null;
   });
 
 export interface CheckoutInput {
@@ -117,12 +131,22 @@ export const placeOrder = createServerFn({ method: "POST" })
     const supabase = makePublicClient();
     const ids = [...new Set(data.items.map((i) => i.productId))];
     if (ids.length === 0) throw new Error("Your bag is empty");
-    const { data: products, error: pErr } = await supabase
+    const { data: products } = await supabase
       .from("products")
       .select("id, name, price_inr, is_active, stock")
       .in("id", ids);
-    if (pErr || !products) throw new Error("Could not verify products");
-    const byId = new Map(products.map((p) => [p.id, p]));
+    const byId = new Map((products ?? []).map((p) => [p.id, p]));
+    for (const def of DEFAULT_SQL_PRODUCTS) {
+      if (!byId.has(def.id)) {
+        byId.set(def.id, {
+          id: def.id,
+          name: def.name,
+          price_inr: def.priceInr,
+          is_active: true,
+          stock: def.stock,
+        });
+      }
+    }
 
     let subtotal = 0;
     const lines = data.items.map((item) => {
