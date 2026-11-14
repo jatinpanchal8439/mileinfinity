@@ -195,96 +195,80 @@ function Hero() {
       className="relative w-full overflow-hidden bg-[#faf8f4]"
       aria-label="Hero - Skincare, Rooted in Nature"
     >
-      <div className="relative min-h-[460px] sm:min-h-[500px] md:min-h-[540px] lg:min-h-[590px] xl:min-h-[620px] w-full flex items-center">
-        {/* Full-bleed Hero Background Image matching user upload */}
-        <div className="absolute inset-0 overflow-hidden bg-[#faf8f4] select-none">
+      {/* Mobile: stacked layout. Tablet+: side-by-side */}
+      <div className="relative w-full flex flex-col md:flex-row md:items-center md:min-h-[540px] lg:min-h-[590px] xl:min-h-[620px]">
+
+        {/* ── Mobile Hero Image (top, full width, aspect ratio locked) ── */}
+        <div className="relative w-full aspect-[4/3] md:hidden overflow-hidden">
           <img
             src={heroRainbowImg}
             alt="Mile Infinity Skincare, Rooted in Nature"
-            className="h-full w-full object-cover object-[75%_center] sm:object-[68%_center] md:object-[62%_center] lg:object-center select-none pointer-events-none"
+            className="h-full w-full object-cover object-[70%_top] select-none pointer-events-none"
           />
-          {/* Subtle soft gradient scrim on the left for crisp text contrast */}
-          <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-1/2 bg-gradient-to-r from-[#faf8f4]/95 via-[#faf8f4]/75 to-transparent sm:from-[#faf8f4]/90 sm:via-[#faf8f4]/50 pointer-events-none" />
+          {/* bottom fade so text below reads clearly */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#faf8f4] to-transparent pointer-events-none" />
         </div>
 
-        {/* Text Content Overlay on Left Side */}
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full pt-4 sm:pt-6 md:pt-7 lg:pt-8 pb-5 sm:pb-6 flex items-center">
-          <div className="w-full max-w-lg lg:max-w-xl">
-            {/* Kicker with dash matching Screenshot */}
-            <div className="hero-subtag inline-flex items-center gap-2.5 mb-2 sm:mb-3">
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/80 font-sans">
-                Plant-Based Skincare
-              </span>
-              <span className="h-[1.5px] w-6 sm:w-8 bg-[#162e21]/60" />
-            </div>
+        {/* ── Desktop: full-bleed background image ── */}
+        <div className="hidden md:block absolute inset-0 overflow-hidden bg-[#faf8f4] select-none">
+          <img
+            src={heroRainbowImg}
+            alt="Mile Infinity Skincare, Rooted in Nature"
+            className="h-full w-full object-cover object-[62%_center] lg:object-center select-none pointer-events-none"
+          />
+          <div className="absolute inset-y-0 left-0 w-2/3 lg:w-1/2 bg-gradient-to-r from-[#faf8f4]/90 via-[#faf8f4]/55 to-transparent pointer-events-none" />
+        </div>
 
-            {/* Heading matching Screenshot exactly: "Skincare, Rooted in Nature." */}
-            <h1 className="hero-heading font-serif text-[36px] xs:text-[42px] sm:text-5xl md:text-[54px] lg:text-[64px] xl:text-[70px] font-bold tracking-tight text-[#162e21] leading-[1.06]">
-              Skincare,<br />
-              Rooted in Nature.
-            </h1>
+        {/* ── Text Content ── */}
+        <div className="relative z-10 w-full px-5 sm:px-8 lg:px-12 py-7 sm:py-8 md:py-14 lg:py-16 md:max-w-[52%] lg:max-w-[48%] xl:max-w-[44%]">
+          {/* Kicker */}
+          <div className="hero-subtag inline-flex items-center gap-2.5 mb-3">
+            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/80 font-sans">
+              Plant-Based Skincare
+            </span>
+            <span className="h-[1.5px] w-6 sm:w-8 bg-[#162e21]/60" />
+          </div>
 
-            {/* Description */}
-            <p className="hero-desc mt-2.5 sm:mt-3.5 text-xs sm:text-[14px] leading-relaxed text-[#2c3d33]/90 max-w-md font-sans">
-              Thoughtfully formulated skincare inspired by botanical ingredients and created to
-              bring conscious care into your everyday routine.
-            </p>
+          {/* Heading */}
+          <h1 className="hero-heading font-serif text-[34px] xs:text-[40px] sm:text-5xl md:text-[48px] lg:text-[62px] xl:text-[70px] font-bold tracking-tight text-[#162e21] leading-[1.06]">
+            Skincare,<br />
+            Rooted in Nature.
+          </h1>
 
-            {/* Rectangular Bronze/Olive Button matching Screenshot with luxury shimmer animation */}
-            <div className="mt-4 sm:mt-6">
-              <a
-                href="#essentials"
-                className="hero-cta-btn relative group overflow-hidden inline-flex items-center justify-center gap-3 rounded-none bg-[#715822] hover:bg-[#5d481b] px-7 sm:px-9 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all duration-300 hover:shadow-xl hover:gap-4 text-center active:scale-95 cursor-pointer z-20"
-              >
-                {/* Shimmer sweep effect */}
-                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
-                <span className="relative z-10 font-semibold tracking-[0.18em]">Shop Skincare</span>
-                <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-            </div>
+          {/* Description — constrained so it never bleeds into image */}
+          <p className="hero-desc mt-3 sm:mt-4 text-[13px] sm:text-sm leading-relaxed text-[#2c3d33]/90 font-sans max-w-[90%] sm:max-w-sm">
+            Thoughtfully formulated skincare inspired by botanical ingredients and created to bring conscious care into your everyday routine.
+          </p>
 
-            {/* 4 Benefit Icon Badges matching Screenshot */}
-            <div className="mt-5 sm:mt-7 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 pt-3.5 sm:pt-5 border-t border-[#162e21]/20 max-w-lg">
-              {/* Badge 1: Leaf - Plant-Based Formulations */}
-              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
-                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:-rotate-6">
-                  <Leaf className="h-5 w-5" strokeWidth={1.6} />
+          {/* CTA Button */}
+          <div className="mt-5 sm:mt-6">
+            <a
+              href="#essentials"
+              className="hero-cta-btn relative group overflow-hidden inline-flex items-center justify-center gap-3 rounded-none bg-[#715822] hover:bg-[#5d481b] px-7 sm:px-9 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all duration-300 hover:shadow-xl hover:gap-4 active:scale-95 cursor-pointer z-20"
+            >
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+              <span className="relative z-10 font-semibold tracking-[0.18em]">Shop Skincare</span>
+              <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </div>
+
+          {/* 4 Benefit Badges — 2×2 on mobile, 4×1 on sm+ */}
+          <div className="mt-6 sm:mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-4 sm:gap-5 pt-4 sm:pt-5 border-t border-[#162e21]/20">
+            {[
+              { Icon: Leaf, label: ["Plant-Based", "Formulations"] },
+              { Icon: Droplets, label: ["Clean", "Ingredients"] },
+              { Icon: Sprout, label: ["Thoughtfully", "Crafted"] },
+              { Icon: Flower2, label: ["Skincare", "Rituals"] },
+            ].map(({ Icon, label }) => (
+              <div key={label[0]} className="hero-badge-item flex flex-col items-start gap-1.5 group/badge cursor-default">
+                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-110">
+                  <Icon className="h-5 w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
-                  Plant-Based<br />Formulations
+                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
+                  {label[0]}<br />{label[1]}
                 </span>
               </div>
-
-              {/* Badge 2: Droplets - Clean Ingredients */}
-              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
-                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:translate-y-[-2px]">
-                  <Droplets className="h-5 w-5" strokeWidth={1.6} />
-                </div>
-                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
-                  Clean<br />Ingredients
-                </span>
-              </div>
-
-              {/* Badge 3: Sprout - Thoughtfully Crafted */}
-              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
-                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:rotate-6">
-                  <Sprout className="h-5 w-5" strokeWidth={1.6} />
-                </div>
-                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
-                  Thoughtfully<br />Crafted
-                </span>
-              </div>
-
-              {/* Badge 4: Flower/Lotus - Skincare Rituals */}
-              <div className="hero-badge-item flex flex-col items-start gap-2 group/badge cursor-default">
-                <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:rotate-12">
-                  <Flower2 className="h-5 w-5" strokeWidth={1.6} />
-                </div>
-                <span className="text-[10px] sm:text-[10px] font-bold tracking-[0.14em] uppercase text-[#162e21] leading-tight font-sans">
-                  Skincare<br />Rituals
-                </span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
