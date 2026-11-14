@@ -58,6 +58,7 @@ import cropStep04 from "@/assets/crop-step-04.png";
 import cinematicEmeraldBg from "@/assets/cinematic-emerald-arc-bg.png";
 import routineFinderArtworkImg from "@/assets/routine-finder-artwork.png";
 import naturalGlowMatchaAdImg from "@/assets/natural-glow-matcha-ad.png";
+import heroBeetrootProductImg from "@/assets/hero-beetroot-still-life.png";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(productsQueryOptions),
