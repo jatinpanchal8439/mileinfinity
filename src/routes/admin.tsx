@@ -112,10 +112,10 @@ export interface AdminOrder {
     courierName?: string;
     status?: "pickup_scheduled" | "in_transit" | "out_for_delivery" | "delivered";
     labelUrl?: string;
-    pickupDate?: string;
-    pickupSlot?: string;
-    packageWeightKg?: number;
-    trackingUrl?: string;
+    pickupDate?: string | undefined;
+    pickupSlot?: string | undefined;
+    packageWeightKg?: number | undefined;
+    trackingUrl?: string | undefined;
   };
 }
 

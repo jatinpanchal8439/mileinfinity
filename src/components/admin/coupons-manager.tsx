@@ -12,6 +12,7 @@ import {
   Check,
   Search,
   AlertCircle,
+  Sparkles,
 } from "lucide-react";
 
 export interface CouponItem {

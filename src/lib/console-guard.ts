@@ -61,7 +61,10 @@ function sanitizeValue(val: unknown): unknown {
   }
   if (val && typeof val === "object") {
     try {
-      const copy: Record<string, unknown> = Array.isArray(val) ? [] : {};
+      if (Array.isArray(val)) {
+        return val.map((item) => sanitizeValue(item));
+      }
+      const copy: Record<string, unknown> = {};
       for (const [k, v] of Object.entries(val as Record<string, unknown>)) {
         const lowerKey = k.toLowerCase();
         if (
@@ -98,7 +101,7 @@ export function initConsoleSecurityGuard(): void {
   const originalInfo = console.info.bind(console);
 
   const isProd =
-    typeof process !== "undefined" && process.env.NODE_ENV === "production"
+    typeof process !== "undefined" && process.env["NODE_ENV"] === "production"
       ? true
       : typeof import.meta !== "undefined"
       ? !import.meta.env?.DEV

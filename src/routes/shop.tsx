@@ -365,6 +365,7 @@ function ShopHeroProductShowcase() {
           onClose={() => setIsCheckoutOpen(false)}
           product={{
             id: heroItem.productId,
+            slug: "ceremonial-green-fusion-hero-serum",
             name: heroItem.name,
             priceInr: heroItem.priceInr,
             size: heroItem.size,
@@ -419,7 +420,7 @@ function ShopTheEssentialsSection() {
       description: p.description || p.tagline || "",
       priceInr: p.priceInr,
       size: p.sizes?.[0] || "50ml",
-      image: p.imageUrl || [cardBeetrootImg, cardGreenImg, cardBlueberryImg, cardSunscreenImg][idx % 4],
+      image: p.imageUrl || [cardBeetrootImg, cardGreenImg, cardBlueberryImg, cardSunscreenImg][idx % 4] || cardGreenImg,
     }))
   );
 
@@ -451,7 +452,7 @@ function ShopTheEssentialsSection() {
               description: p.description || p.tagline || "",
               priceInr: p.priceInr,
               size: p.sizes?.[0] || "50ml",
-              image: p.imageUrl || [cardBeetrootImg, cardGreenImg, cardBlueberryImg, cardSunscreenImg][idx % 4],
+              image: p.imageUrl || [cardBeetrootImg, cardGreenImg, cardBlueberryImg, cardSunscreenImg][idx % 4] || cardGreenImg,
             }))
           );
         }

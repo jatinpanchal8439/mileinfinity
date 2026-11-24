@@ -324,12 +324,13 @@ export function ProductDetailsPage() {
       if (match) setSelectedId(match.id);
       else setSelectedId(search.id);
     } else if (search.slug) {
+      const targetSlug = search.slug;
       const match = PRODUCTS.find(
         (p) =>
-          p.slug === search.slug ||
-          p.slug.includes(search.slug) ||
-          search.slug.includes(p.slug) ||
-          search.slug.includes(p.stepTag.toLowerCase().split(" / ")[1] || "")
+          p.slug === targetSlug ||
+          p.slug.includes(targetSlug) ||
+          targetSlug.includes(p.slug) ||
+          targetSlug.includes(p.stepTag.toLowerCase().split(" / ")[1] || "")
       );
       if (match) setSelectedId(match.id);
     }

@@ -11,13 +11,13 @@ export interface CustomerUser {
   id: string;
   name: string;
   email: string;
-  phone?: string;
-  avatarUrl?: string;
+  phone?: string | undefined;
+  avatarUrl?: string | undefined;
   savedAddress?: {
     addressLine: string;
     city: string;
     pincode: string;
-  };
+  } | undefined;
   createdAt: string;
 }
 
@@ -173,7 +173,7 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
 
     // Check if user is email or phone
     const isEmail = cleanDest.includes("@");
-    const name = meta?.name || (isEmail ? cleanDest.split("@")[0] : "Botanical Member");
+    const resolvedName = meta?.name || (isEmail ? cleanDest.split("@")[0] || "Botanical Member" : "Botanical Member");
 
     // Look for existing registered user in local directory
     const registeredUsersRaw = localStorage.getItem("mile-infinity-registered-customers");
@@ -186,7 +186,7 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
     if (!customer) {
       customer = {
         id: "cust_" + Math.random().toString(36).substring(2, 9),
-        name: name.charAt(0).toUpperCase() + name.slice(1),
+        name: resolvedName.charAt(0).toUpperCase() + resolvedName.slice(1),
         email: isEmail ? cleanDest : `${cleanDest}@user.mileinfinity.com`,
         phone: !isEmail ? cleanDest : undefined,
         createdAt: new Date().toISOString(),
@@ -200,14 +200,15 @@ export function CustomerAuthProvider({ children }: { children: ReactNode }) {
       } catch {}
     }
 
-    setUser(customer);
+    const currentCustomer: CustomerUser = customer;
+    setUser(currentCustomer);
     setIsAuthModalOpen(false);
-    window.dispatchEvent(new CustomEvent("mile-infinity-auth-state-changed", { detail: customer }));
+    window.dispatchEvent(new CustomEvent("mile-infinity-auth-state-changed", { detail: currentCustomer }));
 
     return {
       success: true,
-      message: `Welcome to Mile Infinity, ${customer.name}!`,
-      user: customer,
+      message: `Welcome to Mile Infinity, ${currentCustomer.name}!`,
+      user: currentCustomer,
     };
   }
 

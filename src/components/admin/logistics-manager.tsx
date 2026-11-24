@@ -158,7 +158,7 @@ export function LogisticsManager({
   // Handle Step Status
   function handleStepStatus(order: AdminOrder) {
     const current = order.shipment?.status;
-    let next: AdminOrder["shipment"]["status"] = "in_transit";
+    let next: NonNullable<AdminOrder["shipment"]>["status"] = "in_transit";
     let nextOrderStatus: AdminOrder["status"] = "shipped";
 
     if (!order.shipment?.awbCode) {
