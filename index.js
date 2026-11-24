@@ -8,3 +8,4 @@ const serverPath = fs.existsSync(path.resolve(__dirname, '.output/server/index.m
   : path.resolve(__dirname, '../.output/server/index.mjs');
 
 await import(serverPath);
+
