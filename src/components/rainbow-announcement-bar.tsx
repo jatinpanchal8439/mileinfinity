@@ -54,13 +54,13 @@ export function RainbowAnnouncementBar() {
   const renderSegment = (seg: (typeof segments)[0], key: string | number) => (
     <div
       key={key}
-      className={`${seg.bg} ${seg.textColor} flex h-full items-center justify-center gap-2.5 px-6 sm:px-8 shrink-0 transition-colors duration-200`}
+      className={`${seg.bg} ${seg.textColor} flex h-full items-center justify-center gap-2 px-4 xs:px-6 sm:px-8 shrink-0 transition-colors duration-200 text-[10px] xs:text-[11px] sm:text-xs`}
     >
       {seg.hasCode ? (
         <button
           type="button"
           onClick={copyCode}
-          className="group/btn inline-flex items-center gap-2 cursor-pointer font-semibold uppercase tracking-[0.08em] transition-transform duration-200 hover:scale-[1.02]"
+          className="group/btn inline-flex items-center gap-1.5 xs:gap-2 cursor-pointer font-semibold uppercase tracking-[0.06em] xs:tracking-[0.08em] transition-transform duration-200 hover:scale-[1.02]"
           title="Click to copy promo code GLOW20"
         >
           <span>
@@ -70,15 +70,15 @@ export function RainbowAnnouncementBar() {
             </strong>{" "}
             ]
           </span>
-          <Copy className="h-3 w-3 opacity-60 group-hover/btn:opacity-100 transition-opacity" />
+          <Copy className="h-3 w-3 opacity-60 group-hover/btn:opacity-100 transition-opacity shrink-0" />
         </button>
       ) : (
-        <div className="flex items-center gap-2 font-semibold uppercase tracking-[0.08em]">
-          <span className="text-[12px] opacity-80" aria-hidden="true">
+        <div className="flex items-center gap-1.5 xs:gap-2 font-semibold uppercase tracking-[0.06em] xs:tracking-[0.08em]">
+          <span className="text-[11px] xs:text-[12px] opacity-80" aria-hidden="true">
             🪷
           </span>
           <span>{seg.text}</span>
-          <span className="text-[12px] opacity-80" aria-hidden="true">
+          <span className="text-[11px] xs:text-[12px] opacity-80" aria-hidden="true">
             🪷
           </span>
         </div>
@@ -93,14 +93,14 @@ export function RainbowAnnouncementBar() {
     >
       {/* Toast Notification when code is copied */}
       {copied && (
-        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 bg-[#162e21] text-white px-5 py-2.5 rounded-full text-xs font-semibold shadow-2xl flex items-center gap-2 animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 bg-[#162e21] text-white px-4 xs:px-5 py-2.5 rounded-full text-xs font-semibold shadow-2xl flex items-center gap-2 animate-in fade-in zoom-in-95 duration-200 max-w-[92vw] text-center">
           <Check className="h-4 w-4 text-emerald-400 shrink-0" />
-          <span>Code &quot;GLOW20&quot; copied to clipboard! (20% OFF applied)</span>
+          <span className="truncate">Code &quot;GLOW20&quot; copied! (20% OFF applied)</span>
         </div>
       )}
 
       {/* Continuous Running Carousel / Ticker for All Devices */}
-      <div className="flex h-8 sm:h-9 overflow-hidden text-[11px] sm:text-xs">
+      <div className="flex h-7 xs:h-8 sm:h-9 overflow-hidden text-[10px] xs:text-[11px] sm:text-xs">
         <div className="flex animate-marquee shrink-0 items-center h-full">
           {/* First set of segments */}
           <div className="flex shrink-0 items-center h-full">

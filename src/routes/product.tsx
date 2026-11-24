@@ -464,19 +464,19 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
   };
 
   return (
-    <section className="bg-white py-6 sm:py-12 lg:py-16 border-b border-[#e5dfd5]">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 items-start">
+    <section className="bg-white py-5 xs:py-8 sm:py-12 lg:py-16 border-b border-[#e5dfd5]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-8 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 xs:gap-6 sm:gap-8 lg:gap-14 items-start">
           {/* Left Column: Gallery (col-span-7) */}
-          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 sm:gap-6">
+          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-2.5 xs:gap-3 sm:gap-6">
             {/* Thumbnails Row on mobile / Column on desktop */}
-            <div className="flex sm:flex-col gap-2 sm:gap-3 shrink-0 overflow-x-auto no-scrollbar pb-1 sm:pb-0 w-full sm:w-auto">
+            <div className="flex sm:flex-col gap-1.5 xs:gap-2 sm:gap-3 shrink-0 overflow-x-auto no-scrollbar pb-1 sm:pb-0 w-full sm:w-auto">
               {product.gallery.map((t, idx) => (
                 <button
                   key={`${product.id}-${t.label}-${idx}`}
                   type="button"
                   onClick={() => setActiveThumb(idx)}
-                  className={`group relative w-14 h-16 sm:w-20 sm:h-24 overflow-hidden rounded-xs border transition-all shrink-0 cursor-pointer ${
+                  className={`group relative w-12 h-14 xs:w-14 xs:h-16 sm:w-20 sm:h-24 overflow-hidden rounded-xs border transition-all shrink-0 cursor-pointer ${
                     activeThumb === idx
                       ? "border-[#162e21] ring-2 ring-[#162e21] shadow-sm"
                       : "border-[#e5dfd5] hover:border-[#162e21]/50 opacity-80 hover:opacity-100"
@@ -488,7 +488,7 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
                     alt={t.label}
                     className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                   />
-                  <span className="absolute bottom-0 inset-x-0 bg-[#162e21]/80 text-[7px] sm:text-[9px] text-white py-0.5 text-center font-sans tracking-wider uppercase backdrop-blur-xs">
+                  <span className="absolute bottom-0 inset-x-0 bg-[#162e21]/80 text-[6.5px] xs:text-[7px] sm:text-[9px] text-white py-0.5 text-center font-sans tracking-wider uppercase backdrop-blur-xs">
                     {t.label}
                   </span>
                 </button>
@@ -507,15 +507,15 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
               <button
                 type="button"
                 onClick={() => setLightboxOpen(true)}
-                className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 h-9 w-9 sm:h-10 sm:w-10 bg-white/95 backdrop-blur-md border border-[#162e21]/20 flex items-center justify-center text-[#162e21] shadow-md hover:bg-[#162e21] hover:text-white transition-all duration-200 cursor-pointer"
+                className="absolute bottom-2.5 right-2.5 xs:bottom-3 xs:right-3 sm:bottom-4 sm:right-4 h-8 w-8 xs:h-9 xs:w-9 sm:h-10 sm:w-10 bg-white/95 backdrop-blur-md border border-[#162e21]/20 flex items-center justify-center text-[#162e21] shadow-md hover:bg-[#162e21] hover:text-white transition-all duration-200 cursor-pointer"
                 aria-label="Enlarge image"
                 title="Click to zoom image"
               >
-                <Search className="h-4 w-4" />
+                <Search className="h-3.5 w-3.5 xs:h-4 xs:w-4" />
               </button>
 
               {/* Sub-label badge */}
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-white/90 backdrop-blur-sm border border-[#162e21]/15 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#162e21] font-medium shadow-xs">
+              <div className="absolute top-2.5 left-2.5 xs:top-3 xs:left-3 sm:top-4 sm:left-4 bg-white/90 backdrop-blur-sm border border-[#162e21]/15 px-2 py-0.5 xs:px-2.5 sm:px-3 sm:py-1 text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-[#162e21] font-medium shadow-xs">
                 {activeItem.label}
               </div>
             </div>
@@ -585,33 +585,33 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               {/* Kicker */}
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#162e21]/70 font-sans">
+              <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.22em] text-[#162e21]/70 font-sans">
                 {product.categoryKicker}
               </p>
 
               {/* Title */}
-              <h1 className="mt-2.5 font-serif text-2xl sm:text-3xl lg:text-[38px] font-normal leading-tight text-[#162e21]">
+              <h1 className="mt-1.5 xs:mt-2.5 font-serif text-2xl xs:text-3xl lg:text-[38px] font-normal leading-tight text-[#162e21]">
                 {product.name}
               </h1>
 
               {/* Price */}
-              <p className="mt-2.5 font-serif text-2xl font-normal text-[#162e21]">
+              <p className="mt-2 xs:mt-2.5 font-serif text-2xl font-normal text-[#162e21]">
                 {formatInr(product.priceInr)}
               </p>
 
               {/* Description */}
-              <p className="mt-4 text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans">
+              <p className="mt-3 xs:mt-4 text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans">
                 {product.description}
               </p>
 
-              <hr className="my-5 sm:my-6 border-[#e5dfd5]" />
+              <hr className="my-4 xs:my-5 sm:my-6 border-[#e5dfd5]" />
 
               {/* How to use */}
               <div>
                 <h2 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#162e21] font-sans">
                   How to use
                 </h2>
-                <ul className="mt-2.5 space-y-2 text-xs sm:text-[13px] text-[#2c3d33]/85 font-sans leading-relaxed">
+                <ul className="mt-2 xs:mt-2.5 space-y-1.5 xs:space-y-2 text-xs sm:text-[13px] text-[#2c3d33]/85 font-sans leading-relaxed">
                   {product.howToUse.map((line, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="text-[#162e21] mt-0.5">•</span>
@@ -622,11 +622,11 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
               </div>
 
               {/* Skin type */}
-              <div className="mt-5 sm:mt-6">
+              <div className="mt-4 xs:mt-5 sm:mt-6">
                 <h2 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#162e21] font-sans">
                   Skin type
                 </h2>
-                <ul className="mt-2 space-y-1.5 text-xs sm:text-[13px] text-[#2c3d33]/85 font-sans leading-relaxed">
+                <ul className="mt-1.5 xs:mt-2 space-y-1.5 text-xs sm:text-[13px] text-[#2c3d33]/85 font-sans leading-relaxed">
                   <li className="flex items-start gap-2">
                     <span className="text-[#162e21] mt-0.5">•</span>
                     <span>{product.skinType}</span>
@@ -634,85 +634,88 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
                 </ul>
               </div>
 
-              <hr className="my-5 sm:my-6 border-[#e5dfd5]" />
+              <hr className="my-4 xs:my-5 sm:my-6 border-[#e5dfd5]" />
 
               {/* Dynamic Specifications Grid */}
-              <div className="grid grid-cols-2 gap-2.5 sm:gap-3 text-xs text-[#162e21]/80 font-sans bg-[#f7f5ef] p-3 sm:p-3.5 rounded-xs border border-[#e5dfd5]">
+              <div className="grid grid-cols-2 gap-2 xs:gap-2.5 sm:gap-3 text-xs text-[#162e21]/80 font-sans bg-[#f7f5ef] p-2.5 xs:p-3 sm:p-3.5 rounded-xs border border-[#e5dfd5]">
                 <div>
-                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Net Quantity</span>
-                  <span className="font-medium text-[#162e21] text-xs">{product.specs.netQuantity}</span>
+                  <span className="text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Net Quantity</span>
+                  <span className="font-medium text-[#162e21] text-[11px] xs:text-xs">{product.specs.netQuantity}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Fragrance</span>
-                  <span className="font-medium text-[#162e21] text-xs">{product.specs.fragrance}</span>
+                  <span className="text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Fragrance</span>
+                  <span className="font-medium text-[#162e21] text-[11px] xs:text-xs">{product.specs.fragrance}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Key Actives</span>
-                  <span className="font-medium text-[#162e21] text-xs">{product.specs.keyActives}</span>
+                  <span className="text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Key Actives</span>
+                  <span className="font-medium text-[#162e21] text-[11px] xs:text-xs">{product.specs.keyActives}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Ethics</span>
-                  <span className="font-medium text-[#162e21] text-xs">{product.specs.ethics}</span>
+                  <span className="text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-wider text-[#162e21]/60 block font-medium">Ethics</span>
+                  <span className="font-medium text-[#162e21] text-[11px] xs:text-xs">{product.specs.ethics}</span>
                 </div>
               </div>
             </div>
 
             {/* Quantity & Add to Cart button */}
-            <div className="mt-6 sm:mt-8 pt-2">
-              <label className="block text-xs font-medium text-[#162e21] mb-2 font-sans">
+            <div className="mt-5 xs:mt-6 sm:mt-8 pt-2">
+              <label className="block text-[11px] xs:text-xs font-medium text-[#162e21] mb-2 font-sans">
                 Quantity
               </label>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                {/* Stepper */}
-                <div className="flex items-center justify-between border border-[#162e21]/30 bg-[#f7f5ef] px-4 py-3 sm:w-36">
+              <div className="flex flex-col gap-2.5 sm:gap-3">
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  {/* Stepper */}
+                  <div className="flex items-center justify-between border border-[#162e21]/30 bg-[#f7f5ef] px-3 xs:px-4 py-2.5 xs:py-3 w-28 xs:w-32 sm:w-36 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                      className="text-[#162e21]/70 hover:text-[#162e21] p-0.5 cursor-pointer"
+                      aria-label="Decrease quantity"
+                    >
+                      <Minus className="h-3.5 w-3.5" />
+                    </button>
+                    <span className="text-sm font-medium text-[#162e21] font-sans">
+                      {quantity}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setQuantity((q) => q + 1)}
+                      className="text-[#162e21]/70 hover:text-[#162e21] p-0.5 cursor-pointer"
+                      aria-label="Increase quantity"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+
+                  {/* Add to Cart button */}
                   <button
                     type="button"
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="text-[#162e21]/70 hover:text-[#162e21] p-0.5 cursor-pointer"
-                    aria-label="Decrease quantity"
+                    onClick={handleAddToCart}
+                    className="flex-1 bg-[#162e21] hover:bg-[#0c2217] text-white py-2.5 xs:py-3.5 px-3 xs:px-6 text-[11px] xs:text-xs font-semibold uppercase tracking-[0.16em] transition-all flex items-center justify-center gap-1.5 xs:gap-2 rounded-none shadow-sm cursor-pointer active:scale-98"
                   >
-                    <Minus className="h-3.5 w-3.5" />
-                  </button>
-                  <span className="text-sm font-medium text-[#162e21] font-sans">
-                    {quantity}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setQuantity((q) => q + 1)}
-                    className="text-[#162e21]/70 hover:text-[#162e21] p-0.5 cursor-pointer"
-                    aria-label="Increase quantity"
-                  >
-                    <Plus className="h-3.5 w-3.5" />
+                    {added ? (
+                      <span className="inline-flex items-center gap-1.5 text-emerald-300">
+                        <Check className="h-3.5 w-3.5" /> Added to Cart
+                      </span>
+                    ) : (
+                      <>
+                        <span>Add to Cart</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </>
+                    )}
                   </button>
                 </div>
-
-                {/* Add to Cart button */}
-                <button
-                  type="button"
-                  onClick={handleAddToCart}
-                  className="flex-1 bg-[#162e21] hover:bg-[#0c2217] text-white py-3.5 px-6 text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer"
-                >
-                  {added ? (
-                    <span className="inline-flex items-center gap-2 text-emerald-300">
-                      <Check className="h-4 w-4" /> Added to Cart
-                    </span>
-                  ) : (
-                    <>
-                      <span>Add to Cart</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </>
-                  )}
-                </button>
 
                 {/* Instant Buy with Razorpay */}
                 <button
                   type="button"
                   onClick={() => setIsRazorpayOpen(true)}
-                  className="bg-white hover:bg-[#f7f5ef] text-[#162e21] py-3.5 px-6 text-xs font-bold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer border-2 border-[#162e21] active:scale-95"
+                  className="w-full bg-[#162e21] hover:bg-[#0c2217] sm:bg-white sm:hover:bg-[#f7f5ef] text-white sm:text-[#162e21] py-3 xs:py-3.5 px-4 xs:px-6 text-xs font-bold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer sm:border-2 sm:border-[#162e21] active:scale-98"
                 >
-                  <CreditCard className="h-4 w-4 text-[#162e21]" />
-                  <span>Buy Now</span>
+                  <CreditCard className="h-4 w-4" />
+                  <span>Instant Buy Now</span>
+                  <span className="text-[11px] font-normal opacity-80">({formatInr(product.priceInr * quantity)})</span>
                 </button>
               </div>
             </div>
@@ -744,27 +747,27 @@ function ProductDetailsHero({ product }: { product: ProductDetail }) {
  */
 function ProductEssentialsConsidered({ product }: { product: ProductDetail }) {
   return (
-    <section className="bg-[#ffffff] py-14 sm:py-16 lg:py-20 border-b border-[#e5dfd5]">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16">
+    <section className="bg-[#ffffff] py-10 xs:py-14 sm:py-16 lg:py-20 border-b border-[#e5dfd5]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-8 lg:px-16">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+          <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
             The Essentials, Considered
           </p>
-          <h2 className="mt-2 font-serif text-2xl sm:text-3xl lg:text-[42px] font-normal text-[#162e21]">
+          <h2 className="mt-1.5 xs:mt-2 font-serif text-2xl xs:text-3xl lg:text-[42px] font-normal text-[#162e21]">
             A simple place to begin.
           </h2>
         </div>
 
-        <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
+        <div className="mt-6 xs:mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 xs:gap-6 sm:gap-8 lg:gap-12">
           {product.essentials.map((s) => (
-            <div key={s.num} className="border-t border-[#e5dfd5] pt-5 sm:pt-6">
+            <div key={s.num} className="border-t border-[#e5dfd5] pt-4 xs:pt-5 sm:pt-6">
               <span className="block text-xs font-semibold text-[#8b9d8c] font-sans">
                 {s.num}
               </span>
-              <h3 className="mt-2 font-serif text-lg sm:text-xl lg:text-2xl font-normal text-[#162e21]">
+              <h3 className="mt-1.5 xs:mt-2 font-serif text-base xs:text-lg sm:text-xl lg:text-2xl font-normal text-[#162e21]">
                 {s.title}
               </h3>
-              <p className="mt-2.5 text-xs sm:text-sm text-[#2c3d33]/80 leading-relaxed font-sans">
+              <p className="mt-2 xs:mt-2.5 text-xs sm:text-sm text-[#2c3d33]/80 leading-relaxed font-sans">
                 {s.desc}
               </p>
             </div>
@@ -780,28 +783,28 @@ function ProductEssentialsConsidered({ product }: { product: ProductDetail }) {
  */
 function ProductBotanicalStory({ product }: { product: ProductDetail }) {
   return (
-    <section className="bg-[#faf8f4] py-14 sm:py-16 lg:py-24 border-b border-[#e5dfd5]">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+    <section className="bg-[#faf8f4] py-10 xs:py-14 sm:py-16 lg:py-24 border-b border-[#e5dfd5]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-8 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xs:gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left Column: Story Copy (col-span-6) */}
           <div className="lg:col-span-6">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
               {product.story.eyebrow}
             </p>
 
-            <h2 className="mt-3 font-serif text-2xl sm:text-3xl lg:text-[44px] font-normal text-[#162e21] leading-tight">
+            <h2 className="mt-2 xs:mt-3 font-serif text-2xl xs:text-3xl lg:text-[44px] font-normal text-[#162e21] leading-tight">
               {product.story.title}
             </h2>
 
-            <p className="mt-5 text-xs sm:text-sm lg:text-base text-[#2c3d33]/85 leading-relaxed font-sans max-w-lg">
+            <p className="mt-3.5 xs:mt-5 text-xs sm:text-sm lg:text-base text-[#2c3d33]/85 leading-relaxed font-sans max-w-lg">
               {product.story.desc1}
             </p>
 
-            <p className="mt-4 text-xs sm:text-sm lg:text-base text-[#2c3d33]/85 leading-relaxed font-sans max-w-lg">
+            <p className="mt-3 xs:mt-4 text-xs sm:text-sm lg:text-base text-[#2c3d33]/85 leading-relaxed font-sans max-w-lg">
               {product.story.desc2}
             </p>
 
-            <hr className="mt-6 sm:mt-8 border-[#e5dfd5] max-w-lg" />
+            <hr className="mt-5 xs:mt-6 sm:mt-8 border-[#e5dfd5] max-w-lg" />
           </div>
 
           {/* Right Column: Artwork (col-span-6) */}
@@ -850,15 +853,15 @@ function ProductCompleteRoutine({
   };
 
   return (
-    <section className="bg-white py-14 sm:py-16 lg:py-24 border-b border-[#e5dfd5]">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16">
+    <section className="bg-white py-10 xs:py-14 sm:py-16 lg:py-24 border-b border-[#e5dfd5]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-8 lg:px-16">
         {/* Header row */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-8 sm:pb-10 border-b border-[#162e21]/15">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-6 pb-6 xs:pb-8 sm:pb-10 border-b border-[#162e21]/15">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
               Beyond {currentProduct.stepTag.split(" / ")[1]}
             </p>
-            <h2 className="mt-2 font-serif text-2xl sm:text-3xl lg:text-[44px] font-normal text-[#162e21] leading-tight">
+            <h2 className="mt-1.5 xs:mt-2 font-serif text-2xl xs:text-3xl lg:text-[44px] font-normal text-[#162e21] leading-tight">
               Complete your routine.
             </h2>
           </div>
@@ -868,13 +871,13 @@ function ProductCompleteRoutine({
         </div>
 
         {/* 3 Cards Grid */}
-        <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <div className="mt-6 xs:mt-8 sm:mt-10 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 xs:gap-5 lg:gap-8 items-stretch">
           {complementaryProducts.map((item) => {
             const isAdded = addedId === item.id;
             return (
               <div
                 key={item.id}
-                className="group flex flex-col justify-between bg-white p-4 transition-all duration-300 border border-[#e5dfd5] hover:shadow-xl"
+                className="group flex flex-col justify-between bg-white p-3.5 xs:p-4 transition-all duration-300 border border-[#e5dfd5] hover:shadow-xl"
               >
                 <div>
                   <button
@@ -889,29 +892,29 @@ function ProductCompleteRoutine({
                     />
                   </button>
 
-                  <div className="mt-4">
-                    <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-[#6b7b6c] font-sans">
+                  <div className="mt-3 xs:mt-4">
+                    <span className="block text-[9px] xs:text-[10px] font-semibold uppercase tracking-[0.2em] text-[#6b7b6c] font-sans">
                       {item.stepTag}
                     </span>
                     <button
                       type="button"
                       onClick={() => onSelectProduct(item.id)}
-                      className="mt-1.5 font-serif text-base sm:text-lg font-normal text-[#162e21] leading-snug min-h-[3rem] text-left hover:underline cursor-pointer block"
+                      className="mt-1 xs:mt-1.5 font-serif text-sm xs:text-base sm:text-lg font-normal text-[#162e21] leading-snug min-h-[2.5rem] xs:min-h-[3rem] text-left hover:underline cursor-pointer block"
                     >
                       {item.name}
                     </button>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-3.5 border-t border-[#ede7dc]">
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="font-serif text-base font-medium text-[#162e21]">
+                <div className="mt-4 xs:mt-6 pt-3 xs:pt-3.5 border-t border-[#ede7dc]">
+                  <div className="flex items-center justify-between mb-2.5 xs:mb-3">
+                    <p className="font-serif text-sm xs:text-base font-medium text-[#162e21]">
                       {formatInr(item.priceInr)}
                     </p>
                     <button
                       type="button"
                       onClick={() => onSelectProduct(item.id)}
-                      className="text-[11px] font-semibold uppercase tracking-wider text-[#162e21] hover:underline cursor-pointer"
+                      className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-wider text-[#162e21] hover:underline cursor-pointer"
                     >
                       View Details →
                     </button>
@@ -920,10 +923,10 @@ function ProductCompleteRoutine({
                   <button
                     type="button"
                     onClick={() => handleAdd(item)}
-                    className="w-full bg-[#162e21] hover:bg-[#0c2217] text-white py-3 text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shadow-sm cursor-pointer"
+                    className="w-full bg-[#162e21] hover:bg-[#0c2217] text-white py-2.5 xs:py-3 text-[11px] xs:text-xs font-semibold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-1.5 xs:gap-2 rounded-none shadow-sm cursor-pointer active:scale-98"
                   >
                     {isAdded ? (
-                      <span className="inline-flex items-center gap-2 text-emerald-300">
+                      <span className="inline-flex items-center gap-1.5 text-emerald-300">
                         <Check className="h-3.5 w-3.5" /> Added to Bag
                       </span>
                     ) : (
@@ -950,25 +953,25 @@ function ProductFaqSection({ product }: { product: ProductDetail }) {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section className="bg-[#faf8f4] py-14 sm:py-16 lg:py-24 border-b border-[#e5dfd5]">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start">
+    <section className="bg-[#faf8f4] py-10 xs:py-14 sm:py-16 lg:py-24 border-b border-[#e5dfd5]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-8 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xs:gap-8 sm:gap-12 lg:gap-16 items-start">
           {/* Left Column */}
           <div className="lg:col-span-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
               Good to Know
             </p>
 
-            <h2 className="mt-3 font-serif text-2xl sm:text-3xl lg:text-[46px] font-normal text-[#162e21] leading-tight">
+            <h2 className="mt-2 xs:mt-3 font-serif text-2xl xs:text-3xl lg:text-[46px] font-normal text-[#162e21] leading-tight">
               Frequently asked<br />
               questions.
             </h2>
 
-            <p className="mt-4 sm:mt-6 text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans max-w-sm">
+            <p className="mt-3 xs:mt-4 sm:mt-6 text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans max-w-sm">
               A little clarity before you begin your {product.shortName} ritual.
             </p>
 
-            <div className="mt-6 sm:mt-8 pt-2">
+            <div className="mt-5 xs:mt-6 sm:mt-8 pt-1 xs:pt-2">
               <Link
                 to="/contact"
                 className="text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21] hover:underline"
@@ -983,22 +986,22 @@ function ProductFaqSection({ product }: { product: ProductDetail }) {
             {product.faqs.map((item, idx) => {
               const isOpen = openIdx === idx;
               return (
-                <div key={`${product.id}-faq-${idx}`} className="py-5 sm:py-6 first:pt-0">
+                <div key={`${product.id}-faq-${idx}`} className="py-4 xs:py-5 sm:py-6 first:pt-0">
                   <button
                     type="button"
                     onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between gap-4 text-left group cursor-pointer"
+                    className="w-full flex items-center justify-between gap-3 text-left group cursor-pointer"
                   >
-                    <span className="font-serif text-base sm:text-lg lg:text-xl font-normal text-[#162e21] group-hover:text-[#2c4d36] transition-colors leading-snug">
+                    <span className="font-serif text-sm xs:text-base sm:text-lg lg:text-xl font-normal text-[#162e21] group-hover:text-[#2c4d36] transition-colors leading-snug">
                       {item.q}
                     </span>
-                    <span className="text-lg text-[#162e21]/60 shrink-0 font-serif w-6 text-center">
+                    <span className="text-base xs:text-lg text-[#162e21]/60 shrink-0 font-serif w-6 text-center">
                       {isOpen ? "−" : "+"}
                     </span>
                   </button>
 
                   {isOpen && (
-                    <div className="mt-3.5 pr-4 sm:pr-8">
+                    <div className="mt-2.5 xs:mt-3.5 pr-2 xs:pr-4 sm:pr-8">
                       <p className="text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans">
                         {item.a}
                       </p>
@@ -1009,7 +1012,7 @@ function ProductFaqSection({ product }: { product: ProductDetail }) {
             })}
 
             {/* Bottom links */}
-            <div className="pt-6 flex items-center gap-6 text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21]">
+            <div className="pt-5 xs:pt-6 flex items-center gap-5 xs:gap-6 text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21]">
               <Link to="/contact" className="hover:underline">Shipping</Link>
               <Link to="/contact" className="hover:underline">Returns</Link>
             </div>
@@ -1041,12 +1044,12 @@ function ProductClosingBanner({ product }: { product: ProductDetail }) {
   };
 
   return (
-    <section className="bg-[#12281e] text-white py-10 sm:py-12 lg:py-16">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-16">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
+    <section className="bg-[#12281e] text-white py-8 xs:py-10 sm:py-12 lg:py-16">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-8 lg:px-16">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-5 xs:gap-6 sm:gap-8">
           {/* Left: Thumbnail & Details */}
-          <div className="flex items-center gap-4 sm:gap-6 w-full md:w-auto">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden border border-white/20 bg-white/5 shrink-0">
+          <div className="flex items-center gap-3.5 xs:gap-4 sm:gap-6 w-full md:w-auto">
+            <div className="w-14 h-14 xs:w-16 xs:h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden border border-white/20 bg-white/5 shrink-0">
               <img
                 src={product.gallery[0]?.src}
                 alt={product.name}
@@ -1055,24 +1058,24 @@ function ProductClosingBanner({ product }: { product: ProductDetail }) {
             </div>
 
             <div>
-              <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.22em] text-white/60 font-sans">
+              <p className="text-[8px] xs:text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.22em] text-white/60 font-sans">
                 Your Ritual Begins Here · {product.stepTag}
               </p>
-              <h3 className="mt-1 font-serif text-lg sm:text-xl lg:text-2xl font-normal text-white">
+              <h3 className="mt-0.5 xs:mt-1 font-serif text-base xs:text-lg sm:text-xl lg:text-2xl font-normal text-white">
                 {product.name}
               </h3>
-              <p className="mt-1 font-serif text-base sm:text-lg text-white/90">
+              <p className="mt-0.5 xs:mt-1 font-serif text-sm xs:text-base sm:text-lg text-white/90">
                 {formatInr(product.priceInr)}
               </p>
             </div>
           </div>
 
           {/* Right: Actions */}
-          <div className="flex flex-col sm:flex-row md:flex-col items-center sm:items-end gap-3 shrink-0 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row md:flex-col items-center sm:items-end gap-2.5 xs:gap-3 shrink-0 w-full md:w-auto">
             <button
               type="button"
               onClick={handleAdd}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#f7f5ef] hover:bg-white text-[#162e21] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-md cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 xs:gap-2.5 bg-[#f7f5ef] hover:bg-white text-[#162e21] px-6 xs:px-8 py-3 xs:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-md cursor-pointer active:scale-98"
             >
               {added ? (
                 <span className="inline-flex items-center gap-2 text-emerald-800">

@@ -197,46 +197,46 @@ function Hero() {
       className="relative w-full overflow-hidden bg-[#faf8f4]"
       aria-label="Hero - Skincare, Rooted in Nature"
     >
-      <div className="relative min-h-[500px] sm:min-h-[500px] md:min-h-[540px] lg:min-h-[590px] xl:min-h-[620px] w-full flex items-center">
+      <div className="relative min-h-[480px] xs:min-h-[500px] md:min-h-[540px] lg:min-h-[590px] xl:min-h-[620px] w-full flex items-center">
         {/* Full-bleed Hero Background Image matching user upload */}
         <div className="absolute inset-0 overflow-hidden bg-[#faf8f4] select-none">
           <img
             src={heroRainbowImg}
             alt="Mile Infinity Skincare, Rooted in Nature"
-            className="h-full w-full object-cover object-[80%_center] sm:object-[68%_center] md:object-[62%_center] lg:object-center select-none pointer-events-none"
+            className="h-full w-full object-cover object-[78%_center] xs:object-[74%_center] sm:object-[68%_center] md:object-[62%_center] lg:object-center select-none pointer-events-none"
           />
           {/* Soft gradient scrim on the left for crisp text contrast on both mobile & desktop */}
-          <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-1/2 bg-gradient-to-r from-[#faf8f4]/95 via-[#faf8f4]/80 to-transparent sm:from-[#faf8f4]/90 sm:via-[#faf8f4]/50 pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-1/2 bg-gradient-to-r from-[#faf8f4]/95 via-[#faf8f4]/85 to-transparent sm:from-[#faf8f4]/90 sm:via-[#faf8f4]/50 pointer-events-none" />
         </div>
 
         {/* Text Content Overlay on Left Side */}
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 w-full pt-5 sm:pt-6 md:pt-7 lg:pt-8 pb-6 sm:pb-6 flex items-center">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12 w-full pt-5 sm:pt-6 md:pt-7 lg:pt-8 pb-6 sm:pb-6 flex items-center">
           <div className="w-full max-w-lg lg:max-w-xl">
             {/* Kicker with dash matching Screenshot */}
-            <div className="hero-subtag inline-flex items-center gap-2.5 mb-2 sm:mb-3">
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#162e21]/80 font-sans">
+            <div className="hero-subtag inline-flex items-center gap-2 xs:gap-2.5 mb-2 sm:mb-3">
+              <span className="text-[9px] xs:text-[10px] sm:text-xs font-semibold tracking-[0.22em] xs:tracking-[0.24em] uppercase text-[#162e21]/80 font-sans">
                 Plant-Based Skincare
               </span>
-              <span className="h-[1.5px] w-6 sm:w-8 bg-[#162e21]/60" />
+              <span className="h-[1.5px] w-5 xs:w-6 sm:w-8 bg-[#162e21]/60" />
             </div>
 
             {/* Heading matching Screenshot exactly: "Skincare, Rooted in Nature." */}
-            <h1 className="hero-heading font-serif text-[32px] xs:text-[38px] sm:text-5xl md:text-[54px] lg:text-[64px] xl:text-[70px] font-bold tracking-tight text-[#162e21] leading-[1.06]">
+            <h1 className="hero-heading font-serif text-[29px] xs:text-[35px] sm:text-5xl md:text-[54px] lg:text-[64px] xl:text-[70px] font-bold tracking-tight text-[#162e21] leading-[1.08] xs:leading-[1.06]">
               Skincare,<br />
               Rooted in Nature.
             </h1>
 
             {/* Description — sized cleanly on mobile so text never overflows or cuts */}
-            <p className="hero-desc mt-2.5 sm:mt-3.5 text-xs sm:text-[14px] leading-relaxed text-[#2c3d33]/90 max-w-[270px] xs:max-w-[320px] sm:max-w-md font-sans">
+            <p className="hero-desc mt-2 xs:mt-2.5 sm:mt-3.5 text-xs sm:text-[14px] leading-relaxed text-[#2c3d33]/90 max-w-[270px] xs:max-w-[320px] sm:max-w-md font-sans">
               Thoughtfully formulated skincare inspired by botanical ingredients and created to
               bring conscious care into your everyday routine.
             </p>
 
             {/* Rectangular Bronze/Olive Button matching Screenshot with luxury shimmer animation */}
-            <div className="mt-4 sm:mt-6">
+            <div className="mt-3.5 xs:mt-4 sm:mt-6">
               <a
                 href="#essentials"
-                className="hero-cta-btn relative group overflow-hidden inline-flex items-center justify-center gap-3 rounded-none bg-[#715822] hover:bg-[#5d481b] px-6 sm:px-9 py-2.5 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all duration-300 hover:shadow-xl hover:gap-4 text-center active:scale-95 cursor-pointer z-20"
+                className="hero-cta-btn relative group overflow-hidden inline-flex items-center justify-center gap-2.5 xs:gap-3 rounded-none bg-[#715822] hover:bg-[#5d481b] px-5 xs:px-6 sm:px-9 py-2.5 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.16em] xs:tracking-[0.18em] text-white shadow-md transition-all duration-300 hover:shadow-xl hover:gap-4 text-center active:scale-95 cursor-pointer z-20"
               >
                 {/* Shimmer sweep effect */}
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
@@ -246,43 +246,43 @@ function Hero() {
             </div>
 
             {/* 4 Benefit Icon Badges matching Screenshot */}
-            <div className="mt-5 sm:mt-7 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-5 pt-3.5 sm:pt-5 border-t border-[#162e21]/20 max-w-[280px] xs:max-w-[340px] sm:max-w-lg">
+            <div className="mt-4 xs:mt-5 sm:mt-7 grid grid-cols-2 sm:grid-cols-4 gap-2 xs:gap-2.5 sm:gap-5 pt-3 xs:pt-3.5 sm:pt-5 border-t border-[#162e21]/20 max-w-[290px] xs:max-w-[340px] sm:max-w-lg">
               {/* Badge 1: Leaf - Plant-Based Formulations */}
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+              <div className="hero-badge-item flex flex-col items-start gap-1 xs:gap-1.5 sm:gap-2 group/badge cursor-default">
                 <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:-rotate-6">
-                  <Leaf className="h-4.5 w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
+                  <Leaf className="h-4 w-4 xs:h-4.5 xs:w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
+                <span className="text-[9px] xs:text-[10px] font-bold tracking-[0.1em] xs:tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
                   Plant-Based<br />Formulations
                 </span>
               </div>
 
               {/* Badge 2: Droplets - Clean Ingredients */}
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+              <div className="hero-badge-item flex flex-col items-start gap-1 xs:gap-1.5 sm:gap-2 group/badge cursor-default">
                 <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:translate-y-[-2px]">
-                  <Droplets className="h-4.5 w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
+                  <Droplets className="h-4 w-4 xs:h-4.5 xs:w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
+                <span className="text-[9px] xs:text-[10px] font-bold tracking-[0.1em] xs:tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
                   Clean<br />Ingredients
                 </span>
               </div>
 
               {/* Badge 3: Sprout - Thoughtfully Crafted */}
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+              <div className="hero-badge-item flex flex-col items-start gap-1 xs:gap-1.5 sm:gap-2 group/badge cursor-default">
                 <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:rotate-6">
-                  <Sprout className="h-4.5 w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
+                  <Sprout className="h-4 w-4 xs:h-4.5 xs:w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
+                <span className="text-[9px] xs:text-[10px] font-bold tracking-[0.1em] xs:tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
                   Thoughtfully<br />Crafted
                 </span>
               </div>
 
               {/* Badge 4: Flower/Lotus - Skincare Rituals */}
-              <div className="hero-badge-item flex flex-col items-start gap-1.5 sm:gap-2 group/badge cursor-default">
+              <div className="hero-badge-item flex flex-col items-start gap-1 xs:gap-1.5 sm:gap-2 group/badge cursor-default">
                 <div className="text-[#162e21] transition-transform duration-300 group-hover/badge:scale-120 group-hover/badge:rotate-12">
-                  <Flower2 className="h-4.5 w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
+                  <Flower2 className="h-4 w-4 xs:h-4.5 xs:w-4.5 sm:h-5 sm:w-5" strokeWidth={1.6} />
                 </div>
-                <span className="text-[10px] font-bold tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
+                <span className="text-[9px] xs:text-[10px] font-bold tracking-[0.1em] xs:tracking-[0.12em] uppercase text-[#162e21] leading-tight font-sans">
                   Skincare<br />Rituals
                 </span>
               </div>
@@ -318,38 +318,38 @@ function ApproachSection() {
         className="absolute inset-0 h-full w-full object-cover object-left select-none pointer-events-none"
       />
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16 min-h-auto lg:min-h-[720px] xl:min-h-[800px] flex items-center">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 py-12 lg:py-20 items-center">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16 min-h-auto lg:min-h-[720px] xl:min-h-[800px] flex items-center">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 py-10 sm:py-12 lg:py-20 items-center">
           {/* Left clearance (58-66% width) so the dish & droplets shine completely unobstructed */}
           <div className="hidden lg:block lg:col-span-7 xl:col-span-7 pointer-events-none" />
 
           {/* Right column: Editorial copy shifted further right */}
           <div className="lg:col-span-5 xl:col-span-5 flex lg:justify-end">
-            <div className="max-w-lg lg:ml-auto lg:translate-x-6 xl:translate-x-12 bg-white/95 sm:bg-white/90 lg:bg-transparent backdrop-blur-[2px] lg:backdrop-blur-none p-5 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none shadow-sm lg:shadow-none">
-            <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/70 font-sans">
+            <div className="max-w-lg lg:ml-auto lg:translate-x-6 xl:translate-x-12 bg-white/95 sm:bg-white/90 lg:bg-transparent backdrop-blur-[2px] lg:backdrop-blur-none p-4 xs:p-6 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none shadow-sm lg:shadow-none">
+            <p className="text-[10px] xs:text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/70 font-sans">
               The Mile Infinity Approach
             </p>
 
-            <h2 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-normal leading-[1.14] text-[#162e21]">
+            <h2 className="mt-2.5 sm:mt-3 font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-normal leading-[1.14] text-[#162e21]">
               Nature, thoughtfully<br />
               <span className="italic">formulated.</span>
             </h2>
 
-            <p className="mt-5 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/85 font-sans">
+            <p className="mt-4 sm:mt-6 text-xs sm:text-base leading-relaxed text-[#2c3d33]/85 font-sans">
               Mile Infinity brings together botanical ingredients and modern skincare thinking to
               create everyday rituals designed around care, nourishment and skin wellness.
             </p>
 
-            <p className="mt-3.5 sm:mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/70 font-sans">
+            <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/70 font-sans">
               Our herbal skincare perspective looks to beetroot, mulberry, avocado, green tea,
               white tea, chamomile, lavender, rosemary and calendula—alongside vitamins C and E—as
               inspiration for a considered daily ritual.
             </p>
 
-            <div className="mt-6 sm:mt-8 pt-2">
+            <div className="mt-5 sm:mt-8 pt-2">
               <a
                 href="#botanicals"
-                className="group inline-flex items-center gap-3 text-xs font-semibold tracking-[0.18em] uppercase text-[#162e21] border-b border-[#162e21]/40 pb-1.5 transition-all hover:border-[#162e21] hover:gap-4"
+                className="group inline-flex items-center gap-2.5 xs:gap-3 text-xs font-semibold tracking-[0.16em] xs:tracking-[0.18em] uppercase text-[#162e21] border-b border-[#162e21]/40 pb-1.5 transition-all hover:border-[#162e21] hover:gap-4"
               >
                 <span>Learn More About Botanical Skincare</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -394,21 +394,21 @@ function TwoBrandsEcosystem() {
   ];
 
   return (
-    <section className="relative w-full bg-white py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16 overflow-x-hidden">
+    <section className="relative w-full bg-white py-12 xs:py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16 overflow-x-hidden">
         {/* Header matching screenshot */}
         <Reveal direction="up" className="text-center max-w-3xl mx-auto">
-          <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/75 font-sans">
+          <p className="text-[10px] xs:text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/75 font-sans">
             TWO BRANDS. ONE PURPOSE.
           </p>
-          <div className="w-10 h-[1.5px] bg-[#c29653] mx-auto mt-2 mb-5" />
+          <div className="w-10 h-[1.5px] bg-[#c29653] mx-auto mt-2 mb-4 sm:mb-5" />
 
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] font-normal leading-[1.12] text-[#162e21]">
+          <h2 className="font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[46px] font-normal leading-[1.12] text-[#162e21]">
             A complete wellness ecosystem<br />
             <span className="italic text-[#b88e4d] font-normal">for a more beautiful you.</span>
           </h2>
 
-          <p className="mt-4 text-xs sm:text-[13px] leading-relaxed text-[#2c3d33]/80 font-sans max-w-xl mx-auto">
+          <p className="mt-3.5 sm:mt-4 text-xs sm:text-[13px] leading-relaxed text-[#2c3d33]/80 font-sans max-w-xl mx-auto">
             NavTaksh Wellness is a holistic wellness company inspired by nature, rooted in tradition,
             and created for modern life. Mile Infinity is its skincare expression — bringing the wisdom
             of wellness into modern, effective skincare.
@@ -416,21 +416,21 @@ function TwoBrandsEcosystem() {
         </Reveal>
 
         {/* 3-Column Bridge Ecosystem matching screenshot with PERFECT SAME LOGO ALIGNMENT */}
-        <div className="mt-12 sm:mt-16 grid gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-12 items-start">
+        <div className="mt-10 sm:mt-16 grid gap-6 sm:gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-12 items-start">
           {/* Left Column: Navtaksh Wellness */}
           <Reveal direction="right" delay={150} className="lg:col-span-3 flex flex-col min-w-0">
-            {/* Logo Container - Exact same height (h-20 sm:h-24) as right logo for perfect vertical alignment */}
-            <div className="h-20 sm:h-24 flex items-center justify-center lg:justify-start">
+            {/* Logo Container - Exact same height (h-16 sm:h-24) as right logo for perfect vertical alignment */}
+            <div className="h-16 sm:h-24 flex items-center justify-center lg:justify-start">
               <img
                 src={navtakshLogo}
                 alt="NavTaksh Wellness — नव आयामेषु सम्पूर्ण कल्याणम्"
-                className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                className="h-14 sm:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
               />
             </div>
 
             {/* Highlighted Card Container matching Image 3 */}
-            <div className="mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#c29653]/40 overflow-visible">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#c29653]/15 text-[#966b2e] mb-3">
+            <div className="mt-4 sm:mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-4 xs:p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#c29653]/40 overflow-visible">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] xs:text-[10px] font-bold uppercase tracking-[0.2em] bg-[#c29653]/15 text-[#966b2e] mb-3">
                 <Sparkles className="w-3 h-3" /> Holistic Wellness
               </div>
 
@@ -439,23 +439,23 @@ function TwoBrandsEcosystem() {
                 <span className="italic text-[#b88e4d]">One Complete You.</span>
               </h3>
 
-              <p className="mt-3 text-xs leading-relaxed text-[#2c3d33]/90 font-sans">
+              <p className="mt-2.5 sm:mt-3 text-xs leading-relaxed text-[#2c3d33]/90 font-sans">
                 NavTaksh Wellness embraces a holistic approach to well-being through nine interconnected dimensions:
               </p>
 
               {/* 9 Dimensions Highlighted Pills Grid */}
-              <div className="mt-3.5 flex flex-wrap gap-1.5">
+              <div className="mt-3 flex flex-wrap gap-1.5">
                 {nineDimensions.map((dim) => (
                   <span
                     key={dim}
-                    className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white border border-[#ded4c3] text-[#162e21] shadow-2xs"
+                    className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] xs:text-[10px] font-semibold bg-white border border-[#ded4c3] text-[#162e21] shadow-2xs"
                   >
                     {dim}
                   </span>
                 ))}
               </div>
 
-              <p className="mt-3.5 pt-3 border-t border-[#162e21]/10 text-[11px] leading-relaxed text-[#2c3d33]/80 font-sans italic">
+              <p className="mt-3 pt-3 border-t border-[#162e21]/10 text-[10px] xs:text-[11px] leading-relaxed text-[#2c3d33]/80 font-sans italic">
                 "Each dimension contributes to a more balanced, fulfilling life, reflecting our belief that true wellness goes beyond skincare to nurture the whole person."
               </p>
             </div>
@@ -463,7 +463,7 @@ function TwoBrandsEcosystem() {
 
           {/* Center Column: The Golden Infinity Nature & Radiance Visual */}
           <Reveal direction="up" delay={250} className="lg:col-span-6 flex justify-center items-center py-2 sm:py-4 lg:py-0 self-center">
-            <div className="relative w-full max-w-xs sm:max-w-lg lg:max-w-xl xl:max-w-2xl group mx-auto">
+            <div className="relative w-full max-w-[280px] xs:max-w-xs sm:max-w-lg lg:max-w-xl xl:max-w-2xl group mx-auto">
               <div className="relative overflow-hidden transition-transform duration-700 group-hover:scale-[1.02] animate-float-gentle">
                 <img
                   src={goldenInfinityImg}
@@ -476,12 +476,12 @@ function TwoBrandsEcosystem() {
 
           {/* Right Column: Mile Infinity */}
           <Reveal direction="left" delay={350} className="lg:col-span-3 flex flex-col min-w-0">
-            {/* Logo Container - Exact same height (h-20 sm:h-24) as left logo for perfect vertical alignment */}
-            <div className="h-20 sm:h-24 flex items-center justify-center lg:justify-start">
+            {/* Logo Container - Exact same height (h-16 sm:h-24) as left logo for perfect vertical alignment */}
+            <div className="h-16 sm:h-24 flex items-center justify-center lg:justify-start">
               <img
                 src={logoSvg}
                 alt="Mile Infinity"
-                className="h-14 sm:h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                className="h-12 sm:h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = mileInfinityLogo;
                 }}
@@ -489,8 +489,8 @@ function TwoBrandsEcosystem() {
             </div>
 
             {/* Highlighted Card Container matching Image 3 */}
-            <div className="mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#163729]/40">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-[#163729]/12 text-[#163729] mb-3">
+            <div className="mt-4 sm:mt-6 bg-[#faf8f5]/90 border border-[#e8dfcf] p-4 xs:p-5 sm:p-6 rounded-2xl shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#163729]/40">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[9px] xs:text-[10px] font-bold uppercase tracking-[0.2em] bg-[#163729]/12 text-[#163729] mb-3">
                 <Leaf className="w-3 h-3" /> Botanical Skincare
               </div>
 
@@ -499,16 +499,16 @@ function TwoBrandsEcosystem() {
                 <span className="italic text-[#163729]">Modern Rituals.</span>
               </h3>
 
-              <p className="mt-3 text-xs leading-relaxed text-[#2c3d33]/90 font-sans">
+              <p className="mt-2.5 sm:mt-3 text-xs leading-relaxed text-[#2c3d33]/90 font-sans">
                 Mile Infinity transforms the wisdom of wellness into thoughtfully formulated, conscious and effective skincare for your everyday rituals.
               </p>
 
               {/* Ritual Pillars Highlighted Pills */}
-              <div className="mt-3.5 flex flex-wrap gap-1.5">
+              <div className="mt-3 flex flex-wrap gap-1.5">
                 {ritualPillars.map((pillar) => (
                   <span
                     key={pillar}
-                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#163729]/8 border border-[#163729]/20 text-[#163729] shadow-2xs"
+                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] xs:text-[10px] font-semibold bg-[#163729]/8 border border-[#163729]/20 text-[#163729] shadow-2xs"
                   >
                     {pillar}
                   </span>
@@ -556,19 +556,19 @@ function HomeEssentialsSection({ products }: { products: ProductDto[] }) {
   };
 
   return (
-    <section id="essentials" className="bg-[#f7f5ef] py-16 lg:py-24 border-t border-[#ede7dc]">
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+    <section id="essentials" className="bg-[#f7f5ef] py-12 xs:py-16 lg:py-24 border-t border-[#ede7dc]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16">
         {/* Header row from Group 24 */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#162e21]/15 pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 border-b border-[#162e21]/15 pb-5 sm:pb-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#162e21]/10 text-[#162e21] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#162e21]/10 text-[#162e21] text-[9px] xs:text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
               <Sparkles className="w-3 h-3 text-[#c49838]" /> Daily Botanical Rituals
             </div>
-            <h2 className="mt-1 font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#162e21] leading-tight">
+            <h2 className="mt-1 font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#162e21] leading-tight">
               Your everyday skincare ritual.
             </h2>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 w-full sm:w-auto">
             <span className="text-xs uppercase tracking-[0.16em] font-normal text-[#162e21]/70 font-sans sm:text-right">
               {products.length} products
             </span>
@@ -583,14 +583,14 @@ function HomeEssentialsSection({ products }: { products: ProductDto[] }) {
         </div>
 
         {/* Product Cards Grid matching Screenshot 1 */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 items-stretch">
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7 items-stretch">
           {products.map((p) => {
             const isAdded = addedId === p.id;
             const isHero = p.slug.includes("hero") || p.name.includes("Hero");
             return (
               <div
                 key={p.id}
-                className="group flex flex-col justify-between bg-white/80 hover:bg-white p-4 transition-all duration-300 border border-[#e5dfd5]/85 hover:shadow-xl rounded-none"
+                className="group flex flex-col justify-between bg-white/80 hover:bg-white p-3.5 xs:p-4 transition-all duration-300 border border-[#e5dfd5]/85 hover:shadow-xl rounded-none"
               >
                 <div>
                   {/* Artwork image */}
@@ -600,11 +600,11 @@ function HomeEssentialsSection({ products }: { products: ProductDto[] }) {
                     className="aspect-[4/5] overflow-hidden bg-[#faf8f4] flex items-center justify-center relative block cursor-pointer"
                   >
                     {isHero ? (
-                      <span className="absolute left-3 top-3 z-10 rounded-full bg-[#162e21] text-[#c49838] border border-[#c49838]/40 px-2.5 py-0.5 text-[9px] font-bold tracking-widest uppercase shadow-md flex items-center gap-1">
+                      <span className="absolute left-2.5 top-2.5 xs:left-3 xs:top-3 z-10 rounded-full bg-[#162e21] text-[#c49838] border border-[#c49838]/40 px-2.5 py-0.5 text-[8px] xs:text-[9px] font-bold tracking-widest uppercase shadow-md flex items-center gap-1">
                         <Sparkles className="w-2.5 h-2.5 text-[#c49838]" /> Hero Product
                       </span>
                     ) : (
-                      <span className="absolute left-3 top-3 z-10 rounded-full bg-white/90 text-[#162e21] px-2 py-0.5 text-[9px] font-semibold tracking-wider uppercase shadow-xs">
+                      <span className="absolute left-2.5 top-2.5 xs:left-3 xs:top-3 z-10 rounded-full bg-white/90 text-[#162e21] px-2 py-0.5 text-[8px] xs:text-[9px] font-semibold tracking-wider uppercase shadow-xs">
                         {(p.category || "skincare").toUpperCase()}
                       </span>
                     )}
@@ -617,30 +617,30 @@ function HomeEssentialsSection({ products }: { products: ProductDto[] }) {
                   </Link>
 
                   {/* Details */}
-                  <div className="mt-4">
-                    <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-[#6b7b6c] font-sans">
+                  <div className="mt-3 xs:mt-4">
+                    <span className="block text-[9px] xs:text-[10px] font-semibold uppercase tracking-[0.2em] text-[#6b7b6c] font-sans">
                       {p.category || "skincare"}
                     </span>
-                    <h3 className="mt-1.5 font-serif text-base sm:text-[17px] font-normal text-[#162e21] leading-snug min-h-[2.75rem] line-clamp-2">
+                    <h3 className="mt-1 font-serif text-base sm:text-[17px] font-normal text-[#162e21] leading-snug min-h-[2.5rem] sm:min-h-[2.75rem] line-clamp-2">
                       <Link to="/product" search={{ slug: p.slug }} className="hover:underline">
                         {p.name}
                       </Link>
                     </h3>
-                    <p className="mt-2 text-xs text-[#2c3d33]/80 leading-relaxed font-sans min-h-[2.5rem] line-clamp-2">
+                    <p className="mt-1.5 xs:mt-2 text-xs text-[#2c3d33]/80 leading-relaxed font-sans min-h-[2.2rem] sm:min-h-[2.5rem] line-clamp-2">
                       {p.tagline || p.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-3.5 border-t border-[#ede7dc]">
-                  <div className="flex items-center justify-between mb-3.5">
+                <div className="mt-5 xs:mt-6 pt-3 xs:pt-3.5 border-t border-[#ede7dc]">
+                  <div className="flex items-center justify-between mb-3 xs:mb-3.5">
                     <span className="font-serif text-lg font-bold text-[#162e21]">
                       {formatInr(p.priceInr)}
                     </span>
                     <Link
                       to="/product"
                       search={{ slug: p.slug }}
-                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#162e21] hover:underline"
+                      className="inline-flex items-center gap-1.5 text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.16em] text-[#162e21] hover:underline"
                     >
                       <span>View Details</span>
                       <ArrowRight className="h-3 w-3" />
@@ -780,7 +780,7 @@ function BundleBuilder() {
   }
 
   return (
-    <section id="ritual" className="relative w-full overflow-hidden bg-[#0c2217] py-16 sm:py-20 lg:py-28 text-white">
+    <section id="ritual" className="relative w-full overflow-hidden bg-[#0c2217] py-12 xs:py-16 sm:py-20 lg:py-28 text-white">
       {/* Cinematic Emerald Arc Background Image from Figma */}
       <img
         src={cinematicEmeraldBg}
@@ -789,17 +789,17 @@ function BundleBuilder() {
       />
       <div className="absolute inset-0 bg-[#06170f]/35 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12">
         {/* Top Header from Slide 4 */}
-        <div className="grid gap-5 md:grid-cols-12 md:items-end border-b border-white/15 pb-6 sm:pb-8 mb-8 sm:mb-12">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-12 md:items-end border-b border-white/15 pb-5 sm:pb-8 mb-6 sm:mb-12">
           <div className="md:col-span-7">
-            <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="w-8 h-[1px] bg-emerald-300/60" />
-              <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-emerald-300">
+            <div className="flex items-center gap-2 xs:gap-2.5 mb-2 sm:mb-2.5">
+              <span className="w-6 xs:w-8 h-[1px] bg-emerald-300/60" />
+              <p className="text-[10px] xs:text-[11px] font-semibold tracking-[0.22em] xs:tracking-[0.24em] uppercase text-emerald-300">
                 The Art of Pairing
               </p>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.08] text-white">
+            <h2 className="font-serif text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.08] text-white">
               Two essentials.<br />
               One personal ritual.
             </h2>
@@ -809,18 +809,18 @@ function BundleBuilder() {
               Bring your everyday essentials together. Choose any two Mile Infinity products and
               make a little space for conscious care.
             </p>
-            <p className="mt-2.5 sm:mt-3 text-[10px] font-mono tracking-[0.22em] uppercase text-emerald-300/90">
+            <p className="mt-2 sm:mt-3 text-[9px] xs:text-[10px] font-mono tracking-[0.18em] xs:tracking-[0.22em] uppercase text-emerald-300/90">
               Pair any two products for a bundled price of ₹2,598.
             </p>
           </div>
         </div>
 
         {/* Dual Cards + Selector Card from Slide 4 */}
-        <div className="grid gap-8 lg:gap-10 lg:grid-cols-12 lg:items-center">
-          {/* Left/Center Visual: Two large cards on stone plinths with floating "+" symbol */}
-          <div className="lg:col-span-7 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 relative">
+        <div className="grid gap-6 sm:gap-8 lg:gap-10 lg:grid-cols-12 lg:items-center">
+          {/* Left/Center Visual: Two cards side-by-side with floating "+" symbol */}
+          <div className="lg:col-span-7 flex flex-row items-center justify-center gap-2 xs:gap-3 sm:gap-4 relative w-full">
             {/* Card 1 */}
-            <div className="w-full sm:w-1/2 max-w-[260px] sm:max-w-[280px] overflow-hidden bg-[#f7f5f0] shadow-2xl transition-transform duration-500 hover:scale-[1.02] border border-white/20">
+            <div className="flex-1 min-w-0 max-w-[150px] xs:max-w-[170px] sm:max-w-[280px] overflow-hidden bg-[#f7f5f0] shadow-xl sm:shadow-2xl transition-transform duration-500 hover:scale-[1.02] border border-white/20">
               <div className="aspect-[4/5] overflow-hidden bg-[#e8e4db] flex items-center justify-center">
                 <img
                   src={card1.cardImage}
@@ -828,23 +828,23 @@ function BundleBuilder() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="flex items-center justify-between px-4 py-3 bg-[#e8e3d8] text-[#162e21]">
-                <span className="text-[10px] font-bold tracking-[0.16em] uppercase font-sans">
+              <div className="flex flex-col xs:flex-row xs:items-center justify-between px-2 xs:px-3 sm:px-4 py-2 sm:py-3 bg-[#e8e3d8] text-[#162e21] gap-0.5">
+                <span className="text-[8px] xs:text-[10px] font-bold tracking-[0.12em] xs:tracking-[0.16em] uppercase font-sans truncate">
                   {card1.categoryStep}
                 </span>
-                <span className="font-serif italic text-base capitalize">
+                <span className="font-serif italic text-xs xs:text-sm sm:text-base capitalize truncate">
                   {card1.shortName}
                 </span>
               </div>
             </div>
 
             {/* Floating "+" Button exactly as in Group 23 */}
-            <div className="z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f7f5f0] text-[#162e21] shadow-xl border border-white/60 my-[-8px] sm:my-0 animate-float">
-              <span className="text-xl font-light leading-none">+</span>
+            <div className="z-10 flex h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-[#f7f5f0] text-[#162e21] shadow-xl border border-white/60 animate-float">
+              <span className="text-sm xs:text-base sm:text-xl font-light leading-none">+</span>
             </div>
 
             {/* Card 2 */}
-            <div className="w-full sm:w-1/2 max-w-[260px] sm:max-w-[280px] overflow-hidden bg-[#f7f5f0] shadow-2xl transition-transform duration-500 hover:scale-[1.02] border border-white/20">
+            <div className="flex-1 min-w-0 max-w-[150px] xs:max-w-[170px] sm:max-w-[280px] overflow-hidden bg-[#f7f5f0] shadow-xl sm:shadow-2xl transition-transform duration-500 hover:scale-[1.02] border border-white/20">
               <div className="aspect-[4/5] overflow-hidden bg-[#e8e4db] flex items-center justify-center">
                 <img
                   src={card2.cardImage}
@@ -852,11 +852,11 @@ function BundleBuilder() {
                   className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
-              <div className="flex items-center justify-between px-4 py-3 bg-[#e8e3d8] text-[#162e21]">
-                <span className="text-[10px] font-bold tracking-[0.16em] uppercase font-sans">
+              <div className="flex flex-col xs:flex-row xs:items-center justify-between px-2 xs:px-3 sm:px-4 py-2 sm:py-3 bg-[#e8e3d8] text-[#162e21] gap-0.5">
+                <span className="text-[8px] xs:text-[10px] font-bold tracking-[0.12em] xs:tracking-[0.16em] uppercase font-sans truncate">
                   {card2.categoryStep}
                 </span>
-                <span className="font-serif italic text-base capitalize">
+                <span className="font-serif italic text-xs xs:text-sm sm:text-base capitalize truncate">
                   {card2.shortName}
                 </span>
               </div>
@@ -864,23 +864,23 @@ function BundleBuilder() {
           </div>
 
           {/* Right Column: "Choose your two." sand card from Slide 4 */}
-          <div className="lg:col-span-5 bg-[#f4f1ea] p-4 sm:p-6 lg:p-8 text-[#162e21] shadow-2xl border border-[#ded8cb]">
-            <div className="flex items-center justify-between border-b border-[#ded8cb] pb-3.5 sm:pb-4">
+          <div className="lg:col-span-5 bg-[#f4f1ea] p-4 sm:p-6 lg:p-8 text-[#162e21] shadow-2xl border border-[#ded8cb] rounded-xs">
+            <div className="flex items-center justify-between border-b border-[#ded8cb] pb-3 sm:pb-4">
               <div>
-                <h3 className="font-serif text-xl sm:text-2xl lg:text-3xl font-medium text-[#162e21]">
+                <h3 className="font-serif text-lg xs:text-xl sm:text-2xl lg:text-3xl font-medium text-[#162e21]">
                   Choose your two.
                 </h3>
-                <p className="mt-1 text-xs text-[#2c3d33]/70 font-sans">
+                <p className="mt-0.5 xs:mt-1 text-[11px] xs:text-xs text-[#2c3d33]/70 font-sans">
                   Select 2 products from the list below to create your pairing.
                 </p>
               </div>
-              <span className="border border-[#162e21]/40 px-2 py-0.5 text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.18em] text-[#162e21] shrink-0">
+              <span className="border border-[#162e21]/40 px-2 py-0.5 text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.16em] xs:tracking-[0.18em] text-[#162e21] shrink-0">
                 PAIR BENEFITS
               </span>
             </div>
 
             {/* 4 Items in the selector */}
-            <div className="mt-3.5 sm:mt-4 space-y-2">
+            <div className="mt-3 sm:mt-4 space-y-2">
               {bundleCatalog.map((item) => {
                 const isSelected = selectedIds.includes(item.id);
                 return (
@@ -888,13 +888,13 @@ function BundleBuilder() {
                     key={item.id}
                     type="button"
                     onClick={() => toggle(item.id)}
-                    className={`flex w-full items-center gap-2.5 sm:gap-3.5 p-2 sm:p-3 text-left transition-all duration-300 active:scale-98 hover-lift-sm ${
+                    className={`flex w-full items-center gap-2 xs:gap-2.5 sm:gap-3.5 p-2 sm:p-3 text-left transition-all duration-300 active:scale-98 hover-lift-sm ${
                       isSelected
                         ? "bg-[#dfe5da] ring-1 ring-[#162e21]/20 shadow-sm"
                         : "bg-transparent hover:bg-white/40"
                     }`}
                   >
-                    <div className="h-10 w-10 sm:h-12 sm:w-12 shrink-0 overflow-hidden bg-white p-0.5 border border-[#ded7cb]">
+                    <div className="h-9 w-9 xs:h-10 xs:w-10 sm:h-12 sm:w-12 shrink-0 overflow-hidden bg-white p-0.5 border border-[#ded7cb]">
                       <img
                         src={item.cardImage}
                         alt={item.name}
@@ -903,20 +903,20 @@ function BundleBuilder() {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <p className="text-[9px] font-bold tracking-wider uppercase text-[#162e21]/60">
+                      <p className="text-[8px] xs:text-[9px] font-bold tracking-wider uppercase text-[#162e21]/60">
                         {item.stepName}
                       </p>
-                      <p className="text-xs font-serif font-medium text-[#162e21] truncate">
+                      <p className="text-xs font-serif font-medium text-[#162e21] line-clamp-1">
                         {item.name}
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                       <span className="font-serif text-xs sm:text-sm font-semibold text-[#162e21]">
                         {formatInr(item.priceInr)}
                       </span>
                       <div
-                        className={`flex h-4.5 w-4.5 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                        className={`flex h-4 w-4 xs:h-4.5 xs:w-4.5 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
                           isSelected
                             ? "border-[#1a382b] bg-[#1a382b] text-white scale-105"
                             : "border-[#162e21]/40 bg-transparent"
@@ -931,18 +931,18 @@ function BundleBuilder() {
             </div>
 
             {/* Bottom calculation and CTA from Slide 4 */}
-            <div className="mt-5 sm:mt-6 border-t border-[#ded8cb] pt-4">
+            <div className="mt-4 sm:mt-6 border-t border-[#ded8cb] pt-3.5 sm:pt-4">
               <div className="flex items-baseline justify-between">
                 <div>
-                  <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold text-[#2c3d33]/60">
+                  <p className="text-[8px] xs:text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-semibold text-[#2c3d33]/60">
                     Your two-product ritual
                   </p>
-                  <p className="font-serif text-lg sm:text-xl lg:text-2xl font-medium text-[#162e21] mt-0.5">
+                  <p className="font-serif text-base xs:text-lg sm:text-xl lg:text-2xl font-medium text-[#162e21] mt-0.5">
                     {ritualTitle || "Select 2 Products"}
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="font-serif text-xl sm:text-2xl lg:text-3xl font-semibold text-[#162e21]">
+                  <span className="font-serif text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold text-[#162e21]">
                     {formatInr(totalPrice)}
                   </span>
                 </div>
@@ -952,7 +952,7 @@ function BundleBuilder() {
                 type="button"
                 onClick={handleAddRitual}
                 disabled={selectedIds.length !== 2}
-                className="btn-shimmer hover-lift active:scale-95 mt-4 sm:mt-5 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3.5 sm:py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-lg transition-all flex items-center justify-between px-5 sm:px-6 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="btn-shimmer hover-lift active:scale-95 mt-3.5 sm:mt-5 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3 sm:py-4 text-xs font-semibold uppercase tracking-[0.16em] xs:tracking-[0.18em] text-white shadow-lg transition-all flex items-center justify-between px-4 sm:px-6 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
               >
                 {added ? (
                   <span className="inline-flex items-center gap-2 text-emerald-300 animate-scale-in">
@@ -994,61 +994,61 @@ function SpotlightMatchaSection() {
 
   return (
     <section className="relative w-full overflow-hidden bg-[#f9ecdf]">
-      <div className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] xl:min-h-[820px] w-full flex items-center">
+      <div className="relative min-h-[580px] xs:min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] xl:min-h-[820px] w-full flex items-center">
         {/* Full width background image from Slide 5 — pinned to left so model & bottle stay on left */}
         <img
           src={luxuryMatchaStillLifeImg}
           alt="Mile Infinity Ceremonial Green Fusion Serum — Model & Botanical Still Life"
-          className="absolute inset-0 h-full w-full object-cover object-left select-none pointer-events-none"
+          className="absolute inset-0 h-full w-full object-cover object-[24%_center] xs:object-[28%_center] sm:object-left select-none pointer-events-none"
         />
 
         {/* Soft overlay on mobile screens only for optimal contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f9ecdf] via-[#f9ecdf]/75 to-transparent lg:hidden pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f9ecdf] via-[#f9ecdf]/80 to-transparent lg:hidden pointer-events-none" />
 
         {/* Layout container pushing text firmly to the right side */}
-        <div className="relative z-10 mx-auto max-w-[1600px] 2xl:max-w-[1760px] px-5 sm:px-10 lg:px-16 xl:px-20 w-full py-12 sm:py-16 lg:py-20 flex items-center justify-end">
+        <div className="relative z-10 mx-auto max-w-[1600px] 2xl:max-w-[1760px] px-4 xs:px-6 sm:px-10 lg:px-16 xl:px-20 w-full py-10 xs:py-14 sm:py-16 lg:py-20 flex items-center justify-end">
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 items-center">
             {/* Left 7-8 columns clearance for model, bottle, avocado & botanical still life */}
             <div className="hidden lg:block lg:col-span-7 xl:col-span-7 2xl:col-span-7 pointer-events-none" />
 
             {/* Right columns: Editorial copy shifted firmly to the right side */}
-            <Reveal direction="up" delay={150} className="lg:col-span-5 xl:col-span-5 2xl:col-span-5 max-w-md sm:max-w-lg lg:max-w-xl ml-auto lg:pl-12 xl:pl-16 2xl:pl-24 lg:translate-x-6 xl:translate-x-12 bg-[#f9ecdf]/92 sm:bg-[#f9ecdf]/60 lg:bg-transparent backdrop-blur-xs lg:backdrop-blur-none p-5 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none shadow-sm lg:shadow-none">
-              <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/75 font-sans">
+            <Reveal direction="up" delay={150} className="lg:col-span-5 xl:col-span-5 2xl:col-span-5 max-w-md sm:max-w-lg lg:max-w-xl ml-auto lg:pl-12 xl:pl-16 2xl:pl-24 lg:translate-x-6 xl:translate-x-12 bg-[#f9ecdf]/94 sm:bg-[#f9ecdf]/60 lg:bg-transparent backdrop-blur-xs lg:backdrop-blur-none p-4 xs:p-6 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none shadow-sm lg:shadow-none">
+              <p className="text-[10px] xs:text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/75 font-sans">
                 The Ritual Starts Here
               </p>
 
-              <h2 className="mt-2.5 font-serif text-2xl sm:text-3xl lg:text-[40px] xl:text-[46px] font-medium leading-[1.12] text-[#162e21]">
+              <h2 className="mt-2 xs:mt-2.5 font-serif text-2xl sm:text-3xl lg:text-[40px] xl:text-[46px] font-medium leading-[1.12] text-[#162e21]">
                 Meet your daily<br />
                 <span className="italic font-normal">skincare essential.</span>
               </h2>
 
-              <h3 className="mt-3.5 font-serif text-lg sm:text-xl font-normal text-[#162e21]">
+              <h3 className="mt-2.5 sm:mt-3.5 font-serif text-base xs:text-lg sm:text-xl font-normal text-[#162e21]">
                 Mile Infinity Ceremonial Green Fusion Serum
               </h3>
 
-              <p className="mt-3.5 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/85 font-sans">
+              <p className="mt-2.5 sm:mt-3.5 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/85 font-sans">
                 Part of Mile Infinity's plant-based skincare range, this face serum is inspired by
                 ceremonial green botanicals and fits naturally between cleansing and moisturising.
               </p>
 
               {/* 3 Checklist lines with hyphens from Slide 5 */}
-              <div className="mt-5 space-y-2.5 pt-3.5 border-t border-[#162e21]/15 text-xs sm:text-sm text-[#2c3d33]/85 font-sans">
-                <div className="flex items-center gap-3">
+              <div className="mt-4 sm:mt-5 space-y-2 sm:space-y-2.5 pt-3 sm:pt-3.5 border-t border-[#162e21]/15 text-xs sm:text-sm text-[#2c3d33]/85 font-sans">
+                <div className="flex items-center gap-2.5 sm:gap-3">
                   <span className="text-[#162e21] font-medium">—</span>
                   <span>Face serum for the treatment step</span>
                 </div>
-                <div className="flex items-center gap-3 pt-2.5 border-t border-[#162e21]/10">
+                <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-2.5 border-t border-[#162e21]/10">
                   <span className="text-[#162e21] font-medium">—</span>
                   <span>Green tea-inspired botanical positioning</span>
                 </div>
-                <div className="flex items-center gap-3 pt-2.5 border-t border-[#162e21]/10">
+                <div className="flex items-center gap-2.5 sm:gap-3 pt-2 sm:pt-2.5 border-t border-[#162e21]/10">
                   <span className="text-[#162e21] font-medium">—</span>
                   <span>Designed for an everyday skincare ritual</span>
                 </div>
               </div>
 
               {/* Price & Add to Cart button from Slide 5 */}
-              <div className="mt-6 sm:mt-7 pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-8">
+              <div className="mt-5 sm:mt-7 pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-8">
                 <span className="font-serif text-2xl sm:text-3xl font-medium text-[#162e21]">
                   ₹1,699
                 </span>
@@ -1065,7 +1065,7 @@ function SpotlightMatchaSection() {
                       imageUrl: cardGreenImg,
                     })
                   }
-                  className="btn-shimmer hover-lift active:scale-95 inline-flex items-center justify-center gap-3 bg-[#1a382b] hover:bg-[#12291f] text-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-md w-full sm:w-auto"
+                  className="btn-shimmer hover-lift active:scale-95 inline-flex items-center justify-center gap-3 bg-[#1a382b] hover:bg-[#12291f] text-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-md w-full sm:w-auto cursor-pointer"
                 >
                   <span>Add to Cart</span>
                   <ShoppingBag className="h-4 w-4 stroke-[1.5]" />
@@ -1091,9 +1091,9 @@ function SpotlightMatchaSection() {
  */
 function BotanicalInspirationSection() {
   return (
-    <section className="bg-[#f7f5ef] py-20 lg:py-28 border-t border-[#ede7dc]">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+    <section className="bg-[#f7f5ef] py-14 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
+      <div className="mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left: 4 bottles in sunlit forest */}
           <div className="lg:col-span-5 relative overflow-hidden shadow-lg border border-[#e5dfd5]/80">
             <img
@@ -1105,19 +1105,19 @@ function BotanicalInspirationSection() {
 
           {/* Right: Rooted in nature copy & 3 botanical rows */}
           <div className="lg:col-span-7">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
               Rooted in Nature
             </p>
-            <h2 className="mt-2 font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal leading-[1.15] text-[#162e21]">
+            <h2 className="mt-2 font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[42px] font-normal leading-[1.15] text-[#162e21]">
               Botanical inspiration. Thoughtful<br />everyday care.
             </h2>
-            <p className="mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/80 font-sans max-w-xl">
+            <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/80 font-sans max-w-xl">
               Mile Infinity develops elegant, botanical-first formulas designed to elevate everyday skincare.
               A considered, calibrated collection that meets your skin where it lives, with calm, daily reverence.
             </p>
 
-            <div className="mt-8 divide-y divide-[#162e21]/15 border-y border-[#162e21]/15">
-              <div className="py-3.5 sm:py-4.5 flex flex-col sm:grid sm:grid-cols-12 gap-1 sm:gap-4 sm:items-center">
+            <div className="mt-6 sm:mt-8 divide-y divide-[#162e21]/15 border-y border-[#162e21]/15">
+              <div className="py-3 sm:py-4.5 flex flex-col sm:grid sm:grid-cols-12 gap-1 sm:gap-4 sm:items-center">
                 <span className="sm:col-span-4 lg:col-span-3 font-serif text-base sm:text-lg text-[#162e21] font-normal">
                   Beetroot
                 </span>
@@ -1126,7 +1126,7 @@ function BotanicalInspirationSection() {
                 </p>
               </div>
 
-              <div className="py-3.5 sm:py-4.5 flex flex-col sm:grid sm:grid-cols-12 gap-1 sm:gap-4 sm:items-center">
+              <div className="py-3 sm:py-4.5 flex flex-col sm:grid sm:grid-cols-12 gap-1 sm:gap-4 sm:items-center">
                 <span className="sm:col-span-4 lg:col-span-3 font-serif text-base sm:text-lg text-[#162e21] font-normal">
                   Green tea
                 </span>
@@ -1135,7 +1135,7 @@ function BotanicalInspirationSection() {
                 </p>
               </div>
 
-              <div className="py-3.5 sm:py-4.5 flex flex-col sm:grid sm:grid-cols-12 gap-1 sm:gap-4 sm:items-center">
+              <div className="py-3 sm:py-4.5 flex flex-col sm:grid sm:grid-cols-12 gap-1 sm:gap-4 sm:items-center">
                 <span className="sm:col-span-4 lg:col-span-3 font-serif text-base sm:text-lg text-[#162e21] font-normal">
                   Blue berry &amp; lavender
                 </span>
@@ -1145,7 +1145,7 @@ function BotanicalInspirationSection() {
               </div>
             </div>
 
-            <p className="mt-6 text-[11px] text-[#2c3d33]/65 font-sans leading-relaxed">
+            <p className="mt-5 sm:mt-6 text-[10px] xs:text-[11px] text-[#2c3d33]/65 font-sans leading-relaxed">
               All products are formulated without parabens, phthalates, synthetic dyes, or harsh sulfates. Clean, purposeful skincare you can return to every day.
             </p>
           </div>
@@ -1162,53 +1162,53 @@ function BotanicalInspirationSection() {
  */
 function FormulationStandardsBanner() {
   return (
-    <section className="bg-[#0e2a1e] py-12 lg:py-16 text-white border-t border-[#16382b]">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <h3 className="font-serif text-2xl sm:text-3xl font-normal text-white">
+    <section className="bg-[#0e2a1e] py-10 sm:py-12 lg:py-16 text-white border-t border-[#16382b]">
+      <div className="mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+          <h3 className="font-serif text-xl xs:text-2xl sm:text-3xl font-normal text-white">
             Thoughtful care. Everyday beauty.
           </h3>
           <a
             href="#botanicals"
-            className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#a4c2b0] hover:text-white inline-flex items-center gap-2 transition-colors"
+            className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.18em] xs:tracking-[0.2em] text-[#a4c2b0] hover:text-white inline-flex items-center gap-2 transition-colors"
           >
             <span>Explore Our Formulation Standards</span>
             <ArrowRight className="h-3 w-3" />
           </a>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/15 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex items-start gap-4">
-            <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-950/40 text-emerald-200">
+        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/15 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="flex items-start gap-3.5 sm:gap-4">
+            <div className="mt-1 flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-950/40 text-emerald-200">
               <Leaf className="h-4 w-4" strokeWidth={1.5} />
             </div>
             <div>
-              <h4 className="font-serif text-lg text-white font-normal">Botanical-inspired</h4>
-              <p className="mt-1.5 text-xs text-white/75 font-sans leading-relaxed">
+              <h4 className="font-serif text-base sm:text-lg text-white font-normal">Botanical-inspired</h4>
+              <p className="mt-1 text-xs text-white/75 font-sans leading-relaxed">
                 Pure extracts paired with purposeful, effective cosmetic science.
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-950/40 text-emerald-200">
+          <div className="flex items-start gap-3.5 sm:gap-4">
+            <div className="mt-1 flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-950/40 text-emerald-200">
               <Heart className="h-4 w-4" strokeWidth={1.5} />
             </div>
             <div>
-              <h4 className="font-serif text-lg text-white font-normal">Not tested on animals</h4>
-              <p className="mt-1.5 text-xs text-white/75 font-sans leading-relaxed">
+              <h4 className="font-serif text-base sm:text-lg text-white font-normal">Not tested on animals</h4>
+              <p className="mt-1 text-xs text-white/75 font-sans leading-relaxed">
                 Cruelty-free development and respect for all living things at every step.
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-950/40 text-emerald-200">
+          <div className="flex items-start gap-3.5 sm:gap-4">
+            <div className="mt-1 flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-950/40 text-emerald-200">
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             </div>
             <div>
-              <h4 className="font-serif text-lg text-white font-normal">A considered ritual</h4>
-              <p className="mt-1.5 text-xs text-white/75 font-sans leading-relaxed">
+              <h4 className="font-serif text-base sm:text-lg text-white font-normal">A considered ritual</h4>
+              <p className="mt-1 text-xs text-white/75 font-sans leading-relaxed">
                 Four intentional daily steps for thoughtful, uncomplicated care.
               </p>
             </div>
@@ -1273,7 +1273,7 @@ function FourStepEditSection() {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#0c281e] py-20 lg:py-28 text-[#f7f5f0] border-t border-[#16382b]">
+    <section className="relative w-full overflow-hidden bg-[#0c281e] py-14 sm:py-20 lg:py-28 text-[#f7f5f0] border-t border-[#16382b]">
       {/* Background Botanical Ingredient Collage from user image */}
       <img
         src={botanicalCollageImg}
@@ -1282,27 +1282,27 @@ function FourStepEditSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0c281e] via-[#0c281e]/85 to-[#0c281e]/40 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left Column from Slide 1 / Screenshot 4 */}
           <Reveal direction="right" className="lg:col-span-4 lg:border-r lg:border-white/15 lg:pr-10 xl:pr-12">
-            <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#c29653]">
+            <p className="text-[10px] xs:text-[11px] font-semibold tracking-[0.24em] uppercase text-[#c29653]">
               The Four-Step Edit
             </p>
 
-            <h2 className="mt-3 font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.08] text-white">
+            <h2 className="mt-2.5 sm:mt-3 font-serif text-3xl xs:text-4xl sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.08] text-white">
               Build your<br />
               <span className="italic font-normal">ritual.</span>
             </h2>
 
-            <p className="mt-5 text-xs sm:text-sm leading-relaxed text-white/80 font-sans max-w-sm">
+            <p className="mt-3.5 sm:mt-5 text-xs sm:text-sm leading-relaxed text-white/80 font-sans max-w-sm">
               A considered routine,<br />made refreshingly simple.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-6 sm:mt-8">
               <a
                 href="#shop-catalog"
-                className="btn-shimmer hover-lift active:scale-95 inline-flex items-center gap-3 bg-[#f4f1ea] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21] shadow-lg transition-transform hover:bg-white rounded-none"
+                className="btn-shimmer hover-lift active:scale-95 inline-flex items-center gap-3 bg-[#f4f1ea] px-6 xs:px-7 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#162e21] shadow-lg transition-transform hover:bg-white rounded-none cursor-pointer"
               >
                 <span>Shop The Routine</span>
                 <ArrowRight className="h-4 w-4" />
@@ -1317,27 +1317,27 @@ function FourStepEditSection() {
                 key={s.stepNum}
                 direction="up"
                 delay={idx * 90}
-                className="py-4 sm:py-6 flex items-center justify-between gap-3 sm:gap-6 group transition-all duration-300 hover:bg-white/[0.05] px-3 -mx-3 rounded-lg"
+                className="py-3.5 sm:py-6 flex items-center justify-between gap-2 xs:gap-3 sm:gap-6 group transition-all duration-300 hover:bg-white/[0.05] px-2 xs:px-3 -mx-2 xs:-mx-3 rounded-lg"
               >
                 {/* Step Num + Vertical bar */}
-                <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
+                <div className="flex items-center gap-2 xs:gap-2.5 sm:gap-4 shrink-0">
                   <div>
                     <span className="block text-[8px] sm:text-[9px] font-semibold tracking-widest text-[#c29653] uppercase">
                       {s.stepLabel}
                     </span>
-                    <span className="font-serif text-2xl sm:text-4xl lg:text-5xl text-[#d4af37] font-normal leading-none">
+                    <span className="font-serif text-xl xs:text-2xl sm:text-4xl lg:text-5xl text-[#d4af37] font-normal leading-none">
                       {s.stepNum}
                     </span>
                   </div>
-                  <span className="h-8 sm:h-10 w-[1px] bg-white/20 ml-1 sm:ml-2" />
+                  <span className="h-7 sm:h-10 w-[1px] bg-white/20 ml-1 sm:ml-2" />
                 </div>
 
                 {/* Title + Subtext positioned directly over the background collage */}
                 <div className="flex-1 min-w-0 pl-1 sm:pl-4">
-                  <h4 className="font-serif text-lg sm:text-2xl text-white font-normal truncate group-hover:text-emerald-200 transition-colors">
+                  <h4 className="font-serif text-base xs:text-lg sm:text-2xl text-white font-normal truncate group-hover:text-emerald-200 transition-colors">
                     {s.title}
                   </h4>
-                  <p className="text-[10px] sm:text-xs text-white/80 font-sans truncate mt-0.5">
+                  <p className="text-[9px] xs:text-[10px] sm:text-xs text-white/80 font-sans line-clamp-1 mt-0.5">
                     {s.productName}
                   </p>
                 </div>
@@ -1356,7 +1356,7 @@ function FourStepEditSection() {
                         imageUrl: s.image,
                       })
                     }
-                    className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/30 text-white/80 transition-all duration-200 group-hover:border-white group-hover:text-white group-hover:bg-white/15 group-hover:scale-110 active:scale-90"
+                    className="flex h-7 w-7 xs:h-8 xs:w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/30 text-white/80 transition-all duration-200 group-hover:border-white group-hover:text-white group-hover:bg-white/15 group-hover:scale-110 active:scale-90 cursor-pointer"
                     title={`Add ${s.title} to bag`}
                   >
                     <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
@@ -1414,34 +1414,34 @@ function PoweredByBotanicalsSection() {
   ];
 
   return (
-    <section id="botanicals" className="bg-[#faf8f4] py-20 lg:py-28 border-t border-[#ede7dc]">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+    <section id="botanicals" className="bg-[#faf8f4] py-14 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
+      <div className="mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#162e21]/70">
+          <p className="text-[10px] xs:text-xs font-semibold uppercase tracking-[0.22em] text-[#162e21]/70">
             Conscious Ingredients
           </p>
-          <h2 className="mt-2 font-display text-4xl sm:text-5xl font-medium leading-tight text-[#162e21]">
+          <h2 className="mt-2 font-display text-3xl xs:text-4xl sm:text-5xl font-medium leading-tight text-[#162e21]">
             Nature has its own intelligence.
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-[#2c3d33]/80">
+          <p className="mt-3.5 sm:mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/80">
             Every plant extract is thoughtfully chosen for biocompatibility, concentrated purity,
             and gentle efficacy in your everyday routine.
           </p>
         </div>
 
-        <div className="mt-12 divide-y divide-[#e5dfd5] border-y border-[#e5dfd5]">
+        <div className="mt-8 sm:mt-12 divide-y divide-[#e5dfd5] border-y border-[#e5dfd5]">
           {botanicals.map((b) => (
-            <div key={b.id} className="py-6 grid gap-4 md:grid-cols-12 md:items-center">
-              <div className="md:col-span-1 text-xs font-semibold tracking-widest text-[#162e21]/40">
+            <div key={b.id} className="py-4 sm:py-6 grid gap-2 sm:gap-4 md:grid-cols-12 md:items-center">
+              <div className="md:col-span-1 text-[10px] xs:text-xs font-semibold tracking-widest text-[#162e21]/40">
                 {b.id}
               </div>
               <div className="md:col-span-4">
-                <h3 className="font-display text-xl sm:text-2xl font-medium text-[#162e21]">
+                <h3 className="font-display text-lg xs:text-xl sm:text-2xl font-medium text-[#162e21]">
                   {b.name}
                 </h3>
                 <p className="text-xs italic text-[#2c3d33]/60">{b.latin}</p>
               </div>
-              <div className="md:col-span-3 text-xs font-semibold uppercase tracking-wider text-[#c49838]">
+              <div className="md:col-span-3 text-[10px] xs:text-xs font-semibold uppercase tracking-wider text-[#c49838]">
                 {b.benefit}
               </div>
               <div className="md:col-span-4 text-xs sm:text-sm text-[#2c3d33]/75 leading-relaxed font-sans">
@@ -1526,7 +1526,7 @@ function WhyMileInfinitySection() {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#0d2218] py-20 lg:py-28 xl:py-32 text-white">
+    <section className="relative w-full overflow-hidden bg-[#0d2218] py-14 sm:py-20 lg:py-28 xl:py-32 text-white">
       {/* Background Forest Image from Slide 2 */}
       <img
         src={dewyMatchaForestImg}
@@ -1538,18 +1538,18 @@ function WhyMileInfinitySection() {
       <div className="absolute inset-y-0 left-0 w-full sm:w-3/5 lg:w-1/2 bg-gradient-to-r from-[#0d2218] via-[#0d2218]/85 to-transparent pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0d2218]/90 via-transparent to-transparent sm:hidden pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
-        <div className="grid gap-10 lg:gap-14 lg:grid-cols-12 lg:items-start">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16">
+        <div className="grid gap-8 sm:gap-10 lg:gap-14 lg:grid-cols-12 lg:items-start">
           {/* Left Title Copy with constrained max-width so it never touches the bottle */}
           <div className="lg:col-span-5 max-w-[310px] sm:max-w-xs lg:max-w-sm lg:pt-0">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#c4af78] font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#c4af78] font-sans">
               Why Mile Infinity
             </p>
-            <h2 className="mt-3 font-serif text-2xl sm:text-3xl lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] text-white">
+            <h2 className="mt-2.5 sm:mt-3 font-serif text-2xl sm:text-3xl lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] text-white">
               Thoughtful care.<br />
               <span className="italic font-normal">Everyday beauty.</span>
             </h2>
-            <p className="mt-4 sm:mt-5 text-xs sm:text-[13px] leading-relaxed text-white/85 font-sans max-w-[280px]">
+            <p className="mt-3.5 sm:mt-5 text-xs sm:text-[13px] leading-relaxed text-white/85 font-sans max-w-[280px]">
               Skincare that's rooted in nature, crafted with care and made for your everyday rituals.
             </p>
           </div>
@@ -1559,7 +1559,7 @@ function WhyMileInfinitySection() {
             {pillars.map((p) => (
               <div
                 key={p.num}
-                className="py-4 sm:py-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 lg:gap-6 group"
+                className="py-3.5 sm:py-6 flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-5 lg:gap-6 group"
               >
                 {/* Top sub-row on mobile */}
                 <div className="flex items-center gap-3 sm:gap-4 shrink-0">
@@ -1569,13 +1569,13 @@ function WhyMileInfinitySection() {
                   </span>
 
                   {/* Circular Icon Badge */}
-                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full border border-[#c4af78]/40 bg-[#0e2c1e]/60 text-[#c4af78] shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-9 w-9 xs:h-10 xs:w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full border border-[#c4af78]/40 bg-[#0e2c1e]/60 text-[#c4af78] shadow-sm transition-transform duration-300 group-hover:scale-105">
                     <p.icon className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.4} />
                   </div>
 
                   {/* Title */}
                   <div className="sm:min-w-[140px] lg:min-w-[170px] shrink-0">
-                    <h3 className="font-serif text-xl sm:text-2xl lg:text-[27px] font-normal text-white">
+                    <h3 className="font-serif text-lg xs:text-xl sm:text-2xl lg:text-[27px] font-normal text-white">
                       {p.title}
                     </h3>
                   </div>
@@ -1585,7 +1585,7 @@ function WhyMileInfinitySection() {
                 <div className="hidden sm:block h-7 sm:h-8 w-[1px] bg-white/20 shrink-0" />
 
                 {/* Description */}
-                <div className="pl-8 sm:pl-0 flex-1 min-w-0">
+                <div className="pl-0 sm:pl-0 flex-1 min-w-0">
                   <p className="text-xs sm:text-[13px] text-white/80 font-sans leading-relaxed max-w-[280px]">
                     {p.desc}
                   </p>
@@ -1676,26 +1676,26 @@ function RoutineFinderSection() {
   }
 
   return (
-    <section id="routine-finder" className="relative w-full overflow-hidden bg-[#faf8f4] py-20 lg:py-28 text-[#162e21] border-t border-[#ede7dc]">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+    <section id="routine-finder" className="relative w-full overflow-hidden bg-[#faf8f4] py-14 sm:py-20 lg:py-28 text-[#162e21] border-t border-[#ede7dc]">
+      <div className="mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left Column: Heading & 4 Step Tabs */}
           <div className="lg:col-span-5">
-            <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold tracking-[0.24em] uppercase text-[#162e21]/70 font-sans">
               Find Your Skincare Ritual
             </p>
 
-            <h2 className="mt-3 font-serif text-4xl sm:text-5xl lg:text-[50px] font-normal leading-[1.12] text-[#162e21]">
+            <h2 className="mt-2.5 sm:mt-3 font-serif text-3xl xs:text-4xl sm:text-5xl lg:text-[50px] font-normal leading-[1.12] text-[#162e21]">
               Where does your<br />
               <span className="italic font-normal">routine begin?</span>
             </h2>
 
-            <p className="mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/80 font-sans max-w-md">
+            <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-[#2c3d33]/80 font-sans max-w-md">
               Discover the products that fit naturally into your everyday routine.
             </p>
 
             {/* 4 Interactive Routine Tabs */}
-            <div className="mt-8 space-y-2 max-w-sm">
+            <div className="mt-6 sm:mt-8 space-y-2 max-w-sm">
               {routineSteps.map((step, idx) => {
                 const isActive = activeStepIndex === idx;
                 return (
@@ -1706,14 +1706,14 @@ function RoutineFinderSection() {
                       setActiveStepIndex(idx);
                       setAdded(false);
                     }}
-                    className={`w-full flex items-center gap-4 px-6 py-4 text-left transition-all duration-300 rounded-sm hover-lift-sm active:scale-98 ${
+                    className={`w-full flex items-center gap-3 xs:gap-4 px-4 xs:px-6 py-3 sm:py-4 text-left transition-all duration-300 rounded-sm hover-lift-sm active:scale-98 cursor-pointer ${
                       isActive
                         ? "bg-[#ede6dc] border-l-2 border-[#162e21] shadow-sm text-[#162e21]"
                         : "bg-transparent hover:bg-black/[0.04] border-b border-[#162e21]/10 text-[#162e21]/70"
                     }`}
                   >
                     <span className="text-xs font-mono opacity-60">{step.step}</span>
-                    <span className="font-serif text-lg sm:text-xl font-normal capitalize">
+                    <span className="font-serif text-base xs:text-lg sm:text-xl font-normal capitalize">
                       {step.name}
                     </span>
                   </button>
@@ -1735,11 +1735,11 @@ function RoutineFinderSection() {
               </div>
 
               {/* Dynamic Interactive Floating Product Card positioned gracefully on mobile and desktop */}
-              <div className="mt-5 sm:mt-0 sm:absolute sm:-bottom-4 sm:right-4 z-20 w-full sm:w-72 max-w-sm mx-auto sm:mx-0 bg-white p-4 sm:p-6 shadow-xl rounded-2xl border border-[#ede7dc] hover-lift-sm animate-float-gentle transition-all">
-                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#c29653]">
+              <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-4 sm:right-4 z-20 w-full sm:w-72 max-w-sm mx-auto sm:mx-0 bg-white p-4 sm:p-6 shadow-xl rounded-2xl border border-[#ede7dc] hover-lift-sm animate-float-gentle transition-all">
+                <p className="text-[9px] xs:text-[10px] font-bold tracking-[0.2em] uppercase text-[#c29653]">
                   {current.category}
                 </p>
-                <h4 className="mt-1.5 sm:mt-2 font-serif text-base sm:text-lg font-medium text-[#162e21] leading-snug">
+                <h4 className="mt-1 sm:mt-2 font-serif text-base sm:text-lg font-medium text-[#162e21] leading-snug">
                   {current.productName}
                 </h4>
                 <p className="mt-2 sm:mt-3 font-serif text-base sm:text-lg font-semibold text-[#162e21]">
@@ -1748,7 +1748,7 @@ function RoutineFinderSection() {
                 <button
                   type="button"
                   onClick={handleAdd}
-                  className="btn-shimmer hover-lift active:scale-95 mt-3.5 sm:mt-4 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all flex items-center justify-between px-4 rounded-none cursor-pointer"
+                  className="btn-shimmer hover-lift active:scale-95 mt-3 sm:mt-4 w-full bg-[#1b3b2d] hover:bg-[#122c21] py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white shadow-md transition-all flex items-center justify-between px-4 rounded-none cursor-pointer"
                 >
                   {added ? (
                     <span className="inline-flex items-center gap-1.5 text-emerald-300 animate-scale-in">
@@ -1814,7 +1814,7 @@ function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative w-full overflow-hidden bg-[#faf8f4] py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
+    <section id="faq" className="relative w-full overflow-hidden bg-[#faf8f4] py-12 xs:py-16 sm:py-20 lg:py-28 border-t border-[#ede7dc]">
       {/* Pristine serene stone spa background from master still life */}
       <img
         src={sereneStoneSpaBgImg}
@@ -1822,32 +1822,32 @@ function FaqSection() {
         className="absolute inset-0 h-full w-full object-cover object-left lg:object-center select-none"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 xs:px-6 sm:px-8 lg:px-12">
         <div className="grid gap-8 lg:gap-12 lg:grid-cols-12 items-start">
           {/* Left Column: Heading */}
           <Reveal direction="right" className="lg:col-span-5 pt-2">
-            <p className="text-xs uppercase tracking-[0.24em] text-[#162e21]/75 font-semibold">
+            <p className="text-[10px] xs:text-xs uppercase tracking-[0.24em] text-[#162e21]/75 font-semibold">
               Good to know
             </p>
-            <h2 className="mt-2 font-serif text-3xl sm:text-4xl lg:text-[54px] font-normal leading-[1.14] text-[#162e21]">
+            <h2 className="mt-2 font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[54px] font-normal leading-[1.14] text-[#162e21]">
               Frequently asked<br />
               <span className="italic">questions.</span>
             </h2>
-            <p className="mt-3.5 sm:mt-4 max-w-sm text-xs sm:text-base text-[#2c3d33]/85 leading-relaxed font-sans">
+            <p className="mt-3 sm:mt-4 max-w-sm text-xs sm:text-base text-[#2c3d33]/85 leading-relaxed font-sans">
               Everything you need to begin a simpler Mile Infinity skincare ritual.
             </p>
           </Reveal>
 
           {/* Right Column: Interactive Accordion */}
-          <Reveal direction="left" delay={150} className="lg:col-span-7 divide-y divide-[#162e21]/20 border-y border-[#162e21]/20 sm:bg-transparent bg-[#fdfbf9]/90 sm:backdrop-blur-none backdrop-blur-xs rounded-2xl p-4 sm:p-0">
+          <Reveal direction="left" delay={150} className="lg:col-span-7 divide-y divide-[#162e21]/20 border-y border-[#162e21]/20 sm:bg-transparent bg-[#fdfbf9]/92 sm:backdrop-blur-none backdrop-blur-xs rounded-2xl p-3.5 xs:p-4 sm:p-0">
             {FAQS.map((faq, idx) => {
               const isOpen = openIndex === idx;
               return (
-                <div key={faq.q} className="py-4 sm:py-5">
+                <div key={faq.q} className="py-3.5 sm:py-5">
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between gap-4 text-left font-serif text-base sm:text-lg text-[#162e21] hover:text-[#0c2217] transition-colors group"
+                    className="w-full flex items-center justify-between gap-3 sm:gap-4 text-left font-serif text-base sm:text-lg text-[#162e21] hover:text-[#0c2217] transition-colors group cursor-pointer"
                   >
                     <span className="group-hover:translate-x-1 transition-transform duration-200">{faq.q}</span>
                     <span className={`text-xl font-light text-[#162e21] shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}>
@@ -1877,7 +1877,7 @@ function FaqSection() {
 function ClosingLuxuryBanner() {
   return (
     <section className="relative w-full overflow-hidden bg-[#073125]">
-      <div className="relative min-h-[460px] sm:min-h-[560px] lg:min-h-[603px] w-full flex items-center justify-center">
+      <div className="relative min-h-[420px] xs:min-h-[460px] sm:min-h-[560px] lg:min-h-[603px] w-full flex items-center justify-center">
         {/* Clean full-width background photo without baked text */}
         <img
           src={radiantModelsDuoBgImg}
@@ -1886,8 +1886,8 @@ function ClosingLuxuryBanner() {
         />
 
         {/* Center editorial typography and interactive buttons matching Frame 30 */}
-        <Reveal direction="up" className="relative z-10 text-center px-4 max-w-2xl py-14 sm:py-20">
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-[46px] font-normal leading-[1.2] text-white">
+        <Reveal direction="up" className="relative z-10 text-center px-4 max-w-2xl py-12 sm:py-20">
+          <h2 className="font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[46px] font-normal leading-[1.2] text-white">
             Your skin.<br />
             Your ritual.<br />
             <span className="italic">Your Mile Infinity.</span>
@@ -1899,14 +1899,14 @@ function ClosingLuxuryBanner() {
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
             <a
               href="#essentials"
-              className="btn-shimmer hover-lift active:scale-95 bg-[#ede9e1] hover:bg-white text-[#162e21] px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center gap-2 shadow-lg text-center"
+              className="btn-shimmer hover-lift active:scale-95 bg-[#ede9e1] hover:bg-white text-[#162e21] px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center gap-2 shadow-lg text-center cursor-pointer"
             >
               <span>Shop All Skincare</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
             <a
               href="#approach"
-              className="btn-shimmer hover-lift active:scale-95 border border-white/70 hover:border-white bg-[#073125]/40 hover:bg-[#073125]/70 backdrop-blur-sm text-white px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center gap-2 text-center"
+              className="btn-shimmer hover-lift active:scale-95 border border-white/70 hover:border-white bg-[#073125]/40 hover:bg-[#073125]/70 backdrop-blur-sm text-white px-6 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all inline-flex items-center justify-center gap-2 text-center cursor-pointer"
             >
               <span>Explore The Brand</span>
               <ArrowRight className="h-3.5 w-3.5" />

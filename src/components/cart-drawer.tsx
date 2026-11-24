@@ -301,16 +301,16 @@ export function CartDrawer() {
           className="w-screen max-w-md bg-[#faf8f4] text-[#162e21] shadow-2xl flex flex-col transform"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-[#e5dfd5] px-6 py-5 bg-[#f5f1ea]">
-            <div className="flex items-center gap-3">
-              <ShoppingBag className="h-5 w-5 text-[#162e21]" />
-              <h2 className="font-display text-xl font-medium tracking-tight text-[#162e21]">
+          <div className="flex items-center justify-between border-b border-[#e5dfd5] px-4 xs:px-6 py-4 xs:py-5 bg-[#f5f1ea]">
+            <div className="flex items-center gap-2.5 xs:gap-3">
+              <ShoppingBag className="h-4.5 w-4.5 xs:h-5 xs:w-5 text-[#162e21]" />
+              <h2 className="font-display text-lg xs:text-xl font-medium tracking-tight text-[#162e21]">
                 Your Skincare Bag ({count})
               </h2>
             </div>
             <button
               onClick={closeCart}
-              className="p-1 rounded-full text-[#162e21]/70 hover:text-[#162e21] hover:bg-black/5 transition-colors"
+              className="p-1 rounded-full text-[#162e21]/70 hover:text-[#162e21] hover:bg-black/5 transition-colors cursor-pointer"
               aria-label="Close cart"
             >
               <X className="h-5 w-5" />
@@ -319,8 +319,8 @@ export function CartDrawer() {
 
           {/* Free Shipping Bar */}
           {items.length > 0 && checkoutStep === "cart" && (
-            <div className="bg-[#162e21] px-6 py-3 text-white">
-              <div className="flex items-center justify-between text-xs font-medium">
+            <div className="bg-[#162e21] px-4 xs:px-6 py-2.5 xs:py-3 text-white">
+              <div className="flex items-center justify-between text-[11px] xs:text-xs font-medium">
                 <span className="inline-flex items-center gap-1.5">
                   <Truck className="h-3.5 w-3.5 text-emerald-400" />
                   {freeShippingDiff <= 0 ? (
@@ -333,9 +333,9 @@ export function CartDrawer() {
                     </span>
                   )}
                 </span>
-                <span className="text-[11px] text-white/70">{Math.round(freeShippingProgress)}%</span>
+                <span className="text-[10px] xs:text-[11px] text-white/70">{Math.round(freeShippingProgress)}%</span>
               </div>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
+              <div className="mt-1.5 xs:mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
                 <div
                   className="h-full bg-emerald-400 transition-all duration-500 rounded-full"
                   style={{ width: `${freeShippingProgress}%` }}
@@ -345,7 +345,7 @@ export function CartDrawer() {
           )}
 
           {/* Body Content */}
-          <div className="flex-1 overflow-y-auto px-6 py-4">
+          <div className="flex-1 overflow-y-auto px-4 xs:px-6 py-3 xs:py-4">
             {checkoutStep === "cart" && (
               <>
                 {items.length === 0 ? (

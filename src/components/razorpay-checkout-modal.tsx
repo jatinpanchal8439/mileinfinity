@@ -305,22 +305,22 @@ export function RazorpayCheckoutModal({
         className="relative w-full max-w-2xl bg-white border border-slate-200 text-slate-900 rounded-2xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[92vh]"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 sm:px-6 py-4 bg-slate-50/80">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-[#0f3d24] text-white flex items-center justify-center shadow-sm">
-              <CreditCard className="h-5 w-5" />
+        <div className="flex items-center justify-between border-b border-slate-200 px-3.5 xs:px-5 sm:px-6 py-3 xs:py-4 bg-slate-50/80">
+          <div className="flex items-center gap-2.5 xs:gap-3">
+            <div className="h-9 w-9 xs:h-10 xs:w-10 rounded-xl bg-[#0f3d24] text-white flex items-center justify-center shadow-sm shrink-0">
+              <CreditCard className="h-4.5 w-4.5 xs:h-5 xs:w-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-serif text-lg font-bold tracking-wide text-slate-900">
-                  Razorpay Secure Checkout
+              <div className="flex items-center gap-1.5 xs:gap-2">
+                <span className="font-serif text-base xs:text-lg font-bold tracking-wide text-slate-900">
+                  Razorpay Checkout
                 </span>
-                <span className="bg-emerald-50 text-emerald-700 text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                <span className="bg-emerald-50 text-emerald-700 text-[9px] xs:text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
                   <ShieldCheck className="h-3 w-3 text-emerald-600" />
-                  Verified Gateway
+                  Verified
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[10px] xs:text-[11px] text-slate-500">
                 256-bit SSL Encrypted • Direct 1-Click Buy
               </p>
             </div>
@@ -328,7 +328,7 @@ export function RazorpayCheckoutModal({
 
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-200/60 transition-colors"
+            className="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg hover:bg-slate-200/60 transition-colors cursor-pointer"
             title="Close Checkout"
           >
             <X className="h-5 w-5" />
@@ -336,7 +336,7 @@ export function RazorpayCheckoutModal({
         </div>
 
         {/* Modal Body */}
-        <div className="p-5 sm:p-6 overflow-y-auto flex-1 space-y-6">
+        <div className="p-3.5 xs:p-5 sm:p-6 overflow-y-auto flex-1 space-y-4 xs:space-y-6">
           {step === "details" && (
             <>
               {/* Product Card Summary Snippet */}

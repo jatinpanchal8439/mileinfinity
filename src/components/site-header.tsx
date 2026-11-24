@@ -97,21 +97,21 @@ export function SiteHeader() {
       <RainbowAnnouncementBar />
 
       <div
-        className={`relative mx-auto flex max-w-[1760px] 2xl:max-w-none items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 xl:px-16 transition-all duration-300 ease-in-out ${
-          scrolled ? "h-15 sm:h-16" : "h-18 sm:h-20 lg:h-22"
+        className={`relative mx-auto flex max-w-[1760px] 2xl:max-w-none items-center justify-between gap-2.5 xs:gap-3 sm:gap-4 px-3 xs:px-4 sm:px-8 lg:px-12 xl:px-16 transition-all duration-300 ease-in-out ${
+          scrolled ? "h-14 sm:h-16" : "h-16 xs:h-18 sm:h-20 lg:h-22"
         }`}
       >
         {/* Mobile menu toggle with smooth rotate animation */}
         <button
-          className="p-1.5 text-[#162e21] lg:hidden rounded-lg hover:bg-black/5 transition-all duration-200 active:scale-95 cursor-pointer"
+          className="p-1 xs:p-1.5 text-[#162e21] lg:hidden rounded-lg hover:bg-black/5 transition-all duration-200 active:scale-95 cursor-pointer shrink-0"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
           <div className="transition-transform duration-300">
             {mobileOpen ? (
-              <X className="h-6 w-6 rotate-90 transition-transform duration-300" />
+              <X className="h-5 w-5 xs:h-6 xs:w-6 rotate-90 transition-transform duration-300" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5 xs:h-6 xs:w-6" />
             )}
           </div>
         </button>
@@ -128,8 +128,8 @@ export function SiteHeader() {
             height={126}
             className={`w-auto object-contain transition-all duration-300 ease-out group-hover:scale-105 ${
               scrolled
-                ? "h-10 sm:h-12 md:h-13"
-                : "h-12 sm:h-14 md:h-16 lg:h-18"
+                ? "h-8 xs:h-9 sm:h-12 md:h-13"
+                : "h-9 xs:h-11 sm:h-14 md:h-16 lg:h-18"
             }`}
             style={{ imageRendering: "auto", WebkitFontSmoothing: "antialiased" }}
             onError={(e) => {
@@ -182,8 +182,8 @@ export function SiteHeader() {
         </nav>
 
         {/* Icons and rectangular SHOP SKINCARE CTA on the right */}
-        <div className="flex items-center gap-4 sm:gap-5 ml-auto">
-          {/* Animated expandable search bar */}
+        <div className="flex items-center gap-2 xs:gap-3 sm:gap-5 ml-auto shrink-0">
+          {/* Animated expandable search bar on desktop */}
           <div className="relative hidden sm:block">
             {searchOpen ? (
               <div className="flex items-center gap-2 rounded-full border border-[#162e21]/30 bg-white/95 px-3 py-1 shadow-sm animate-in fade-in zoom-in-95 duration-200">
@@ -222,21 +222,21 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={openProfileDrawer}
-              className="flex items-center gap-1.5 text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer py-1.5 px-2 rounded-full hover:bg-black/5"
+              className="flex items-center gap-1 text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer p-1.5 xs:py-1.5 xs:px-2 rounded-full hover:bg-black/5"
               title="My Account & Orders"
               aria-label="User Account"
             >
-              <User className="h-[18px] w-[18px]" strokeWidth={1.7} />
+              <User className="h-4.5 w-4.5 xs:h-[18px] xs:w-[18px]" strokeWidth={1.7} />
             </button>
           ) : (
             <button
               type="button"
               onClick={() => openAuthModal("login")}
-              className="text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer p-1.5 rounded-full hover:bg-black/5"
+              className="text-[#162e21] hover:text-[#0f261c] transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer p-1.5 xs:py-1.5 xs:px-2 rounded-full hover:bg-black/5"
               title="Sign In / Register with Free OTP"
               aria-label="User Account"
             >
-              <User className="h-[18px] w-[18px]" strokeWidth={1.7} />
+              <User className="h-4.5 w-4.5 xs:h-[18px] xs:w-[18px]" strokeWidth={1.7} />
             </button>
           )}
 
@@ -244,21 +244,49 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={openCart}
-            className={`inline-flex items-center justify-center gap-2 rounded-none bg-[#847c43] hover:bg-[#736c39] px-4 sm:px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-white transition-all shadow-xs hover:shadow-md active:scale-95 cursor-pointer ${
+            className={`inline-flex items-center justify-center gap-1.5 xs:gap-2 rounded-none bg-[#847c43] hover:bg-[#736c39] px-2.5 xs:px-3.5 sm:px-5 py-2 xs:py-2.5 text-[11px] xs:text-xs font-semibold uppercase tracking-[0.08em] xs:tracking-[0.12em] text-white transition-all shadow-xs hover:shadow-md active:scale-95 cursor-pointer shrink-0 ${
               badgeBump ? "scale-105" : ""
             }`}
             aria-label="Shopping Cart"
           >
-            <ShoppingBag className="h-4 w-4" strokeWidth={1.7} />
-            <span>CART ({count})</span>
+            <ShoppingBag className="h-3.5 w-3.5 xs:h-4 xs:w-4" strokeWidth={1.7} />
+            <span className="hidden min-[380px]:inline">CART </span>
+            <span>({count})</span>
           </button>
         </div>
       </div>
 
       {/* Mobile Animated Dropdown Drawer */}
       {mobileOpen && (
-        <nav className="border-t border-[#e5dfd5] bg-[#f7f5f0]/98 backdrop-blur-xl px-6 py-5 lg:hidden animate-in slide-in-from-top-3 fade-in duration-300 ease-out shadow-xl">
-          <div className="space-y-1.5">
+        <nav className="border-t border-[#e5dfd5] bg-[#f7f5f0]/98 backdrop-blur-xl px-4 xs:px-6 py-4 xs:py-5 lg:hidden animate-in slide-in-from-top-3 fade-in duration-300 ease-out shadow-xl">
+          {/* Mobile Search Bar */}
+          <div className="mb-3.5 flex items-center gap-2 rounded-xl border border-[#162e21]/20 bg-white px-3 py-2 shadow-2xs">
+            <Search className="h-4 w-4 text-[#162e21]/60 shrink-0" />
+            <input
+              type="text"
+              placeholder="Search skincare essentials..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && searchQuery.trim()) {
+                  setMobileOpen(false);
+                  window.location.href = `/shop?search=${encodeURIComponent(searchQuery.trim())}`;
+                }
+              }}
+              className="w-full bg-transparent text-xs text-[#162e21] placeholder:text-[#162e21]/50 focus:outline-none"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="text-[#162e21]/40 hover:text-[#162e21]"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
+
+          <div className="space-y-1">
             {NAV_LINKS.map((link, idx) => {
               const active = isLinkActive(link.to);
               return (
@@ -288,7 +316,7 @@ export function SiteHeader() {
           </div>
 
           {/* Mobile Customer Auth */}
-          <div className="mt-4 border-t border-[#e5dfd5] pt-3">
+          <div className="mt-3.5 border-t border-[#e5dfd5] pt-3">
             {isAuthenticated ? (
               <button
                 onClick={() => {
@@ -306,7 +334,7 @@ export function SiteHeader() {
                   setMobileOpen(false);
                   openAuthModal("login");
                 }}
-                className="w-full flex items-center gap-2 py-2.5 px-3 rounded-xl border border-[#162e21]/20 hover:bg-[#162e21]/5 text-sm font-semibold text-[#162e21] transition-all cursor-pointer"
+                className="w-full flex items-center gap-2 py-2.5 px-3 rounded-xl border border-[#162e21]/20 hover:bg-[#162e21]/5 text-xs xs:text-sm font-semibold text-[#162e21] transition-all cursor-pointer"
               >
                 <User className="w-4 h-4" />
                 <span>Customer Sign In / Sign Up (Free OTP)</span>
@@ -314,7 +342,7 @@ export function SiteHeader() {
             )}
           </div>
 
-          <div className="mt-4 border-t border-[#e5dfd5] pt-4">
+          <div className="mt-3.5 border-t border-[#e5dfd5] pt-3.5">
             <Link
               to="/shop"
               className="btn-shimmer inline-block w-full rounded-none bg-[#162e21] hover:bg-[#0f261c] py-3 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all shadow-md active:scale-98"

@@ -72,7 +72,7 @@ function ContactHeroBanner() {
   return (
     <section className="relative w-full overflow-hidden bg-[#e5dfd5]">
       {/* Hero Background artwork */}
-      <div className="relative min-h-[580px] sm:min-h-[640px] lg:min-h-[720px] w-full flex items-center">
+      <div className="relative min-h-[500px] xs:min-h-[540px] sm:min-h-[640px] lg:min-h-[720px] w-full flex items-center">
         <img
           src={contactHeroBannerImg}
           alt="Mile Infinity Skincare Conversation — We're Here to Help"
@@ -80,29 +80,29 @@ function ContactHeroBanner() {
         />
 
         {/* Subtle left-side legibility wash for typography preserving natural sunlit texture */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#f5efe6]/70 via-[#f5efe6]/25 to-transparent sm:w-[55%] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f5efe6]/95 via-[#f5efe6]/85 to-[#f5efe6]/40 sm:from-[#f5efe6]/70 sm:via-[#f5efe6]/25 sm:to-transparent sm:w-[55%] pointer-events-none" />
 
         {/* Content container */}
-        <div className="relative z-10 mx-auto max-w-[1440px] w-full px-6 sm:px-10 lg:px-16 py-16 sm:py-20 lg:py-24">
+        <div className="relative z-10 mx-auto max-w-[1440px] w-full px-4 xs:px-6 sm:px-10 lg:px-16 py-12 xs:py-16 sm:py-20 lg:py-24">
           <div className="max-w-xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/75 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/75 font-sans">
               We're Here to Help
             </p>
 
-            <h1 className="mt-3 font-serif text-3xl sm:text-5xl lg:text-[62px] font-normal leading-[1.08] text-[#162e21] tracking-tight">
+            <h1 className="mt-2 xs:mt-3 font-serif text-2xl xs:text-3xl sm:text-5xl lg:text-[62px] font-normal leading-[1.08] text-[#162e21] tracking-tight">
               Let's Start a<br />
               Conversation.
             </h1>
 
-            <p className="mt-4 sm:mt-5 text-xs sm:text-base text-[#2c3d33]/85 leading-relaxed font-sans max-w-lg">
+            <p className="mt-3 xs:mt-4 sm:mt-5 text-xs sm:text-base text-[#2c3d33]/85 leading-relaxed font-sans max-w-lg">
               Questions about Mile Infinity, our skincare collection, or your order? We're here to help you find the information and support you need.
             </p>
 
             {/* Action buttons */}
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <div className="mt-5 xs:mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 xs:gap-3 sm:gap-4">
               <a
                 href="#contact-form"
-                className="inline-flex items-center justify-center gap-3 bg-[#162e21] hover:bg-[#0c2217] text-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none shadow-sm hover:shadow-md text-center"
+                className="inline-flex items-center justify-center gap-3 bg-[#162e21] hover:bg-[#0c2217] text-white px-6 xs:px-7 py-3 xs:py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none shadow-sm hover:shadow-md text-center"
               >
                 <span>Get in Touch</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -110,7 +110,7 @@ function ContactHeroBanner() {
 
               <a
                 href="/shop"
-                className="inline-flex items-center justify-center gap-3 bg-[#f7f5ef]/85 hover:bg-white text-[#162e21] border border-[#162e21]/30 hover:border-[#162e21] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none text-center"
+                className="inline-flex items-center justify-center gap-3 bg-[#f7f5ef]/85 hover:bg-white text-[#162e21] border border-[#162e21]/30 hover:border-[#162e21] px-6 xs:px-7 py-3 xs:py-3.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none text-center"
               >
                 <span>Explore Our Skincare</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -130,12 +130,12 @@ function ContactHeroBanner() {
  */
 function ContactSubheaderBar() {
   return (
-    <div className="border-b border-[#e5dfd5] bg-[#faf8f4] py-4">
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-        <span className="font-serif italic text-base text-[#162e21]">
+    <div className="border-b border-[#e5dfd5] bg-[#faf8f4] py-3.5 xs:py-4">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1.5 xs:gap-2">
+        <span className="font-serif italic text-sm xs:text-base text-[#162e21]">
           Contact Mile Infinity
         </span>
-        <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#162e21]/60 font-sans">
+        <span className="text-[9px] xs:text-[10px] font-semibold uppercase tracking-[0.2em] xs:tracking-[0.22em] text-[#162e21]/60 font-sans">
           Enquiries / Product Guidance / Quick Answers
         </span>
       </div>
@@ -167,30 +167,30 @@ function ContactFormSection() {
   };
 
   return (
-    <section id="contact-form" className="bg-[#faf8f4] py-16 lg:py-24 border-b border-[#e5dfd5]">
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <section id="contact-form" className="bg-[#faf8f4] py-12 xs:py-16 lg:py-24 border-b border-[#e5dfd5]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xs:gap-12 lg:gap-16 items-start">
           {/* Left Column: Heading & Description */}
           <div className="lg:col-span-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
               Send Us a Message
             </p>
 
-            <h2 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-[50px] font-normal text-[#162e21] leading-[1.12]">
+            <h2 className="mt-2 xs:mt-3 font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[50px] font-normal text-[#162e21] leading-[1.12]">
               Tell Us How<br />
               We Can<br />
               Help.
             </h2>
 
-            <p className="mt-6 text-sm text-[#2c3d33]/85 leading-relaxed font-sans max-w-md">
+            <p className="mt-4 xs:mt-6 text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans max-w-md">
               For skincare product enquiries, order and delivery assistance, or a question about Mile Infinity, start here.
             </p>
 
-            <p className="mt-4 text-xs text-[#2c3d33]/70 leading-relaxed font-sans max-w-md">
+            <p className="mt-3 xs:mt-4 text-[11px] xs:text-xs text-[#2c3d33]/70 leading-relaxed font-sans max-w-md">
               Writing about a purchase? Choose Customer Support and include your order number if you have it.
             </p>
 
-            <div className="mt-8 pt-4">
+            <div className="mt-6 xs:mt-8 pt-2 xs:pt-4">
               <a
                 href="#contact-faq"
                 className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#162e21] hover:underline"
@@ -202,22 +202,22 @@ function ContactFormSection() {
           </div>
 
           {/* Right Column: Form */}
-          <div className="lg:col-span-7 bg-[#f7f5ef] p-6 sm:p-10 border border-[#e5dfd5]">
-            <div className="flex justify-between items-center mb-6">
-              <span className="text-[11px] font-medium text-[#162e21]/50 font-sans">
+          <div className="lg:col-span-7 bg-[#f7f5ef] p-4 xs:p-6 sm:p-10 border border-[#e5dfd5]">
+            <div className="flex justify-between items-center mb-4 xs:mb-6">
+              <span className="text-[10px] xs:text-[11px] font-medium text-[#162e21]/50 font-sans">
                 * Required fields
               </span>
             </div>
 
             {submitted ? (
-              <div className="py-12 text-center bg-white border border-[#162e21]/15 p-8">
+              <div className="py-8 xs:py-12 text-center bg-white border border-[#162e21]/15 p-6 xs:p-8">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#162e21] text-white">
                   <Check className="h-6 w-6" />
                 </div>
-                <h3 className="font-serif text-2xl font-normal text-[#162e21]">
+                <h3 className="font-serif text-xl xs:text-2xl font-normal text-[#162e21]">
                   Thank you, {fullName}.
                 </h3>
-                <p className="mt-3 text-sm text-[#2c3d33]/80 leading-relaxed font-sans max-w-md mx-auto">
+                <p className="mt-2.5 xs:mt-3 text-xs sm:text-sm text-[#2c3d33]/80 leading-relaxed font-sans max-w-md mx-auto">
                   Your message regarding "{subject || "your enquiry"}" has been received. Our team will review your note and respond to <strong className="text-[#162e21]">{email}</strong> within 24 hours.
                 </p>
                 <button
@@ -228,17 +228,17 @@ function ContactFormSection() {
                     setSubject("");
                     setOrderNumber("");
                   }}
-                  className="mt-6 text-xs uppercase tracking-[0.16em] font-semibold text-[#162e21] underline"
+                  className="mt-5 xs:mt-6 text-xs uppercase tracking-[0.16em] font-semibold text-[#162e21] underline cursor-pointer"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4 xs:space-y-5">
                 {/* Full Name & Email Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 xs:gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#162e21] mb-1.5 font-sans">
+                    <label className="block text-xs font-medium text-[#162e21] mb-1 xs:mb-1.5 font-sans">
                       Full Name *
                     </label>
                     <input
@@ -247,12 +247,12 @@ function ContactFormSection() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Your full name"
-                      className="w-full bg-white border border-[#162e21]/20 px-3.5 py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
+                      className="w-full bg-white border border-[#162e21]/20 px-3 xs:px-3.5 py-2 xs:py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-[#162e21] mb-1.5 font-sans">
+                    <label className="block text-xs font-medium text-[#162e21] mb-1 xs:mb-1.5 font-sans">
                       Email Address *
                     </label>
                     <input
@@ -261,14 +261,14 @@ function ContactFormSection() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email address"
-                      className="w-full bg-white border border-[#162e21]/20 px-3.5 py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
+                      className="w-full bg-white border border-[#162e21]/20 px-3 xs:px-3.5 py-2 xs:py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
                     />
                   </div>
                 </div>
 
                 {/* Enquiry Type dropdown */}
                 <div>
-                  <label className="block text-xs font-medium text-[#162e21] mb-1.5 font-sans">
+                  <label className="block text-xs font-medium text-[#162e21] mb-1 xs:mb-1.5 font-sans">
                     Enquiry Type *
                   </label>
                   <div className="relative">
@@ -276,7 +276,7 @@ function ContactFormSection() {
                       value={enquiryType}
                       onChange={(e) => setEnquiryType(e.target.value)}
                       required
-                      className="w-full appearance-none bg-white border border-[#162e21]/20 px-3.5 py-2.5 pr-8 text-xs text-[#162e21] rounded-none focus:outline-none focus:border-[#162e21] cursor-pointer"
+                      className="w-full appearance-none bg-white border border-[#162e21]/20 px-3 xs:px-3.5 py-2 xs:py-2.5 pr-8 text-xs text-[#162e21] rounded-none focus:outline-none focus:border-[#162e21] cursor-pointer"
                     >
                       <option value="">Choose an enquiry type</option>
                       <option value="customer-support">Customer Support</option>
@@ -285,28 +285,28 @@ function ContactFormSection() {
                     </select>
                     <ChevronDown className="h-4 w-4 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#162e21]/60" />
                   </div>
-                  <p className="mt-1 text-[10px] text-[#162e21]/60 font-sans">
+                  <p className="mt-1 text-[9px] xs:text-[10px] text-[#162e21]/60 font-sans">
                     Customer Support / Product Guidance / General Enquiries
                   </p>
                 </div>
 
                 {/* Order Number & Subject Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 xs:gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#162e21] mb-1.5 font-sans">
+                    <label className="block text-xs font-medium text-[#162e21] mb-1 xs:mb-1.5 font-sans">
                       Order Number <span className="text-[#162e21]/60 font-normal">(optional)</span>
                     </label>
                     <input
                       type="text"
                       value={orderNumber}
                       onChange={(e) => setOrderNumber(e.target.value)}
-                      placeholder="If your enquiry relates to an order"
-                      className="w-full bg-white border border-[#162e21]/20 px-3.5 py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
+                      placeholder="If related to an order"
+                      className="w-full bg-white border border-[#162e21]/20 px-3 xs:px-3.5 py-2 xs:py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-[#162e21] mb-1.5 font-sans">
+                    <label className="block text-xs font-medium text-[#162e21] mb-1 xs:mb-1.5 font-sans">
                       Subject *
                     </label>
                     <input
@@ -315,23 +315,23 @@ function ContactFormSection() {
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="What would you like to ask?"
-                      className="w-full bg-white border border-[#162e21]/20 px-3.5 py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
+                      className="w-full bg-white border border-[#162e21]/20 px-3 xs:px-3.5 py-2 xs:py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21]"
                     />
                   </div>
                 </div>
 
                 {/* Your Message */}
                 <div>
-                  <label className="block text-xs font-medium text-[#162e21] mb-1.5 font-sans">
+                  <label className="block text-xs font-medium text-[#162e21] mb-1 xs:mb-1.5 font-sans">
                     Your Message *
                   </label>
                   <textarea
                     required
-                    rows={5}
+                    rows={4}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell us how we can help."
-                    className="w-full bg-white border border-[#162e21]/20 px-3.5 py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21] resize-none"
+                    className="w-full bg-white border border-[#162e21]/20 px-3 xs:px-3.5 py-2 xs:py-2.5 text-xs text-[#162e21] placeholder:text-[#162e21]/40 rounded-none focus:outline-none focus:border-[#162e21] resize-none"
                   />
                 </div>
 
@@ -339,7 +339,7 @@ function ContactFormSection() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2.5 bg-[#162e21] hover:bg-[#0c2217] text-white px-8 py-3 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-sm"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#162e21] hover:bg-[#0c2217] text-white px-7 xs:px-8 py-3 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-sm cursor-pointer active:scale-98"
                   >
                     <span>Send Message</span>
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -403,15 +403,15 @@ function ContactQuestionsMatterSection() {
   ];
 
   return (
-    <section className="bg-[#ede6db] py-14 sm:py-20 lg:py-28">
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-10 lg:px-16">
+    <section className="bg-[#ede6db] py-10 xs:py-14 sm:py-20 lg:py-28">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16">
         {/* Header row matching screenshot */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-end pb-8 sm:pb-12 lg:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 xs:gap-6 items-end pb-6 xs:pb-8 sm:pb-12 lg:pb-16">
           <div className="lg:col-span-7">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
               More Help to Discover //
             </p>
-            <h2 className="mt-2 sm:mt-3 font-serif text-2xl sm:text-4xl lg:text-[54px] font-normal text-[#162e21] leading-[1.08] tracking-tight">
+            <h2 className="mt-1.5 xs:mt-2 sm:mt-3 font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[54px] font-normal text-[#162e21] leading-[1.08] tracking-tight">
               Your Skincare<br />
               Questions Matter.
             </h2>
@@ -424,7 +424,7 @@ function ContactQuestionsMatterSection() {
         </div>
 
         {/* 4 Cards Grid - Staggered layout matching screenshot */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 items-start lg:pb-16">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-6 xl:gap-8 items-start lg:pb-16">
           {essentials.map((item) => (
             <div
               key={item.step}
@@ -445,21 +445,21 @@ function ContactQuestionsMatterSection() {
               </a>
 
               {/* Product Info */}
-              <div className="mt-4 flex flex-col flex-1">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8c9489] font-sans">
+              <div className="mt-3 xs:mt-4 flex flex-col flex-1">
+                <span className="text-[9px] xs:text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8c9489] font-sans">
                   {item.step}
                 </span>
 
-                <h3 className="mt-2 font-serif text-lg sm:text-[22px] font-normal text-[#162e21] leading-snug">
+                <h3 className="mt-1.5 xs:mt-2 font-serif text-base xs:text-lg sm:text-[22px] font-normal text-[#162e21] leading-snug">
                   <a href={item.href} className="hover:text-[#2c4d36] transition-colors">
                     {item.name}
                   </a>
                 </h3>
 
-                <div className="mt-3 sm:mt-4 pt-1">
+                <div className="mt-2.5 xs:mt-3 sm:mt-4 pt-1">
                   <a
                     href={item.href}
-                    className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-[#162e21] group-hover:gap-3 transition-all hover:underline"
+                    className="inline-flex items-center gap-1.5 xs:gap-2 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-[#162e21] group-hover:gap-3 transition-all hover:underline"
                   >
                     <span>{item.linkText}</span>
                     <ArrowRight className="h-3 w-3" />
@@ -471,10 +471,10 @@ function ContactQuestionsMatterSection() {
         </div>
 
         {/* Explore Collection button matching screenshot */}
-        <div className="mt-10 sm:mt-16 text-center">
+        <div className="mt-8 xs:mt-10 sm:mt-16 text-center">
           <a
             href="/shop"
-            className="inline-flex items-center justify-center gap-3 bg-[#162e21] hover:bg-[#0c2217] text-white px-8 sm:px-9 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-sm hover:shadow-md w-full sm:w-auto"
+            className="inline-flex items-center justify-center gap-3 bg-[#162e21] hover:bg-[#0c2217] text-white px-7 xs:px-9 py-3 xs:py-3.5 text-xs font-semibold uppercase tracking-[0.18em] transition-all rounded-none shadow-sm hover:shadow-md w-full sm:w-auto"
           >
             <span>Explore Collection</span>
             <ArrowRight className="h-3.5 w-3.5" />
@@ -521,27 +521,27 @@ function ContactFaqSection() {
   ];
 
   return (
-    <section id="contact-faq" className="bg-[#faf8f4] py-16 lg:py-24 border-b border-[#e5dfd5]">
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <section id="contact-faq" className="bg-[#faf8f4] py-12 xs:py-16 lg:py-24 border-b border-[#e5dfd5]">
+      <div className="mx-auto max-w-[1440px] px-4 xs:px-6 sm:px-10 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xs:gap-12 lg:gap-16 items-start">
           {/* Left Column */}
           <div className="lg:col-span-4">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
+            <p className="text-[10px] xs:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#162e21]/70 font-sans">
               Quick Answers
             </p>
 
-            <h2 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-[46px] font-normal text-[#162e21] leading-[1.12]">
+            <h2 className="mt-2 xs:mt-3 font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-[46px] font-normal text-[#162e21] leading-[1.12]">
               A Little<br />
               Clarity<br />
               Goes a Long<br />
               Way.
             </h2>
 
-            <p className="mt-6 text-sm text-[#2c3d33]/85 leading-relaxed font-sans max-w-sm">
+            <p className="mt-4 xs:mt-6 text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans max-w-sm">
               A few helpful starting points for your skincare and shopping questions.
             </p>
 
-            <div className="mt-8 pt-2">
+            <div className="mt-6 xs:mt-8 pt-1 xs:pt-2">
               <a
                 href="#contact-form"
                 className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#162e21] hover:underline"
@@ -557,22 +557,22 @@ function ContactFaqSection() {
             {faqs.map((item, idx) => {
               const isOpen = openIdx === idx;
               return (
-                <div key={item.q} className="py-6 first:pt-0">
+                <div key={item.q} className="py-4 xs:py-5 sm:py-6 first:pt-0">
                   <button
                     type="button"
                     onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between gap-4 text-left group"
+                    className="w-full flex items-center justify-between gap-3 text-left group cursor-pointer"
                   >
-                    <span className="font-serif text-lg sm:text-xl font-normal text-[#162e21] group-hover:text-[#2c4d36] transition-colors leading-snug">
+                    <span className="font-serif text-base sm:text-lg lg:text-xl font-normal text-[#162e21] group-hover:text-[#2c4d36] transition-colors leading-snug">
                       {item.q}
                     </span>
-                    <span className="text-lg text-[#162e21]/60 shrink-0 font-serif w-6 text-center">
+                    <span className="text-base sm:text-lg text-[#162e21]/60 shrink-0 font-serif w-6 text-center">
                       {isOpen ? "−" : "+"}
                     </span>
                   </button>
 
                   {isOpen && (
-                    <div className="mt-3.5 pr-8">
+                    <div className="mt-2.5 xs:mt-3.5 pr-2 xs:pr-4 sm:pr-8">
                       <p className="text-xs sm:text-sm text-[#2c3d33]/85 leading-relaxed font-sans">
                         {item.a}
                       </p>
@@ -595,7 +595,7 @@ function ContactFaqSection() {
 function ContactClosingBanner() {
   return (
     <section className="relative overflow-hidden bg-[#081810] text-[#f7f5f0]">
-      <div className="relative min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex items-center justify-center">
+      <div className="relative min-h-[420px] xs:min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex items-center justify-center">
         {/* Background artwork of models duo */}
         <img
           src={radiantModelsDuoBgImg}
@@ -606,21 +606,21 @@ function ContactClosingBanner() {
         {/* Center overlay wash */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#06140d]/90 via-[#081810]/40 to-[#06140d]/80" />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center py-16">
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight tracking-tight text-white drop-shadow-sm">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 xs:px-6 text-center py-12 xs:py-16">
+          <h2 className="font-serif text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight tracking-tight text-white drop-shadow-sm">
             Your skin.<br />
             Your ritual.<br />
             Your Mile Infinity.
           </h2>
 
-          <p className="mt-5 text-sm sm:text-base text-white/90 font-sans max-w-lg mx-auto leading-relaxed">
+          <p className="mt-3.5 xs:mt-5 text-xs sm:text-base text-white/90 font-sans max-w-lg mx-auto leading-relaxed">
             Discover skincare designed to make everyday care feel more intentional.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-6 xs:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 xs:gap-4 max-w-xs sm:max-w-none mx-auto">
             <a
               href="/shop"
-              className="inline-flex items-center gap-2.5 bg-white text-[#162e21] hover:bg-[#f7f5ef] px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none shadow-md"
+              className="inline-flex items-center justify-center gap-2.5 bg-white text-[#162e21] hover:bg-[#f7f5ef] px-6 xs:px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none shadow-md"
             >
               <span>Shop All Skincare</span>
               <ArrowRight className="h-3.5 w-3.5" />
@@ -628,7 +628,7 @@ function ContactClosingBanner() {
 
             <a
               href="/#approach"
-              className="inline-flex items-center gap-2.5 border border-white/40 hover:border-white text-white hover:bg-white/10 px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none"
+              className="inline-flex items-center justify-center gap-2.5 border border-white/40 hover:border-white text-white hover:bg-white/10 px-6 xs:px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition-all rounded-none"
             >
               <span>Explore the Brand</span>
               <ArrowRight className="h-3.5 w-3.5" />

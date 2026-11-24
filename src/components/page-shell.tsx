@@ -5,9 +5,9 @@ import { CartDrawer } from "@/components/cart-drawer";
 
 export function PageShell({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-background overflow-x-hidden w-full">
       <SiteHeader />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 w-full overflow-x-hidden">{children}</main>
       <SiteFooter />
       <CartDrawer />
     </div>

@@ -93,7 +93,7 @@ export function ProductCard({
 
   return (
     <>
-      <div ref={cardRef} className="group flex flex-col justify-between hover-lift-sm p-3 -m-2 rounded-xl transition-all duration-300 hover:bg-white/80 bg-white/40 border border-[#e5dfd5]/60 hover:border-[#c49838]/40 hover:shadow-lg">
+      <div ref={cardRef} className="group flex flex-col justify-between hover-lift-sm p-3 sm:p-3.5 rounded-xl transition-all duration-300 hover:bg-white/80 bg-white/50 border border-[#e5dfd5]/70 hover:border-[#c49838]/40 hover:shadow-lg">
         <div>
           <Link
             to="/product"
@@ -101,13 +101,13 @@ export function ProductCard({
             className="relative block overflow-hidden bg-sand rounded-lg"
           >
             {product.isNew && (
-              <span className="eyebrow absolute left-3 top-3 z-10 rounded-full bg-background/95 backdrop-blur-sm px-3 py-1 text-primary shadow-sm animate-float-gentle">
+              <span className="eyebrow absolute left-2.5 top-2.5 xs:left-3 xs:top-3 z-10 rounded-full bg-background/95 backdrop-blur-sm px-2.5 xs:px-3 py-1 text-primary shadow-sm animate-float-gentle text-[9px] xs:text-[10px]">
                 New Product
               </span>
             )}
 
             {discountAmount && (
-              <span className="absolute right-3 top-3 z-10 rounded-full bg-[#c49838] text-[#0d2218] px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              <span className="absolute right-2.5 top-2.5 xs:right-3 xs:top-3 z-10 rounded-full bg-[#c49838] text-[#0d2218] px-2 xs:px-2.5 py-0.5 text-[9px] xs:text-[10px] font-bold tracking-wider uppercase shadow-sm">
                 Save {formatInr(discountAmount)}
               </span>
             )}
@@ -128,12 +128,12 @@ export function ProductCard({
             )}
           </Link>
 
-          <div className="mt-4 flex flex-1 flex-col">
+          <div className="mt-3 xs:mt-4 flex flex-1 flex-col">
             <div className="flex items-center justify-between">
-              <span className="eyebrow text-muted-foreground uppercase">{product.category}</span>
+              <span className="eyebrow text-muted-foreground uppercase text-[9px] xs:text-[10px]">{product.category}</span>
               {settings.enabled && settings.showBadge && (
-                <span className="inline-flex items-center gap-1 text-[9px] font-semibold text-[#0c2340] bg-blue-50/80 px-1.5 py-0.5 rounded border border-blue-200/60 font-mono">
-                  <ShieldCheck className="h-2.5 w-2.5 text-blue-600" /> Razorpay 1-Click
+                <span className="inline-flex items-center gap-1 text-[8px] xs:text-[9px] font-semibold text-[#0c2340] bg-blue-50/80 px-1.5 py-0.5 rounded border border-blue-200/60 font-mono">
+                  <ShieldCheck className="h-2.5 w-2.5 text-blue-600" /> Razorpay
                 </span>
               )}
             </div>
@@ -141,41 +141,41 @@ export function ProductCard({
             <Link
               to="/product"
               search={{ slug: product.slug }}
-              className="mt-1 font-display text-lg leading-snug text-foreground hover:text-primary transition-colors line-clamp-1"
+              className="mt-1 font-display text-base xs:text-lg leading-snug text-foreground hover:text-primary transition-colors line-clamp-1"
             >
               {product.name}
             </Link>
 
-            <p className="mt-1 line-clamp-2 text-xs text-muted-foreground min-h-[2rem]">
+            <p className="mt-1 line-clamp-2 text-[11px] xs:text-xs text-muted-foreground min-h-[1.8rem] xs:min-h-[2rem]">
               {product.tagline}
             </p>
 
-            <div className="mt-3 flex items-center gap-2">
-              <span className="font-display text-xl font-bold text-primary">
+            <div className="mt-2.5 xs:mt-3 flex items-center gap-2">
+              <span className="font-display text-lg xs:text-xl font-bold text-primary">
                 {formatInr(product.priceInr)}
               </span>
               {product.comparePriceInr && (
-                <span className="text-sm text-muted-foreground line-through">
+                <span className="text-xs xs:text-sm text-muted-foreground line-through">
                   {formatInr(product.comparePriceInr)}
                 </span>
               )}
               {product.stock <= 0 && (
-                <span className="eyebrow ml-auto text-destructive">Sold Out</span>
+                <span className="eyebrow ml-auto text-destructive text-[9px]">Sold Out</span>
               )}
             </div>
           </div>
         </div>
 
         {/* Action Buttons: Razorpay Quick-Pay + Add to Bag */}
-        <div className="mt-4 pt-3 border-t border-[#ede7dc] flex flex-col gap-2">
+        <div className="mt-3 xs:mt-4 pt-2.5 xs:pt-3 border-t border-[#ede7dc] flex flex-col gap-2">
           {settings.enabled && showQuickPay && (
             <button
               type="button"
               onClick={() => setIsCheckoutOpen(true)}
               disabled={product.stock <= 0}
-              className={`w-full py-2.5 px-3 rounded-lg text-xs font-semibold uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 ${getRazorpayButtonStyle()}`}
+              className={`w-full py-2 xs:py-2.5 px-2 xs:px-3 rounded-lg text-[11px] xs:text-xs font-semibold uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-1.5 xs:gap-2 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 ${getRazorpayButtonStyle()}`}
             >
-              <CreditCard className="h-3.5 w-3.5 text-current" />
+              <CreditCard className="h-3.5 w-3.5 text-current shrink-0" />
               <span>{settings.buttonText}</span>
               <span className="text-[10px] opacity-80 font-normal">({formatInr(product.priceInr)})</span>
             </button>
@@ -185,7 +185,7 @@ export function ProductCard({
             type="button"
             onClick={handleAdd}
             disabled={product.stock <= 0}
-            className={`w-full py-2 px-3 rounded-lg text-xs font-medium tracking-wider uppercase border border-[#162e21]/30 hover:border-[#162e21] hover:bg-white text-[#162e21] transition-all flex items-center justify-center gap-1.5 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 ${
+            className={`w-full py-2 px-2.5 xs:px-3 rounded-lg text-[11px] xs:text-xs font-medium tracking-wider uppercase border border-[#162e21]/30 hover:border-[#162e21] hover:bg-white text-[#162e21] transition-all flex items-center justify-center gap-1.5 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 ${
               added ? "bg-[#1f4e37] text-white border-transparent" : "bg-white/60"
             }`}
           >
