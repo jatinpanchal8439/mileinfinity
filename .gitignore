@@ -37,3 +37,4 @@ dist-ssr
 
 # Root reference mockup images
 /*.png
+*.zip
