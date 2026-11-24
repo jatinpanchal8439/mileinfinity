@@ -414,8 +414,8 @@ function ShopTheEssentialsSection() {
     getCachedProducts().map((p, idx) => ({
       id: p.id,
       slug: p.slug,
-      categoryKey: p.category,
-      categoryTag: p.category.toUpperCase(),
+      categoryKey: p.category || "skincare",
+      categoryTag: (p.category || "skincare").toUpperCase(),
       name: p.name,
       description: p.description || p.tagline || "",
       priceInr: p.priceInr,
@@ -446,8 +446,8 @@ function ShopTheEssentialsSection() {
             mileInfinityOnly.map((p, idx) => ({
               id: p.id,
               slug: p.slug,
-              categoryKey: p.category,
-              categoryTag: p.category.toUpperCase(),
+              categoryKey: p.category || "skincare",
+              categoryTag: (p.category || "skincare").toUpperCase(),
               name: p.name,
               description: p.description || p.tagline || "",
               priceInr: p.priceInr,

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import {
@@ -31,6 +31,7 @@ import { productsQueryOptions } from "@/lib/queries";
 import { useCart } from "@/lib/cart";
 import { formatInr } from "@/lib/format";
 import type { ProductDto } from "@/lib/store.functions";
+import { DEFAULT_SQL_PRODUCTS } from "@/lib/database-service";
 
 // High-resolution Figma and reference assets
 import heroRainbowImg from "@/assets/hero-rainbow-moisturizer-2x.jpg";
@@ -83,7 +84,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { data: products } = useSuspenseQuery(productsQueryOptions);
+  const { data: rawProducts } = useQuery(productsQueryOptions);
+  const products = rawProducts && rawProducts.length > 0 ? rawProducts : DEFAULT_SQL_PRODUCTS;
   const featured = products.slice(0, 4);
 
   return (
@@ -603,7 +605,7 @@ function HomeEssentialsSection({ products }: { products: ProductDto[] }) {
                       </span>
                     ) : (
                       <span className="absolute left-3 top-3 z-10 rounded-full bg-white/90 text-[#162e21] px-2 py-0.5 text-[9px] font-semibold tracking-wider uppercase shadow-xs">
-                        {p.category.toUpperCase()}
+                        {(p.category || "skincare").toUpperCase()}
                       </span>
                     )}
 
@@ -617,7 +619,7 @@ function HomeEssentialsSection({ products }: { products: ProductDto[] }) {
                   {/* Details */}
                   <div className="mt-4">
                     <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-[#6b7b6c] font-sans">
-                      {p.category}
+                      {p.category || "skincare"}
                     </span>
                     <h3 className="mt-1.5 font-serif text-base sm:text-[17px] font-normal text-[#162e21] leading-snug min-h-[2.75rem] line-clamp-2">
                       <Link to="/product" search={{ slug: p.slug }} className="hover:underline">

@@ -148,11 +148,9 @@ export function initConsoleSecurityGuard(): void {
   window.addEventListener("error", (e) => {
     const msg = (e.message || "").toLowerCase();
     if (
-      msg.includes("supabase") ||
-      msg.includes("token") ||
-      msg.includes("razorpay") ||
-      msg.includes("postgrest") ||
-      msg.includes("fetch")
+      msg.includes("service_role") ||
+      msg.includes("keysecret") ||
+      msg.includes("jwt_secret")
     ) {
       e.preventDefault();
       e.stopPropagation();

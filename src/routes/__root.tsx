@@ -8,7 +8,7 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, Suspense, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 import appCss from "../styles.css?url";
@@ -136,7 +136,13 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
+    let initial = true;
     const { data } = supabase.auth.onAuthStateChange((event) => {
+      // Don't re-invalidate on initial session check mount
+      if (initial) {
+        initial = false;
+        return;
+      }
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
       if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
@@ -149,7 +155,9 @@ function RootComponent() {
       <CustomerAuthProvider>
         <CartProvider>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
         </CartProvider>
       </CustomerAuthProvider>
     </QueryClientProvider>
